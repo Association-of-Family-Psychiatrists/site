@@ -1,96 +1,78 @@
 <template>
-  <div class="home-container">
-    <div class="hero">
-      <h1 class="title">Welcome to PreGram</h1>
-      <p class="subtitle">
-        A simple, elegant way to share and preview your images before posting to social media.
+  <section class="home">
+    <Hero
+      title="Welcome to the Association of Family Psychiatrists"
+      subtitle="Promoting mental wellness and supporting family psychiatry through education, advocacy, and community."
+      image="https://thewellspringfoundation.org/wp-content/uploads/hero-placeholder.jpg"
+    />
+
+    <div class="about">
+      <h2>About Us</h2>
+      <p>
+        The Association of Family Psychiatrists is dedicated to advancing the field of family mental health by
+        fostering professional development, sharing best practices, and connecting practitioners across the country.
       </p>
-      <RouterLink to="/upload" class="cta-button">Upload Your Gallery →</RouterLink>
+      <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <div class="features">
-      <h2>What You Can Do</h2>
-      <ul>
-        <li>🖼 Upload a gallery of images with a single click</li>
-        <li>❤️ Let friends react to photos they love</li>
-        <li>💬 Add and read comments on each image</li>
-        <li>🧠 Keep track of recent galleries you’ve viewed</li>
-        <li>📱 Works beautifully on mobile and desktop</li>
-      </ul>
-    </div>
-
-    <div class="footer-note">Built with Vue 3, Firebase, and pure style ✨</div>
-  </div>
+    <FeaturedEvent
+      title="2025 Mental Health Symposium"
+      date="October 12, 2025"
+      location="San Francisco, CA"
+      description="Join leading family psychiatrists for a day of workshops, panels, and community networking."
+      image="https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/71184991-ea5f-47ec-8d69-9fee0aabba2d/Fellows.png?format=2500w"
+      link="/events/symposium-2025"
+    />
+  </section>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import Hero from '@/components/Hero.vue'
+import FeaturedEvent from '@components/FeaturedEvent.vue'
 </script>
 
 <style scoped>
-.home-container {
-  padding: 2rem;
-  max-width: 800px;
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.about {
+  width: 100%;
   margin: 0 auto;
+  padding: 3rem 30rem;
+  background-color: var(--vt-c-black-soft);
+  color: var(--color-text-light);
   text-align: center;
-  color: #6da4f5; /* gray-800 */
+  display: block;
+  min-height: unset;
 }
 
-.hero {
-  margin-bottom: 3rem;
+
+.about h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-light);
 }
 
-.title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #2563eb; /* blue-600 */
-  margin-bottom: 0.5rem;
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  color: #45679a; /* gray-600 */
-  margin-bottom: 1.5rem;
+.about p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
 .cta-button {
-  display: inline-block;
-  background-color: #2563eb;
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-text-light);
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 6px;
+  font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #1e40af; /* darker blue */
-}
-
-.features h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.features ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  text-align: left;
-  display: inline-block;
-}
-
-.features li {
-  margin: 0.75rem 0;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.footer-note {
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: #9ca3af; /* gray-400 */
+  background-color: #c65e53;
 }
 </style>

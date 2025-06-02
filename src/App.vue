@@ -1,5 +1,6 @@
 <script setup>
-import Header from './components/Header.vue'
+import Header from '@components/Header.vue'
+import Footer from '@components/Footer.vue'
 import { RouterView } from 'vue-router'
 </script>
 
@@ -10,17 +11,17 @@ import { RouterView } from 'vue-router'
       <RouterView />
     </main>
   </div>
+  <Footer />
 </template>
 
 <style scoped>
 .layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .page-content {
-  flex-grow: 1;
-  padding: 2rem;
+  width: 100%
 }
 </style>
+
