@@ -3,14 +3,17 @@
     <section class="intro">
       <h1>About the Association</h1>
       <p>
-        The Association of Family Psychiatrists is committed to advancing the field of family mental health by fostering collaboration, research, education, and advocacy.
+        The Association of Family Psychiatrists is committed to advancing the field of family mental
+        health by fostering collaboration, research, education, and advocacy.
       </p>
     </section>
 
     <section class="mission">
       <h2>Our Mission</h2>
       <p>
-        We strive to support psychiatrists and mental health professionals who work with families, providing resources, training, and a professional network to promote mental wellness at every stage of life.
+        We strive to support psychiatrists and mental health professionals who work with families,
+        providing resources, training, and a professional network to promote mental wellness at
+        every stage of life.
       </p>
     </section>
 
@@ -23,8 +26,7 @@
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .about-page {
@@ -39,7 +41,8 @@
   margin-bottom: 3rem;
 }
 
-h1, h2 {
+h1,
+h2 {
   color: var(--color-heading);
   margin-bottom: 1rem;
 }

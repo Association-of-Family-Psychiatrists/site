@@ -12,7 +12,10 @@
         <RouterLink to="/contact">Contact</RouterLink>
         <RouterLink to="/privacy">Privacy Policy</RouterLink>
       </nav>
-      <p class="footer-copy">&copy; {{ new Date().getFullYear() }} Association of Family Psychiatrists. All rights reserved.</p>
+      <p class="footer-copy">
+        &copy; {{ new Date().getFullYear() }} Association of Family Psychiatrists. All rights
+        reserved.
+      </p>
     </div>
   </footer>
 </template>

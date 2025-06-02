@@ -20,7 +20,7 @@ defineProps({
   location: String,
   description: String,
   image: String,
-  link: String
+  link: String,
 })
 </script>
 
@@ -51,7 +51,6 @@ defineProps({
   justify-content: center;
   align-items: center;
 }
-
 
 .event-title {
   font-size: 1.75rem;

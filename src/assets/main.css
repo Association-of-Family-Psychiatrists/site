@@ -18,7 +18,9 @@ body,
 a {
   text-decoration: none;
   color: #00796b; /* Classic teal */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 @media (hover: hover) {

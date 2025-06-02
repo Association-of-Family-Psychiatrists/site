@@ -21,7 +21,6 @@ import { RouterView } from 'vue-router'
 }
 
 .page-content {
-  width: 100%
+  width: 100%;
 }
 </style>
-

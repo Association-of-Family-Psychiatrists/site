@@ -9,8 +9,9 @@
     <div class="about">
       <h2>About Us</h2>
       <p>
-        The Association of Family Psychiatrists is dedicated to advancing the field of family mental health by
-        fostering professional development, sharing best practices, and connecting practitioners across the country.
+        The Association of Family Psychiatrists is dedicated to advancing the field of family mental
+        health by fostering professional development, sharing best practices, and connecting
+        practitioners across the country.
       </p>
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
@@ -48,7 +49,6 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
   display: block;
   min-height: unset;
 }
-
 
 .about h2 {
   font-size: 1.75rem;
