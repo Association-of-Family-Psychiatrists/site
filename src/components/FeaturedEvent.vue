@@ -1,8 +1,8 @@
 <template>
   <section class="featured-event">
-    <img :src="image" alt="Event image" class="event-image" />
+    <img :src="image" alt="Event image" class="event-image animate-left" />
 
-    <div class="event-details">
+    <div class="event-details animate-right">
       <h2 class="event-title">{{ title }}</h2>
       <p class="event-meta">{{ date }} &bullet; {{ location }}</p>
       <p class="event-description">{{ description }}</p>
@@ -27,19 +27,16 @@ defineProps({
 <style scoped>
 .featured-event {
   display: flex;
-  gap: 2rem;
-  align-items: stretch; /* ensures equal height if needed */
+  align-items: stretch;
   background-color: var(--color-background-soft);
-  border-radius: 12px;
   flex-wrap: wrap;
 }
 
 .event-image {
   flex: 1;
   height: 100%;
-  max-height: 400px;
+  max-height: 450px;
   object-fit: cover;
-  border-radius: 8px;
 }
 
 .event-details {
@@ -50,6 +47,7 @@ defineProps({
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-bottom: 3px solid var(--color-accent);
 }
 
 .event-title {
@@ -82,6 +80,35 @@ defineProps({
   background-color: #c65e53;
 }
 
+/* Animations */
+.animate-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+.animate-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeInRight 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .featured-event {
     flex-direction: column;

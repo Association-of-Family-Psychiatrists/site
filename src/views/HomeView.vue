@@ -3,7 +3,7 @@
     <Hero
       title="Welcome to the Association of Family Psychiatrists"
       subtitle="Promoting mental wellness and supporting family psychiatry through education, advocacy, and community."
-      image="https://thewellspringfoundation.org/wp-content/uploads/hero-placeholder.jpg"
+      image="https://images.squarespace-cdn.com/content/v1/5748cc56746fb940f105bd1c/22364a6b-02db-4f89-8840-8ad7de5d6682/family+therapy+pic.jpg"
     />
 
     <div class="about">
@@ -16,14 +16,13 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <FeaturedEvent
-      title="2025 Mental Health Symposium"
-      date="October 12, 2025"
-      location="San Francisco, CA"
-      description="Join leading family psychiatrists for a day of workshops, panels, and community networking."
-      image="https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/71184991-ea5f-47ec-8d69-9fee0aabba2d/Fellows.png?format=2500w"
-      link="/events/symposium-2025"
-    />
+    <FeaturedEvent :="featuredEventData" />
+
+    <CardGrid title="Upcoming Programs" :cards="featuredCards" />
+
+    <StatsBanner :stats="statsData" />
+
+    <ArticleGrid title="Latest Articles" :articles="featuredArticles" />
   </section>
 </template>
 
@@ -31,6 +30,10 @@
 import { RouterLink } from 'vue-router'
 import Hero from '@/components/Hero.vue'
 import FeaturedEvent from '@components/FeaturedEvent.vue'
+import CardGrid from '@components/CardGrid.vue'
+import StatsBanner from '../components/StatsBanner.vue'
+import ArticleGrid from '../components/ArticleGrid.vue'
+import { featuredEventData, featuredCards, statsData, featuredArticles } from '@data/homeData.js'
 </script>
 
 <style scoped>
@@ -42,12 +45,11 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
 .about {
   width: 100%;
   margin: 0 auto;
-  padding: 3rem 30rem;
+  padding: 3rem 2rem; /* base padding for small screens */
   background-color: var(--vt-c-black-soft);
   color: var(--color-text-light);
   text-align: center;
   display: block;
-  min-height: unset;
 }
 
 .about h2 {
@@ -74,5 +76,18 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
 
 .cta-button:hover {
   background-color: #c65e53;
+}
+
+/* Larger screen enhancements */
+@media (min-width: 768px) {
+  .about {
+    padding: 3rem 6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .about {
+    padding: 3rem 15rem;
+  }
 }
 </style>
