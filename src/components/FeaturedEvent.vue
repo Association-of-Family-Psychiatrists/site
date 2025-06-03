@@ -37,6 +37,7 @@ defineProps({
   height: 100%;
   max-height: 450px;
   object-fit: cover;
+  object-position: center 20%;
 }
 
 .event-details {

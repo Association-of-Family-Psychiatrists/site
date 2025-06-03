@@ -31,7 +31,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .footer-top {
-  background-color: var(--color-accent);
+  background-color: var(--vt-c-indigo);
   padding: 3rem;
   margin: 4rem 0rem;
   height: 140px;

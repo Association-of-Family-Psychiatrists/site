@@ -1,10 +1,18 @@
 <template>
   <section class="home">
-    <Hero
-      title="Welcome to the Association of Family Psychiatrists"
-      subtitle="Promoting mental wellness and supporting family psychiatry through education, advocacy, and community."
-      image="https://images.squarespace-cdn.com/content/v1/5748cc56746fb940f105bd1c/22364a6b-02db-4f89-8840-8ad7de5d6682/family+therapy+pic.jpg"
-    />
+    <div class="intro">
+      <div class="logo-column">
+        <video src="/afp-logo.mp4" class="logo-img" autoplay muted playsinline></video>
+      </div>
+
+      <div class="welcome-column">
+        <h1 class="welcome-title">Welcome to the Association of Family Psychiatrists</h1>
+        <p class="welcome-subtitle">
+          Promoting mental wellness and supporting family psychiatry through education, advocacy,
+          and community.
+        </p>
+      </div>
+    </div>
 
     <div class="about">
       <h2>About Us</h2>
@@ -37,6 +45,69 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
 </script>
 
 <style scoped>
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  gap: 2rem;
+  background-color: var(--vt-c-white);
+  text-align: center;
+}
+
+.logo-column {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img {
+  width: 550px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-column {
+  flex: 1 1 400px;
+  text-align: left;
+  opacity: 0;
+  animation: slideFadeIn 1s ease-out 0.4s forwards;
+}
+
+.welcome-title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+.welcome-subtitle {
+  font-size: 2rem;
+  line-height: 1.6;
+  color: var(--vt-c-black-soft);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .welcome-column {
+    text-align: center;
+  }
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -44,12 +115,15 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
 
 .about {
   width: 100%;
+  min-height: 35vh;
   margin: 0 auto;
-  padding: 3rem 2rem; /* base padding for small screens */
   background-color: var(--vt-c-black-soft);
   color: var(--color-text-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center; /* horizontal centering */
   text-align: center;
-  display: block;
 }
 
 .about h2 {
@@ -76,18 +150,5 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
 
 .cta-button:hover {
   background-color: #c65e53;
-}
-
-/* Larger screen enhancements */
-@media (min-width: 768px) {
-  .about {
-    padding: 3rem 6rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .about {
-    padding: 3rem 15rem;
-  }
 }
 </style>

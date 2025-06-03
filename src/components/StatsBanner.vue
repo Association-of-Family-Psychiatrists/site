@@ -28,10 +28,9 @@ defineProps({
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 2rem;
-  background-color: var(--color-accent);
+  background-color: var(--vt-c-indigo);
   color: white;
   padding: 3rem 2rem;
-  border-radius: 12px;
   text-align: center;
 }
 

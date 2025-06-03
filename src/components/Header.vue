@@ -59,14 +59,15 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 1rem 2rem;
   background: white;
-  position: relative; /* ADD THIS */
+  position: relative;
   z-index: 20; /* Ensure it's above rest of layout */
+  border-bottom: 1px solid var(--color-accent);
 }
 
 .mobile-drawer {
   flex-direction: column;
   position: absolute;
-  top: 100%; /* Place right below the header */
+  top: 100%;
   left: 0;
   right: 0;
   background: white;
