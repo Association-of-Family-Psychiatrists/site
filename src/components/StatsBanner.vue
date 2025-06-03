@@ -28,7 +28,7 @@ defineProps({
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 2rem;
-  background-color: var(--vt-c-indigo);
+  background-color: var(--vt-c-black-soft);
   color: white;
   padding: 3rem 2rem;
   text-align: center;

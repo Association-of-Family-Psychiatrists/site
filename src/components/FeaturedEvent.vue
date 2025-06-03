@@ -121,7 +121,7 @@ defineProps({
   }
 
   .event-details {
-    text-align: left;
+    text-align: center;
   }
 }
 </style>

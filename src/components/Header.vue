@@ -108,6 +108,7 @@ onBeforeUnmount(() => {
   font-size: 1.8rem;
   cursor: pointer;
   display: none;
+  color: var(--color-accent);
 }
 
 .slide-enter-active,

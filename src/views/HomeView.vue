@@ -2,7 +2,7 @@
   <section class="home">
     <div class="intro">
       <div class="logo-column">
-        <video src="/afp-logo.mp4" class="logo-img" autoplay muted playsinline></video>
+        <img src="@assets/afp-logo.gif" alt="AFP Logo" class="logo-img" />
       </div>
 
       <div class="welcome-column">
@@ -36,11 +36,10 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import Hero from '@/components/Hero.vue'
 import FeaturedEvent from '@components/FeaturedEvent.vue'
 import CardGrid from '@components/CardGrid.vue'
-import StatsBanner from '../components/StatsBanner.vue'
-import ArticleGrid from '../components/ArticleGrid.vue'
+import StatsBanner from '@components/StatsBanner.vue'
+import ArticleGrid from '@components/ArticleGrid.vue'
 import { featuredEventData, featuredCards, statsData, featuredArticles } from '@data/homeData.js'
 </script>
 
@@ -57,14 +56,14 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
 }
 
 .logo-column {
-  flex: 1 1 300px;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo-img {
-  width: 550px;
+  width: 35rem;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -106,6 +105,18 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
   .welcome-column {
     text-align: center;
   }
+
+  .welcome-title {
+    font-size: 2rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .logo-img {
+    max-width: 25rem;
+  }
 }
 
 .home {
@@ -124,6 +135,7 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
   justify-content: center; /* vertical centering */
   align-items: center; /* horizontal centering */
   text-align: center;
+  padding: 3rem 2rem;
 }
 
 .about h2 {

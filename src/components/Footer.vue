@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer-top">
-      <img src="@assets/logo.svg" alt="AFP Logo" class="logo" />
+      <img src="@assets/afp-logo-with-text.png" alt="AFP Logo" class="logo" />
     </div>
 
     <div class="footer-bottom">
@@ -31,18 +31,15 @@ import { RouterLink } from 'vue-router'
 }
 
 .footer-top {
-  background-color: var(--vt-c-indigo);
-  padding: 3rem;
+  background-color: var(--vt-c-black-soft);
   margin: 4rem 0rem;
-  height: 140px;
 }
 
 .logo {
-  height: 50px;
+  height: 250px;
   width: auto;
   display: block;
   margin: 0 auto;
-  filter: brightness(0) invert(1); /* makes dark logos appear white if needed */
 }
 
 .footer-bottom {
@@ -73,5 +70,6 @@ import { RouterLink } from 'vue-router'
 .footer-copy {
   font-size: 0.875rem;
   opacity: 0.8;
+  color: var(--color-text-dark);
 }
 </style>

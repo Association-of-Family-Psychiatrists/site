@@ -66,33 +66,29 @@ export const statsData = [
 
 export const featuredArticles = [
   {
-    title: 'Understanding Family Psychiatry',
+    title: 'Coping With Problematic Effects of Social Media',
     thumbnail:
       'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
-    url: 'https://example.com/article1',
+    url: 'https://www.psychologytoday.com/us/blog/psychiatrys-think-tank/202501/coping-with-problematic-effects-of-social-media',
   },
   {
     title: 'Community Support Strategies',
     thumbnail:
       'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
-    url: 'https://example.com/article2',
   },
   {
     title: 'Trauma-Informed Care',
     thumbnail:
       'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
-    url: 'https://example.com/article3',
   },
   {
     title: 'Trauma-Informed Care',
     thumbnail:
       'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
-    url: 'https://example.com/article3',
   },
   {
     title: 'Trauma-Informed Care',
     thumbnail:
       'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
-    url: 'https://example.com/article3',
   },
 ]
