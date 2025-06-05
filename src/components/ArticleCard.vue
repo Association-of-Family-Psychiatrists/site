@@ -24,6 +24,11 @@ defineProps({
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
 }
 
 .thumbnail {

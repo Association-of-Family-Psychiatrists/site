@@ -9,6 +9,9 @@
     <nav class="nav desktop-nav">
       <RouterLink to="/" exact-active-class="active" class="nav-link">Home</RouterLink>
       <RouterLink to="/about" exact-active-class="active" class="nav-link">About</RouterLink>
+      <RouterLink to="/resources" exact-active-class="active" class="nav-link"
+        >Resources</RouterLink
+      >
     </nav>
 
     <!-- Mobile drawer -->
@@ -17,6 +20,9 @@
         <RouterLink to="/" exact-active-class="active" @click="drawerOpen = false">Home</RouterLink>
         <RouterLink to="/about" exact-active-class="active" @click="drawerOpen = false"
           >About</RouterLink
+        >
+        <RouterLink to="/resources" exact-active-class="active" class="nav-link"
+          >Resources</RouterLink
         >
       </nav>
     </transition>
