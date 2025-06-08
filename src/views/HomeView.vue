@@ -26,10 +26,25 @@
 
     <FeaturedEvent :="featuredEventData" />
 
+    <div class="conference-and-publications">
+      <div class="conference-column">
+        <ConferenceEvent v-bind="conferenceEventData" />
+      </div>
+
+      <div class="publications-column">
+        <h2>Recent Publications</h2>
+        <PublicationCard v-for="(pub, index) in publicationData" :key="index" v-bind="pub" />
+      </div>
+    </div>
+
     <CardGrid title="Upcoming Programs" :cards="featuredCards" />
 
     <StatsBanner :stats="statsData" />
 
+    <CardGrid
+      title="2024 Winners of our Annual Award for Excellence in Family Care"
+      :cards="featuredAwardWinners"
+    />
     <ArticleGrid title="Latest Articles" :articles="featuredArticles" />
   </section>
 </template>
@@ -40,7 +55,17 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
 import CardGrid from '@components/CardGrid.vue'
 import StatsBanner from '@components/StatsBanner.vue'
 import ArticleGrid from '@components/ArticleGrid.vue'
-import { featuredEventData, featuredCards, statsData, featuredArticles } from '@data/homeData.js'
+import ConferenceEvent from '@components/ConferenceEvent.vue'
+import PublicationCard from '@components/PublicationCard.vue'
+import {
+  featuredEventData,
+  featuredCards,
+  statsData,
+  featuredArticles,
+  conferenceEventData,
+  publicationData,
+  featuredAwardWinners,
+} from '@data/homeData.js'
 </script>
 
 <style scoped>
@@ -162,5 +187,31 @@ import { featuredEventData, featuredCards, statsData, featuredArticles } from '@
 
 .cta-button:hover {
   background-color: #c65e53;
+}
+
+.conference-and-publications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 10%;
+}
+
+.conference-and-publications > * {
+  flex: 1 1 400px; /* Grow equally, shrink equally, min width ~400px */
+}
+
+.publications-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.publications-column h2 {
+  margin-bottom: 1rem;
+}
+
+.conference-column {
+  margin-top: 1.25rem;
 }
 </style>

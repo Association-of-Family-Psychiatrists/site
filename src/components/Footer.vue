@@ -41,17 +41,12 @@ import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import { db, auth } from '@/firebase'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
-import { signInAnonymously } from 'firebase/auth'
 
 const email = ref('')
 const message = ref('')
 
 const subscribe = async () => {
   try {
-    if (!auth.currentUser) {
-      await signInAnonymously(auth)
-    }
-
     const emailId = email.value.trim().toLowerCase()
 
     if (!emailId) {
@@ -83,6 +78,7 @@ const subscribe = async () => {
 
 .footer-top {
   margin: 4rem 0rem;
+  padding-top: 2rem;
 }
 
 .logo {

@@ -13,6 +13,7 @@
         >Resources</RouterLink
       >
       <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
+      <RouterLink to="/membership" class="member-button">Become a Member</RouterLink>
     </nav>
 
     <!-- Mobile drawer -->
@@ -22,10 +23,19 @@
         <RouterLink to="/about" exact-active-class="active" @click="drawerOpen = false"
           >About</RouterLink
         >
-        <RouterLink to="/resources" exact-active-class="active" class="nav-link"
+        <RouterLink to="/resources" exact-active-class="active" @click="drawerOpen = false"
           >Resources</RouterLink
         >
-        <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
+        <RouterLink to="/members" exact-active-class="active" @click="drawerOpen = false"
+          >Members</RouterLink
+        >
+        <RouterLink
+          to="/membership"
+          @click="drawerOpen = false"
+          class="member-button mobile-member-button"
+        >
+          Become a Member
+        </RouterLink>
       </nav>
     </transition>
   </header>
@@ -61,6 +71,26 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.member-button {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.member-button:hover {
+  background-color: #c65e53;
+}
+
+/* Mobile button spacing */
+.mobile-member-button {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -108,6 +138,7 @@ onBeforeUnmount(() => {
 .nav-link {
   color: var(--color-accent);
   font-size: 1.25rem;
+  margin-top: 5px;
 }
 
 .hamburger {

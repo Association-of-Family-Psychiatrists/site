@@ -33,9 +33,14 @@ const router = createRouter({
       component: MemberView,
     },
     {
+      path: '/membership',
+      name: 'membership',
+      component: () => import('@views/MembershipView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: PlaceholderView,
+      component: () => import('@views/PlaceholderView.vue'),
     },
   ],
 })

@@ -41,15 +41,7 @@ export const featuredCards = [
     subtitle: 'Live event • October 2025',
     details: 'A hands-on workshop for professionals focused on family systems and communication.',
   },
-].concat(
-  new Array(4).fill({
-    image:
-      'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=2048x2048&w=is&k=20&c=dFWJz1EFJt7Tq2lA-hgTpSW119YywTWtS4EwU3fpKrE=',
-    title: 'Placeholder Event / Person',
-    subtitle: 'TBD',
-    details: 'Additional Information',
-  }),
-)
+]
 
 export const statsData = [
   {
@@ -93,5 +85,61 @@ export const featuredArticles = [
     title: 'Placeholder Article',
     thumbnail:
       'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=2048x2048&w=is&k=20&c=dFWJz1EFJt7Tq2lA-hgTpSW119YywTWtS4EwU3fpKrE=',
+  },
+]
+
+export const featuredAwardWinners = [
+  { title: 'Janice Cho, MD' },
+  { title: 'Sarah Faitell, DO' },
+  { title: 'Eileen Glocer, MD' },
+  { title: 'Hannah Goddard, DO' },
+  { title: 'Jatin Julakanti, MD' },
+  { title: 'Hannah Leo, MD' },
+  { title: 'Kaajal Patel Tan, DO' },
+  { title: 'Michelle Prakash, MD' },
+  { title: 'Pallavi Tatapudy, MD' },
+  { title: 'Richard Seeber II, MD' },
+  { title: 'Alfonso Vera Jr, MD' },
+]
+
+export const conferenceEventData = {
+  title: '2025 Annual Family Psychiatry Conference',
+  date: 'September 21, 2025',
+  time: '9:00 AM – 4:00 PM PT',
+  description:
+    'Join us for the 2025 Annual Conference, featuring leading experts in family psychiatry. Engage in keynotes, panels, and networking opportunities.',
+  link: 'https://example.com/conference-recording',
+  linkLabel: 'Join Live / Watch Recording',
+  schedule: [
+    { time: '9:00 AM', title: 'Opening Remarks & Keynote' },
+    { time: '10:30 AM', title: 'Panel: Innovations in Family Therapy' },
+    { time: '12:00 PM', title: 'Lunch Break' },
+    { time: '1:00 PM', title: 'Workshop: Integrating Family Care in Psychiatry' },
+    { time: '2:30 PM', title: 'Research Presentations' },
+    { time: '3:30 PM', title: 'Closing Discussion & Networking' },
+  ],
+}
+
+export const publicationData = [
+  {
+    title: 'Helping Couples and Families Navigate Illness and Disability',
+    summary:
+      'John Rolland’s new book presents an integrated approach for supporting couples and families dealing with serious illness and disability.',
+    url: 'https://example.com/research-publication',
+    authors: ['John Rolland', 'John Doe'],
+  },
+  {
+    title: 'Lisa Dixon Appointed Editor in Chief of Psychiatric Services',
+    summary:
+      'Lisa Dixon is now the Editor in Chief of Psychiatric Services, bringing her extensive expertise in family psychiatry and community mental health.',
+    url: 'https://example.com/research-publication',
+    authors: ['Lisa Dixon'],
+  },
+  {
+    title: 'Recent Articles of Interest to Our Members',
+    summary:
+      'A curated list of recent publications and articles that provide valuable insights and advancements in the field of family psychiatry.',
+    url: 'https://example.com/research-publication',
+    authors: ['AFP Editorial Board'],
   },
 ]

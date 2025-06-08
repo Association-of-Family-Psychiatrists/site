@@ -12,7 +12,7 @@
       <h3 class="card-title">{{ title }}</h3>
       <p class="card-subtitle">{{ subtitle }}</p>
 
-      <button @click="expanded = !expanded" class="cta-button">
+      <button v-if="details" @click="expanded = !expanded" class="cta-button">
         {{ expanded ? 'Hide' : 'Learn More' }}
       </button>
 
@@ -29,7 +29,10 @@
 import { ref } from 'vue'
 
 defineProps({
-  image: String,
+  image: {
+    type: String,
+    default: '',
+  },
   title: String,
   subtitle: String,
   details: String,
