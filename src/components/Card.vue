@@ -1,6 +1,12 @@
 <template>
   <div class="card">
-    <img :src="image" alt="Card image" class="card-image" />
+    <img
+      v-if="showImage"
+      :src="image"
+      alt="Card image"
+      class="card-image"
+      @error="showImage = false"
+    />
 
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
@@ -30,6 +36,7 @@ defineProps({
 })
 
 const expanded = ref(false)
+const showImage = ref(true)
 </script>
 
 <style scoped>
@@ -49,7 +56,7 @@ const expanded = ref(false)
 
 .card-image {
   width: 100%;
-  height: 180px;
+  max-height: 180px;
   object-fit: cover;
 }
 

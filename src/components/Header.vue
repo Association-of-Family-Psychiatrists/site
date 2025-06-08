@@ -12,6 +12,7 @@
       <RouterLink to="/resources" exact-active-class="active" class="nav-link"
         >Resources</RouterLink
       >
+      <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
     </nav>
 
     <!-- Mobile drawer -->
@@ -24,6 +25,7 @@
         <RouterLink to="/resources" exact-active-class="active" class="nav-link"
           >Resources</RouterLink
         >
+        <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
       </nav>
     </transition>
   </header>

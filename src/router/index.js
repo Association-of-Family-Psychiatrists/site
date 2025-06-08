@@ -3,6 +3,7 @@ import HomeView from '@views/HomeView.vue'
 import AboutView from '@views/AboutView.vue'
 import PlaceholderView from '@views/PlaceholderView.vue'
 import ResourcesView from '@views/ResourcesView.vue'
+import MemberView from '@views/MemberView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -25,6 +26,11 @@ const router = createRouter({
       path: '/resources',
       name: 'resources',
       component: ResourcesView,
+    },
+    {
+      path: '/members',
+      name: 'members',
+      component: MemberView,
     },
     {
       path: '/:pathMatch(.*)*',
