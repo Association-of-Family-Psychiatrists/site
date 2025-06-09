@@ -22,12 +22,33 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { loadStripe } from '@stripe/stripe-js'
 
-const router = useRouter()
+const goToJoinPage = async () => {
+  const stripe = await loadStripe(
+    'pk_test_51RXnmZ2LuuFdegO3Y0dk6gd65FMnwPV1DLKc1tRoC5JLs1GtodS6mCCzzsNfQgDYUxHcQOcXupKq5xTKvtmPl62V00UUfMxsSM',
+  )
 
-const goToJoinPage = () => {
-  // You can later change this to point to your payment or membership page
-  router.push('/join')
+  const response = await fetch(
+    'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createCheckoutSession',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+
+  const session = await response.json()
+
+  const { error } = await stripe.redirectToCheckout({
+    sessionId: session.id,
+  })
+
+  if (error) {
+    console.error(error)
+    alert('Payment failed. Please try again.')
+  }
 }
 </script>
 
