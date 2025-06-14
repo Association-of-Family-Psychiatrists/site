@@ -2,10 +2,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@views/HomeView.vue'
 import AboutView from '@views/AboutView.vue'
 import PlaceholderView from '@views/PlaceholderView.vue'
+import MembershipConfirmationView from '@views/MembershipConfirmationView.vue'
 import ResourcesView from '@views/ResourcesView.vue'
 import MemberView from '@views/MemberView.vue'
 import EventsView from '@views/EventsView.vue'
 import ContactView from '@views/ContactView.vue'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -42,6 +44,11 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView,
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: () => import('@views/MembershipConfirmationView.vue'),
     },
     {
       path: '/membership',

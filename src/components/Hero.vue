@@ -44,13 +44,10 @@ defineProps({
 }
 
 .overlay {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(198, 94, 83, 0.8); /* matches your CTA hover */
+  color: #fff;
   padding: 2rem;
   border-radius: 8px;
-  color: white;
-  max-width: 90%;
-  margin-bottom: 10rem;
 }
 
 .title {
