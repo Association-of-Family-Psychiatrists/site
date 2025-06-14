@@ -143,6 +143,12 @@ const subscribe = async () => {
   transition: background-color 0.3s;
 }
 
+@media (max-width: 768px) {
+  .subscribe-button {
+    margin-top: 1rem;
+  }
+}
+
 .subscribe-button:hover {
   background-color: #c65e53;
 }
