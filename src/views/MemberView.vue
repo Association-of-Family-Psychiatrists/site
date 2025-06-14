@@ -1,9 +1,11 @@
 <template>
   <section class="member-view">
-    <h1 class="page-title">Our Members</h1>
-    <p class="page-subtitle">Meet some of the dedicated professionals in our association.</p>
+    <h1 class="page-title animate-fade-slide">Our Members</h1>
+    <p class="page-subtitle animate-fade-slide">
+      Meet some of the dedicated professionals in our association.
+    </p>
 
-    <CardGrid title="Members" :cards="memberCards" />
+    <CardGrid title="Members" class="animate-fade-slide" :cards="memberCards" />
   </section>
 </template>
 
@@ -28,5 +30,22 @@ import { memberCards } from '@/data/memberData.js'
   font-size: 1.25rem;
   margin-bottom: 3rem;
   color: var(--color-text);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.8s ease forwards;
 }
 </style>

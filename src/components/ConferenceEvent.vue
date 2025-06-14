@@ -1,6 +1,6 @@
 <!-- src/components/ConferenceEvent.vue -->
 <template>
-  <section class="conference-event">
+  <section :id="id" class="conference-event animate-fade-slide">
     <h2 class="conference-title">{{ title }}</h2>
     <p class="conference-datetime">{{ date }} &bullet; {{ time }}</p>
     <p class="conference-description">{{ description }}</p>
@@ -23,6 +23,7 @@
 
 <script setup>
 defineProps({
+  id: String,
   title: String,
   date: String,
   time: String,

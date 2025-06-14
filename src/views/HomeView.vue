@@ -2,7 +2,7 @@
   <section class="home">
     <div class="intro">
       <div class="logo-column">
-        <img src="@assets/afp-logo.gif" alt="AFP Logo" class="logo-img" />
+        <img src="@assets/afp-logo.png" alt="AFP Logo" class="logo-img" />
       </div>
 
       <div class="welcome-column">
@@ -28,7 +28,7 @@
 
     <div class="conference-and-publications">
       <div class="conference-column">
-        <ConferenceEvent v-bind="conferenceEventData" />
+        <Event v-bind="conferenceEventData" />
       </div>
 
       <div class="publications-column">
@@ -55,7 +55,7 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
 import CardGrid from '@components/CardGrid.vue'
 import StatsBanner from '@components/StatsBanner.vue'
 import ArticleGrid from '@components/ArticleGrid.vue'
-import ConferenceEvent from '@components/ConferenceEvent.vue'
+import Event from '@components/Event.vue'
 import PublicationCard from '@components/PublicationCard.vue'
 import {
   featuredEventData,
@@ -72,26 +72,63 @@ import {
 .intro {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 2rem;
-  gap: 2rem;
-  background-color: var(--vt-c-white);
-  text-align: center;
-}
-
-.logo-column {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: center; /* columns same height */
 }
 
 .logo-img {
-  width: 35rem;
-  height: auto;
   display: block;
-  margin: 0 auto;
+  width: 100%;
+  height: 100%; /* fill the parent box */
+  object-fit: fill; /* or cover */
+}
+
+.logo-column {
+  flex: 0 0 auto;
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+.welcome-column {
+  flex: 1 1 400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeInRight 1s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .intro {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 1003px) {
+  .logo-img {
+    width: 100vw;
+  }
 }
 
 @keyframes slideFadeIn {
@@ -105,15 +142,8 @@ import {
   }
 }
 
-.welcome-column {
-  flex: 1 1 400px;
-  text-align: left;
-  opacity: 0;
-  animation: slideFadeIn 1s ease-out 0.4s forwards;
-}
-
 .welcome-title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: var(--color-accent);
@@ -137,10 +167,6 @@ import {
 
   .welcome-subtitle {
     font-size: 1.25rem;
-  }
-
-  .logo-img {
-    max-width: 25rem;
   }
 }
 
@@ -194,7 +220,7 @@ import {
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 2rem 10%;
 }
 
@@ -208,10 +234,7 @@ import {
 }
 
 .publications-column h2 {
-  margin-bottom: 1rem;
-}
-
-.conference-column {
-  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
 }
 </style>

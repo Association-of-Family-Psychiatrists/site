@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
-    <div class="footer-top">
+    <!-- <div class="footer-top">
       <img src="@assets/afp-logo-with-text.png" alt="AFP Logo" class="logo" />
-    </div>
+    </div> -->
 
     <div class="footer-bottom">
       <nav class="footer-nav">
@@ -10,7 +10,6 @@
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/events">Events</RouterLink>
         <RouterLink to="/contact">Contact</RouterLink>
-        <RouterLink to="/privacy">Privacy Policy</RouterLink>
       </nav>
 
       <div class="subscribe-box">
@@ -74,6 +73,7 @@ const subscribe = async () => {
   color: white;
   text-align: center;
   background-color: var(--vt-c-black-soft);
+  padding: 4rem;
 }
 
 .footer-top {
@@ -91,7 +91,6 @@ const subscribe = async () => {
 .footer-bottom {
   max-width: 960px;
   margin: 0 auto;
-  padding-bottom: 2rem;
   color: white;
 }
 

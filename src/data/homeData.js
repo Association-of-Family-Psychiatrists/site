@@ -8,7 +8,7 @@ export const featuredEventData = {
     'Ex: Registration has opened for the annual AFP Conference. This component can be used to display an event, with an image and description',
   image:
     'https://media.istockphoto.com/id/1417699524/photo/group-of-people-at-music-concert.jpg?s=2048x2048&w=is&k=20&c=ry_TiyFeGk5F03WDdcTE9lnx25PvIIUvKCl0uQHyFa0=',
-  link: '/events/symposium-2025',
+  link: '/events#conference',
 }
 
 export const featuredCards = [
@@ -47,20 +47,17 @@ export const statsData = [
   {
     value: '1,200+',
     label: 'Members',
-    description:
-      'This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic.',
+    description: 'This is a description for this statistic',
   },
   {
     value: '$250K',
     label: 'Funds Raised',
-    description:
-      'This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic.',
+    description: 'This is a description for this statistic',
   },
   {
     value: '12',
     label: 'Committees',
-    description:
-      'This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic. This is a description for this statistic.',
+    description: 'This is a description for this statistic',
   },
 ]
 

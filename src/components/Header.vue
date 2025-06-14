@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <h1 class="logo">Association of Family Psychiatrists</h1>
+    <RouterLink to="/" class="logo">Association of Family Psychiatrists</RouterLink>
 
     <!-- Hamburger for small screens -->
     <button class="hamburger" @click="drawerOpen = !drawerOpen" aria-label="Toggle Menu">☰</button>
@@ -12,6 +12,7 @@
       <RouterLink to="/resources" exact-active-class="active" class="nav-link"
         >Resources</RouterLink
       >
+      <RouterLink to="/events" exact-active-class="active" class="nav-link">Events</RouterLink>
       <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
       <RouterLink to="/membership" class="member-button">Become a Member</RouterLink>
     </nav>

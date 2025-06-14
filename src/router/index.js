@@ -4,7 +4,8 @@ import AboutView from '@views/AboutView.vue'
 import PlaceholderView from '@views/PlaceholderView.vue'
 import ResourcesView from '@views/ResourcesView.vue'
 import MemberView from '@views/MemberView.vue'
-
+import EventsView from '@views/EventsView.vue'
+import ContactView from '@views/ContactView.vue'
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -33,6 +34,16 @@ const router = createRouter({
       component: MemberView,
     },
     {
+      path: '/events',
+      name: 'events',
+      component: EventsView,
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactView,
+    },
+    {
       path: '/membership',
       name: 'membership',
       component: () => import('@views/MembershipView.vue'),
@@ -43,6 +54,15 @@ const router = createRouter({
       component: () => import('@views/PlaceholderView.vue'),
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 }
+  },
 })
 
 export default router
