@@ -30,6 +30,9 @@
         <RouterLink to="/members" exact-active-class="active" @click="drawerOpen = false"
           >Members</RouterLink
         >
+        <RouterLink to="/events" exact-active-class="active" @click="drawerOpen = false"
+          >Events</RouterLink
+        >
         <RouterLink
           to="/membership"
           @click="drawerOpen = false"
@@ -90,6 +93,17 @@ onBeforeUnmount(() => {
 .mobile-member-button {
   margin-top: 1rem;
   text-align: center;
+  display: block;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: white !important; /* force white color */
+  background-color: var(--color-accent);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem; /* << KEY: force visible text */
+  line-height: 1.4; /* << KEY: force visible line height */
 }
 
 .header {
