@@ -236,6 +236,7 @@ import {
 .publications-column {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
 }
 
 .publications-column h2 {
