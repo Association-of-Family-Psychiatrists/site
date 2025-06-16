@@ -24,21 +24,7 @@
   </section>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const name = ref('')
-const email = ref('')
-const message = ref('')
-
-const submitForm = () => {
-  // You can replace this with actual form submission logic
-  alert(`Thank you, ${name.value}! Your message has been sent.`)
-  name.value = ''
-  email.value = ''
-  message.value = ''
-}
-</script>
+<script setup></script>
 
 <style scoped>
 .contact-view {
@@ -94,6 +80,7 @@ const submitForm = () => {
   font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
+  font-family: 'Georgia', serif;
 }
 
 .contact-form input:focus,
@@ -111,6 +98,7 @@ const submitForm = () => {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-family: 'Georgia', serif;
 }
 
 .cta-button:hover {

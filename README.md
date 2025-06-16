@@ -1,52 +1,81 @@
-# Frontend Documentation
+# Frontend Documentation — Association of Family Psychiatrists (AFP)
 
-This folder contains the Vue 3 frontend for the AFP website. Built using Vite and organized by components, views, and shared data.
+This is the Vue 3 frontend for the Association of Family Psychiatrists website. It is built using [Vite](https://vitejs.dev/) and organized into modular components, views, and shared state. It integrates with Firebase for backend functionality and Stripe for payments.
 
-## Structure
+---
+
+## 📁 Project Structure
 
 ```
 site/
-├── public/                      # Static assets and favicons
+├── public/                      # Static assets (favicon, images)
 ├── src/
-│   ├── assets/                  # Logo, base CSS
-│   ├── components/              # Reusable UI components (Hero, Event, Cards, etc.)
-│   ├── data/                    # JS modules with dummy or static data
-│   ├── views/                   # Page-level Vue components (e.g. Home, Membership)
-│   ├── firebase.js              # Firebase client SDK initialization
-│   ├── router/                  # Vue Router config
-│   ├── stores/                  # (Optional) Pinia or reactive state
-│   ├── App.vue                  # Root app layout
+│   ├── assets/                  # Global styles, fonts, and logos
+│   ├── components/              # Reusable UI components (Hero, Event, etc.)
+│   ├── data/                    # Static JS data (dummy events, etc.)
+│   ├── views/                   # Page-level Vue components (Home, Membership)
+│   ├── firebase.js              # Firebase SDK initialization
+│   ├── router/                  # Vue Router configuration
+│   ├── stores/                  # (Optional) Global state using Pinia
+│   ├── App.vue                  # Root component
 │   └── main.js                  # Vite entry file
-├── e2e/                         # End-to-end test config and example
 ├── index.html
 ├── package.json
 ├── vite.config.js
-└── README.md
+└── README.md                   # You're here
 ```
 
-## Components
+---
 
-### UI Components
-- `Hero.vue`: Section header with image and overlay
-- `FeaturedEvent.vue`, `Event.vue`: Reusable for events display
-- `StatsBanner.vue`, `CardGrid.vue`, `PublicationCard.vue`: Homepage-specific components
+## 🧩 Key Components
 
-### Layout & Navigation
-- `Header.vue`, `Footer.vue`: Site navigation and global UI
+### UI
+- `Hero.vue` – Page headers with background image
+- `Event.vue`, `FeaturedEvent.vue` – Event cards
+- `StatsBanner.vue`, `CardGrid.vue`, `PublicationCard.vue` – Homepage highlights
 
-## Views
+### Layout
+- `Header.vue`, `Footer.vue` – Site navigation and global layout
 
-- `HomeView.vue`: Homepage with dynamic sections
-- `MembershipView.vue`: Stripe checkout integration with animated form
-- `MembershipConfirmationView.vue`: Shown after successful Stripe payment
-- `AboutView.vue`, `ResourcesView.vue`, `EventsView.vue`, etc.
+---
 
-## Firebase Integration
+## 📄 Views
 
-- Firebase client initialized in `src/firebase.js`
-- Calls to backend Firebase Functions from `MembershipView.vue`
+- `HomeView.vue` – Homepage with scroll animations
+- `MembershipView.vue` – Membership form with Stripe integration
+- `MembershipConfirmationView.vue` – Displayed after successful checkout
+- `AboutView.vue`, `EventsView.vue`, `ResourcesView.vue`, etc.
+- `ContactView.vue` – Powered by Formspree (see below)
 
-## Running Locally
+---
+
+## 📬 Contact Form Integration (Formspree)
+
+The **Contact** page uses [Formspree](https://formspree.io/) to send contact form submissions directly to an email address:
+
+```html
+<form action="https://formspree.io/f/xanjjwnj" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required />
+  <input type="email" name="_replyto" placeholder="Your Email" required />
+  <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+  <input type="hidden" name="_next" value="https://yoursite.com/thank-you" />
+  <button type="submit">Send Message</button>
+</form>
+```
+
+No backend setup is required for this feature.
+
+---
+
+## 🔥 Firebase & Stripe
+
+- `src/firebase.js` initializes the Firebase app
+- `MembershipView.vue` securely communicates with Firebase Cloud Functions
+- Stripe checkout sessions are created server-side and accessed from the frontend
+
+---
+
+## 🧪 Local Development
 
 ```bash
 cd site
@@ -54,26 +83,33 @@ npm install
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173`
+App will be available at: `http://localhost:5173`
 
-## Deploying to GitHub Pages
+---
 
-Before committing to GitHub, run prettier with the command:
+## 🚀 Deployment
 
+This site is deployed to **GitHub Pages** using the following flow:
+
+### Format code before pushing:
 ```bash
 npm run format
-```
-
-Then commit as normal
-
-```bash
 git add .
-git commit -m "Commit message"
+git commit -m "Update"
 git push
 ```
 
-To deploy to GitHub pages, run:
-
+### Deploy:
 ```bash
 npm run deploy
 ```
+
+Ensure that `vite.config.js` has the correct `base` path for GitHub Pages:
+```js
+export default defineConfig({
+  base: '/your-repo-name/',
+  ...
+})
+```
+
+---
