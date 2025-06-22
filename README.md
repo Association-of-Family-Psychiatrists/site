@@ -1,6 +1,6 @@
-# Frontend Documentation — Association of Family Psychiatrists (AFP)
+# Frontend Documentation
 
-This is the Vue 3 frontend for the Association of Family Psychiatrists website. It is built using [Vite](https://vitejs.dev/) and organized into modular components, views, and shared state. It integrates with Firebase for backend functionality and Stripe for payments.
+This is the [Vue 3](https://vuejs.org/) frontend for the Association of Family Psychiatrists website. It is built using [Vite](https://vitejs.dev/) and organized into modular components, views, and shared state. It integrates with [Firebase](https://firebase.google.com/) for backend functionality and [Stripe](https://stripe.com/) for payments.
 
 ---
 
@@ -54,7 +54,7 @@ site/
 The **Contact** page uses [Formspree](https://formspree.io/) to send contact form submissions directly to an email address:
 
 ```html
-<form action="https://formspree.io/f/xanjjwnj" method="POST">
+<form action="https://formspree.io/f/{form_id}" method="POST">
   <input type="text" name="name" placeholder="Your Name" required />
   <input type="email" name="_replyto" placeholder="Your Email" required />
   <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
