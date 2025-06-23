@@ -53,7 +53,6 @@ const subscribe = async () => {
       return
     }
 
-    // Use setDoc with email as document ID (overwrites if exists)
     await setDoc(doc(db, 'mailingList', emailId), {
       email: emailId,
       subscribedAt: serverTimestamp(),
@@ -62,8 +61,13 @@ const subscribe = async () => {
     message.value = 'Thank you for subscribing!'
     email.value = ''
   } catch (error) {
-    console.error('Error adding email:', error)
-    message.value = 'An error occurred. Please try again later.'
+    // Check if it's the Firestore permission error caused by existing doc
+    if (error.code === 'permission-denied') {
+      message.value = 'You’re already subscribed.'
+    } else {
+      console.error('Unexpected error adding email:', error)
+      message.value = 'An error occurred. Please try again later.'
+    }
   }
 }
 </script>
