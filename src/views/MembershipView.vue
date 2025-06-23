@@ -54,17 +54,59 @@
         <span class="spinner" />
       </div>
     </div>
+
+    <!-- Existing Member Popup -->
+    <transition name="modal" appear>
+      <div v-if="showExistingMemberModal" class="modal-overlay" @click="closeModal">
+        <div class="modal-content" @click.stop>
+          <div class="modal-header">
+            <h3>Welcome Back!</h3>
+            <button class="close-button" @click="closeModal" aria-label="Close modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="icon-container">
+              <div class="welcome-icon">👋</div>
+            </div>
+            <p class="modal-message">
+              It looks like you're already a member of the Association of Family Psychiatrists!
+            </p>
+            <p class="modal-submessage">
+              If you need to update your membership or have any questions, please contact us
+              directly.
+            </p>
+            <div class="modal-actions">
+              <button class="modal-button primary" @click="closeModal">Got it, thanks!</button>
+              <button class="modal-button secondary" @click="contactUs">Contact Us</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </section>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { loadStripe } from '@stripe/stripe-js'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const name = ref('')
 const email = ref('')
 const phone = ref('')
 const loading = ref(false)
+const showExistingMemberModal = ref(false)
+
+const closeModal = () => {
+  showExistingMemberModal.value = false
+}
+
+const contactUs = () => {
+  // Navigate to contact page using Vue Router
+  router.push('/contact')
+}
 
 const handleCheckout = async () => {
   console.log('Sending', {
@@ -91,6 +133,17 @@ const handleCheckout = async () => {
         }),
       },
     )
+
+    if (response.status === 409) {
+      // User already exists
+      showExistingMemberModal.value = true
+      loading.value = false
+      return
+    }
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
 
     const session = await response.json()
 
@@ -239,5 +292,157 @@ h1 {
 .fade-slide-leave-to {
   opacity: 0;
   transform: translateY(10px);
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  font-family: 'Georgia', serif;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #f3f4f6;
+}
+
+.modal-body {
+  padding: 1rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.icon-container {
+  margin-bottom: 1rem;
+}
+
+.welcome-icon {
+  font-size: 3rem;
+  margin: 0 auto;
+}
+
+.modal-message {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.modal-submessage {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Georgia', serif;
+  min-width: 120px;
+}
+
+.modal-button.primary {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.modal-button.primary:hover {
+  background-color: #c65e53;
+}
+
+.modal-button.secondary {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.modal-button.secondary:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Modal animations */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-enter-from {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.modal-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
 }
 </style>
