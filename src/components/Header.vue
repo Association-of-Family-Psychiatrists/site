@@ -7,7 +7,6 @@
 
     <!-- Main nav (visible on desktop) -->
     <nav class="nav desktop-nav">
-      <RouterLink to="/" exact-active-class="active" class="nav-link">Home</RouterLink>
       <RouterLink to="/about" exact-active-class="active" class="nav-link">About</RouterLink>
       <RouterLink to="/resources" exact-active-class="active" class="nav-link"
         >Resources</RouterLink
@@ -20,7 +19,6 @@
     <!-- Mobile drawer -->
     <transition name="slide">
       <nav class="nav mobile-drawer" v-if="drawerOpen">
-        <RouterLink to="/" exact-active-class="active" @click="drawerOpen = false">Home</RouterLink>
         <RouterLink to="/about" exact-active-class="active" @click="drawerOpen = false"
           >About</RouterLink
         >

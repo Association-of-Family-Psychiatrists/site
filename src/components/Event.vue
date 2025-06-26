@@ -14,7 +14,7 @@
 
       <p v-if="location" class="event-location">{{ location }}</p>
 
-      <p class="event-description">{{ description }}</p>
+      <p class="event-description" v-html="parsedDescription"></p>
 
       <a
         v-if="rsvpLink || link"
@@ -26,22 +26,23 @@
         {{ linkLabel }}
       </a>
 
-      <!-- Optional Schedule -->
+        <!-- Optional Schedule -->
       <div v-if="schedule && schedule.length" class="schedule">
         <h3>Event Schedule</h3>
         <ul>
-          <li v-for="(item, index) in schedule" :key="index" class="schedule-item">
+          <li v-for="(item, index) in parsedSchedule" :key="index" class="schedule-item">
             <span class="schedule-time">{{ item.time }}</span>
-            <span class="schedule-title">{{ item.title }}</span>
+            <span class="schedule-title" v-html="item.parsedTitle"></span>
           </li>
         </ul>
       </div>
-    </div>
+    </div>  
   </article>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import { marked } from 'marked'
 
 const props = defineProps({
   id: String,
@@ -50,9 +51,9 @@ const props = defineProps({
   time: String,
   location: String,
   description: String,
-  image: String, // optional
+  image: String,
   rsvpLink: String,
-  link: String, // optional fallback for ConferenceEvent
+  link: String,
   linkLabel: {
     type: String,
     default: 'RSVP / Access',
@@ -68,10 +69,22 @@ const formattedDate = computed(() => {
   return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 })
 
+const parsedDescription = computed(() => {
+  return props.description ? marked.parseInline(props.description) : ''
+})
+
+const parsedSchedule = computed(() => {
+  return props.schedule.map(item => ({
+    ...item,
+    parsedTitle: marked.parseInline(item.title || ''),
+  }))
+})
+
 const fadeSlide = {
   initial: { opacity: 0, y: 30 },
   enter: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
+
 </script>
 
 <style scoped>
@@ -114,6 +127,19 @@ const fadeSlide = {
   color: #333;
 }
 
+.event-description a,
+.schedule-title a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.event-description a:hover,
+.schedule-title a:hover {
+  color: var(--vt-c-indigo);
+  text-decoration: none;
+}
+
 .event-button {
   display: inline-block;
   margin-top: 1rem;
@@ -140,17 +166,24 @@ const fadeSlide = {
 
 .schedule-item {
   display: flex;
-  align-items: baseline;
-  margin-bottom: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
 }
 
 .schedule-time {
   font-weight: bold;
-  width: 6rem;
+  min-width: 6rem;
+  flex-shrink: 0;
   color: var(--color-text);
+  line-height: 1.4;
 }
 
 .schedule-title {
   color: var(--color-text);
+  flex: 1;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 </style>

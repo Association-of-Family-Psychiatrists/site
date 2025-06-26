@@ -7,7 +7,7 @@
         image="https://images.squarespace-cdn.com/content/v1/5748cc56746fb940f105bd1c/22364a6b-02db-4f89-8840-8ad7de5d6682/family+therapy+pic.jpg"
       />
 
-      <div class="section-content" style="margin-top: 4rem">
+      <div class="section-content" id="about-statement">
         <h1 class="section-heading">About the Association</h1>
         <p>
           The Association of Family Psychiatrists is committed to advancing the field of family
@@ -17,7 +17,7 @@
     </section>
 
     <section class="mission">
-      <div class="section-content">
+      <div class="section-content" id="mission-statement">
         <h2 class="section-heading">Our Mission</h2>
         <p>
           We strive to support psychiatrists and mental health professionals who work with families,
@@ -28,7 +28,7 @@
     </section>
 
     <section class="vision">
-      <div class="section-content">
+      <div class="section-content" id="vision-statement">
         <h2 class="section-heading">Our Vision</h2>
         <p>
           A world where every family has access to compassionate, evidence-based psychiatric care.
@@ -70,6 +70,10 @@ section:not(:last-of-type)::after {
   margin: 0 auto;
   text-align: center;
   padding: 0 1rem;
+}
+
+#about-statement {
+  margin-top: 4rem;
 }
 
 .section-heading {

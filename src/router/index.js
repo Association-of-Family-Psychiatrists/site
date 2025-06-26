@@ -29,6 +29,38 @@ const router = createRouter({
       path: '/resources',
       name: 'resources',
       component: ResourcesView,
+      children: [
+        {
+          path: 'listserv',
+          name: 'resources-listserv',
+          component: () => import('@views/resources/ListservView.vue'),
+        },
+        {
+          path: 'articles',
+          name: 'resources-articles',
+          component: () => import('@views/resources/ArticlesView.vue'),
+        },
+        {
+          path: 'web',
+          name: 'resources-web',
+          component: () => import('@views/resources/WebResourcesView.vue'),
+        },
+        // {
+        //   path: 'child-adolescent',
+        //   name: 'resources-child-adolescent',
+        //   component: () => import('@views/ChildAdolescentView.vue'),
+        // },
+        // {
+        //   path: 'couples-adults',
+        //   name: 'resources-couples-adults',
+        //   component: () => import('@views/CouplesAdultsView.vue'),
+        // },
+        // {
+        //   path: 'culture-family',
+        //   name: 'resources-culture-family',
+        //   component: () => import('@views/CultureFamilyView.vue'),
+        // },
+      ],
     },
     {
       path: '/members',

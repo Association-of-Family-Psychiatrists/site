@@ -5,7 +5,7 @@
         <img src="@assets/afp-logo.png" alt="AFP Logo" class="logo-img" />
       </div>
 
-      <div class="welcome-column">
+      <div class="welcome-column" id="welcome">
         <h1 class="welcome-title">Welcome to the Association of Family Psychiatrists</h1>
         <p class="welcome-subtitle">
           Promoting mental wellness and supporting family psychiatry through education, advocacy,
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="about">
+    <div class="about" id="about">
       <h2>About Us</h2>
       <p>
         The Association of Family Psychiatrists is dedicated to advancing the field of family mental
@@ -24,28 +24,29 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <FeaturedEvent :="featuredEventData" />
+    <FeaturedEvent :="featuredEventData" id="featured-event"/>
 
     <div class="conference-and-publications">
-      <div class="conference-column">
+      <div class="conference-column" id="conference">
         <Event v-bind="conferenceEventData" />
       </div>
 
-      <div class="publications-column">
-        <h2>Recent Publications</h2>
+      <div class="publications-column" id="publications">
+        <h2>Featured Publications</h2>
         <PublicationCard v-for="(pub, index) in publicationData" :key="index" v-bind="pub" />
       </div>
     </div>
 
-    <CardGrid title="Upcoming Programs" :cards="featuredCards" />
+    <CardGrid title="Affiliated Organizations" :cards="featuredCards" id="affiliated-organizations" />
 
-    <StatsBanner :stats="statsData" />
+    <!-- <StatsBanner :stats="statsData" /> -->
 
     <CardGrid
       title="2024 Winners of our Annual Award for Excellence in Family Care"
       :cards="featuredAwardWinners"
+      id="award-winners"
     />
-    <ArticleGrid title="Latest Articles" :articles="featuredArticles" />
+    <ArticleGrid title="Featured Books" :articles="featuredArticles" id="featured-books" />
   </section>
 </template>
 
@@ -148,14 +149,14 @@ import {
 }
 
 .welcome-title {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: var(--color-accent);
 }
 
 .welcome-subtitle {
-  font-size: 2rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--vt-c-black-soft);
 }

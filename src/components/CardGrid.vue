@@ -25,7 +25,7 @@ defineProps({
 
 <style scoped>
 .card-grid-section {
-  padding: 3rem 1rem;
+  padding: 3rem;
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;

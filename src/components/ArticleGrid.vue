@@ -21,7 +21,7 @@ defineProps({
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 3rem;
 }
 
 .grid-title {

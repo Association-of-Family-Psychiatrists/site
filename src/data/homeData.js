@@ -15,31 +15,24 @@ export const featuredCards = [
   {
     image:
       'https://media.istockphoto.com/id/1317804584/photo/one-businesswoman-studio-portrait-looking-at-the-camera.jpg?s=2048x2048&w=is&k=20&c=bUHQJBt4Nbp0IEngDcXMMQteAnGi7fz1WpEuq3zLrOI=',
-    title: 'Guest Speaker',
-    subtitle: 'Live event • October 2025',
+    title: 'AACAP',
+    subtitle: 'Annual Meeting • October 2025',
     details: 'With some additional information here',
   },
   {
     image:
       'https://media.istockphoto.com/id/1411002384/photo/nurses-meeting.jpg?s=2048x2048&w=is&k=20&c=M5E3-J6IVCX6cvVBGyfedmTXEPjedRxyE2NZMkdv9hM=',
-    title: 'Research Symposium',
-    subtitle: 'Hybrid • January 2026',
+    title: 'APA',
+    subtitle: 'Annual Meeting • May 2026',
     details:
-      'Join psychiatrists and researchers discussing the latest in clinical family practice.',
+      'Link:',
   },
   {
     image:
       'https://media.istockphoto.com/id/1783743772/photo/female-speaker-giving-a-presentation-during-business-seminar-at-convention-center.jpg?s=2048x2048&w=is&k=20&c=h7aIvTLP5PhWfrp54V_yUhtoD1cZqqwauSmqMAsbnyw=',
     title: 'Annual AFP Conference',
-    subtitle: 'In-Person • July 2026',
+    subtitle: 'Virtual • March 2026',
     details: 'Our flagship event featuring keynote speakers, panels, and networking opportunities.',
-  },
-  {
-    image:
-      'https://media.istockphoto.com/id/1387143441/photo/shot-of-a-family-meeting-with-a-therapist.jpg?s=2048x2048&w=is&k=20&c=_nNijdSHxifcPAKvYZVWpnQu_HSrYLo9kveHu75LElk=',
-    title: 'Family Therapy Workshop',
-    subtitle: 'Live event • October 2025',
-    details: 'A hands-on workshop for professionals focused on family systems and communication.',
   },
 ]
 
@@ -78,11 +71,6 @@ export const featuredArticles = [
     thumbnail:
       'https://media.istockphoto.com/id/2206797715/photo/cubes-form-the-expression-ptsd.jpg?s=2048x2048&w=is&k=20&c=w4i03qsp8ue3YYBBhSuqcaAwzhfmyWGuEBmA2QkN2Tg=',
   },
-  {
-    title: 'Placeholder Article',
-    thumbnail:
-      'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=2048x2048&w=is&k=20&c=dFWJz1EFJt7Tq2lA-hgTpSW119YywTWtS4EwU3fpKrE=',
-  },
 ]
 
 export const featuredAwardWinners = [
@@ -100,20 +88,21 @@ export const featuredAwardWinners = [
 ]
 
 export const conferenceEventData = {
-  title: '2025 Annual Family Psychiatry Conference',
+  title: 'Highlights: 2024 Annual Family Psychiatry Conference',
   date: 'September 21, 2025',
   time: '9:00 AM – 4:00 PM PT',
   description:
     'Join us for the 2025 Annual Conference, featuring leading experts in family psychiatry. Engage in keynotes, panels, and networking opportunities.',
-  link: 'https://example.com/conference-recording',
-  linkLabel: 'Join Live / Watch Recording',
+  link: 'https://drive.google.com/file/d/14MEsEO4A65rdNfa7eHmyuKKwWBJJDtLl/view?usp=drive_link',
+  linkLabel: 'Watch Recording',
   schedule: [
-    { time: '9:00 AM', title: 'Opening Remarks & Keynote' },
-    { time: '10:30 AM', title: 'Panel: Innovations in Family Therapy' },
-    { time: '12:00 PM', title: 'Lunch Break' },
-    { time: '1:00 PM', title: 'Workshop: Integrating Family Care in Psychiatry' },
-    { time: '2:30 PM', title: 'Research Presentations' },
-    { time: '3:30 PM', title: 'Closing Discussion & Networking' },
+    { time: ' 11:00 AM', title: 'Introduction by Dr. Glick on the state of psychiatric practice, it’s efficacy, and why it isn’t used more in practice' },
+    { time: '11:10 AM', title: '[Family Work in Adult Outpatient Setting](https://www.familypsychiatrists.org/s/family-work-in-outpatient-setting-Carolyn-Fulton.pdf) (Carolyn Fulton)' },
+    { time: '11:45 PM', title: '[Role of Family Engagement in PHP](https://www.familypsychiatrists.org/s/Role-of-Family-Engagement-in-a-Partial-Hospital-Program-Tumuluru.pdf) (Dr. Tumuluru)' },
+    { time: '12:20 PM', title: 'Break' },
+    { time: '12:30 PM', title: '[Family and Family Interventions in Institutional Care](https://www.familypsychiatrists.org/s/family-interventions-in-institutionalized-care-settings-Gogineni.pdf) (Dr. Gogineni)' },
+    { time: '1:05 PM', title: '[Understanding and Treating Adolescent Eating Disorders](https://www.familypsychiatrists.org/s/understanding-and-treating-adolescent-eating-disorders-the-role-of-the-psychiatrist-in-family-based.pdf) (Dr. Spector and Dr. Spettigue)' },
+    { time: '1:40 PM', title: 'Break Out Rooms' },
   ],
 }
 
