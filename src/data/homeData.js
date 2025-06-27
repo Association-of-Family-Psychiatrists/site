@@ -1,14 +1,14 @@
 // src/data/homeData.js
 
 export const featuredEventData = {
-  title: 'Featured Event',
-  date: 'October 12, 2025',
-  location: 'San Francisco, CA',
+  title: 'Feature',
+  date: 'A Date',
+  location: 'A Place',
   description:
-    'Ex: Registration has opened for the annual AFP Conference. This component can be used to display an event, with an image and description',
+    'A place to feature anything the AFP wants on their home page',
   image:
     'https://media.istockphoto.com/id/1417699524/photo/group-of-people-at-music-concert.jpg?s=2048x2048&w=is&k=20&c=ry_TiyFeGk5F03WDdcTE9lnx25PvIIUvKCl0uQHyFa0=',
-  link: '/events#conference',
+  link: '/',
 }
 
 export const featuredCards = [
@@ -82,9 +82,6 @@ export const featuredAwardWinners = [
   { title: 'Hannah Leo, MD' },
   { title: 'Kaajal Patel Tan, DO' },
   { title: 'Michelle Prakash, MD' },
-  { title: 'Pallavi Tatapudy, MD' },
-  { title: 'Richard Seeber II, MD' },
-  { title: 'Alfonso Vera Jr, MD' },
 ]
 
 export const conferenceEventData = {

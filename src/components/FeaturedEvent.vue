@@ -6,7 +6,7 @@
       <h2 class="event-title">{{ title }}</h2>
       <p class="event-meta">{{ date }} &bullet; {{ location }}</p>
       <p class="event-description">{{ description }}</p>
-      <RouterLink :to="link" class="cta-button">Sign Up</RouterLink>
+      <RouterLink :to="link" class="cta-button">{{ linkLabel }}</RouterLink>
     </div>
   </section>
 </template>
@@ -21,6 +21,10 @@ defineProps({
   description: String,
   image: String,
   link: String,
+  linkLabel: {
+    type: String,
+    default: 'Access',
+  },
 })
 </script>
 

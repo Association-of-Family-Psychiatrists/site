@@ -26,6 +26,7 @@
 
     <FeaturedEvent :="featuredEventData" id="featured-event"/>
 
+
     <div class="conference-and-carousel">
       <h2 class="section-title">Conference Highlights</h2>
       <div class="columns-container">
@@ -71,16 +72,21 @@
       </div>
     </div>
 
+    <AffiliatedOrganizations id="affiliated-organizations" />
+
+
     <CardGrid title="Affiliated Organizations" :cards="featuredCards" id="affiliated-organizations" />
 
     <!-- <StatsBanner :stats="statsData" /> -->
+
+ 
+    <ArticleGrid title="Featured Books / Publications" :articles="featuredArticles" id="featured-books" />
 
     <CardGrid
       title="2024 Winners of our Annual Award for Excellence in Family Care"
       :cards="featuredAwardWinners"
       id="award-winners"
     />
-    <ArticleGrid title="Featured Books" :articles="featuredArticles" id="featured-books" />
   </section>
 </template>
 
@@ -91,6 +97,7 @@ import FeaturedEvent from '@components/FeaturedEvent.vue'
 import CardGrid from '@components/CardGrid.vue'
 import ArticleGrid from '@components/ArticleGrid.vue'
 import Event from '@components/Event.vue'
+import AffiliatedOrganizations from '@components/AffiliatedOrganizations.vue'
 import {
   featuredEventData,
   featuredCards,
