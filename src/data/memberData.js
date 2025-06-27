@@ -29,3 +29,34 @@ export const memberCards = [
     details: 'Published author and speaker on family systems theory and cross-cultural psychiatry.',
   },
 ]
+
+export const officerCards = [
+  {
+    title: 'Dr. Sarah Johnson',
+    subtitle: 'President',
+    description: 'Leading the association with over 15 years of experience in family psychiatry. Specializes in child and adolescent mental health.',
+    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face',
+    link: '#'
+  },
+  {
+    title: 'Dr. Michael Chen',
+    subtitle: 'Vice President',
+    description: 'Oversees educational programs and professional development initiatives. Expert in adult psychiatry and family therapy.',
+    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face',
+    link: '#'
+  },
+  {
+    title: 'Dr. Emily Rodriguez',
+    subtitle: 'Secretary',
+    description: 'Manages communications and member services. Specializes in geriatric psychiatry and family care coordination.',
+    image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face',
+    link: '#'
+  },
+  {
+    title: 'Dr. James Wilson',
+    subtitle: 'Treasurer',
+    description: 'Oversees financial management and budget planning. Expert in addiction psychiatry and family recovery programs.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
+    link: '#'
+  }
+]

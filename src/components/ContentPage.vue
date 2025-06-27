@@ -1,9 +1,9 @@
 <template>
   <section class="content-page">
     <div class="content-container">
-      <RouterLink to="/resources" class="back-button animate-fade-slide">
-        ← Back to Resources
-      </RouterLink>
+      <button @click="goBack" class="back-button animate-fade-slide">
+        ← Back
+      </button>
       
       <h1 class="page-title animate-fade-slide">{{ title }}</h1>
       
@@ -16,7 +16,8 @@
         <h2 v-if="section.heading" class="section-heading">{{ section.heading }}</h2>
         <h3 v-if="section.subheading" class="section-subheading">{{ section.subheading }}</h3>
         <div class="content-text">
-          <p v-for="(paragraph, pIndex) in section.paragraphs" :key="pIndex" v-html="parseMarkdown(paragraph)"></p>
+          <p v-for="(paragraph, pIndex) in section.paragraphs" :key="pIndex" v-html="parseLinks(paragraph)">
+          </p>
         </div>
       </div>
     </div>
@@ -24,7 +25,7 @@
 </template>
 
 <script setup>
-import { marked } from 'marked'
+import { useRouter } from 'vue-router'
 
 defineProps({
   title: {
@@ -38,11 +39,46 @@ defineProps({
   }
 })
 
-const parseMarkdown = (text) => {
-  return text ? marked.parseInline(text) : ''
+const router = useRouter()
+
+const goBack = () => {
+  router.go(-1)
 }
 
-
+// Function to parse and render links in text
+const parseLinks = (text) => {
+  if (!text) return ''
+  
+  // Store markdown links as placeholders to prevent double-processing
+  const markdownLinks = []
+  let linkIndex = 0
+  
+  // First, replace markdown links with placeholders
+  let result = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, linkText, url) => {
+    const placeholder = `__MARKDOWN_LINK_${linkIndex}__`
+    markdownLinks.push({ placeholder, linkText, url })
+    linkIndex++
+    return placeholder
+  })
+  
+  // Convert plain URLs to clickable links
+  const urlRegex = /(https?:\/\/[^\s]+)/g
+  result = result.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="content-link">$1</a>')
+  
+  // Convert email addresses to clickable mailto links
+  const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g
+  result = result.replace(emailRegex, '<a href="mailto:$1" class="content-link">$1</a>')
+  
+  // Restore markdown links
+  markdownLinks.forEach(({ placeholder, linkText, url }) => {
+    const isEmail = url.startsWith('mailto:')
+    const target = isEmail ? '' : ' target="_blank" rel="noopener noreferrer"'
+    const htmlLink = `<a href="${url}"${target} class="content-link">${linkText}</a>`
+    result = result.replace(placeholder, htmlLink)
+  })
+  
+  return result
+}
 </script>
 
 <style scoped>

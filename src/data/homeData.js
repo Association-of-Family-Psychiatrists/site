@@ -129,3 +129,30 @@ export const publicationData = [
     authors: ['AFP Editorial Board'],
   },
 ]
+
+export const conferenceCarouselData = [
+  {
+    src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
+    alt: 'Conference attendees networking',
+    title: 'Networking Sessions',
+    description: 'Connect with fellow psychiatrists and mental health professionals'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
+    alt: 'Keynote speaker presentation',
+    title: 'Keynote Presentations',
+    description: 'Insightful talks from leading experts in family psychiatry'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
+    alt: 'Workshop session',
+    title: 'Interactive Workshops',
+    description: 'Hands-on learning experiences and skill development'
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&h=600&fit=crop',
+    alt: 'Conference venue and atmosphere',
+    title: 'Conference Venue',
+    description: 'State-of-the-art facilities for an exceptional learning experience'
+  }
+]

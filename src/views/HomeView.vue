@@ -26,14 +26,48 @@
 
     <FeaturedEvent :="featuredEventData" id="featured-event"/>
 
-    <div class="conference-and-publications">
-      <div class="conference-column" id="conference">
-        <Event v-bind="conferenceEventData" />
-      </div>
+    <div class="conference-and-carousel">
+      <h2 class="section-title">Conference Highlights</h2>
+      <div class="columns-container">
+        <div class="conference-column" id="conference">
+          <Event v-bind="conferenceEventData" />
+        </div>
 
-      <div class="publications-column" id="publications">
-        <h2>Featured Publications</h2>
-        <PublicationCard v-for="(pub, index) in publicationData" :key="index" v-bind="pub" />
+        <div class="carousel-column" id="conference-carousel">
+          <div class="carousel-container">
+            <div class="carousel-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+              <div 
+                v-for="(image, index) in conferenceImages" 
+                :key="index" 
+                class="carousel-slide"
+              >
+                <img :src="image.src" :alt="image.alt" class="carousel-image" />
+                <div class="carousel-caption">
+                  <h3>{{ image.title }}</h3>
+                  <p>{{ image.description }}</p>
+                </div>
+              </div>
+            </div>
+            
+            <button class="carousel-button prev" @click="previousSlide" aria-label="Previous slide">
+              ‹
+            </button>
+            <button class="carousel-button next" @click="nextSlide" aria-label="Next slide">
+              ›
+            </button>
+            
+            <div class="carousel-indicators">
+              <button 
+                v-for="(image, index) in conferenceImages" 
+                :key="index"
+                class="indicator" 
+                :class="{ active: currentSlide === index }"
+                @click="goToSlide(index)"
+                :aria-label="`Go to slide ${index + 1}`"
+              ></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -51,22 +85,59 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import FeaturedEvent from '@components/FeaturedEvent.vue'
 import CardGrid from '@components/CardGrid.vue'
-import StatsBanner from '@components/StatsBanner.vue'
 import ArticleGrid from '@components/ArticleGrid.vue'
 import Event from '@components/Event.vue'
-import PublicationCard from '@components/PublicationCard.vue'
 import {
   featuredEventData,
   featuredCards,
-  statsData,
   featuredArticles,
   conferenceEventData,
-  publicationData,
   featuredAwardWinners,
+  conferenceCarouselData,
 } from '@data/homeData.js'
+
+// Conference carousel data
+const conferenceImages = ref(conferenceCarouselData)
+
+const currentSlide = ref(0)
+let autoPlayInterval = null
+
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % conferenceImages.value.length
+}
+
+const previousSlide = () => {
+  currentSlide.value = currentSlide.value === 0 
+    ? conferenceImages.value.length - 1 
+    : currentSlide.value - 1
+}
+
+const goToSlide = (index) => {
+  currentSlide.value = index
+}
+
+const startAutoPlay = () => {
+  autoPlayInterval = setInterval(nextSlide, 5000) // Change slide every 5 seconds
+}
+
+const stopAutoPlay = () => {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval)
+    autoPlayInterval = null
+  }
+}
+
+onMounted(() => {
+  startAutoPlay()
+})
+
+onUnmounted(() => {
+  stopAutoPlay()
+})
 </script>
 
 <style scoped>
@@ -75,7 +146,6 @@ import {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%;
-  min-height:;
 }
 
 .logo-column {
@@ -221,27 +291,165 @@ import {
   background-color: #c65e53;
 }
 
-.conference-and-publications {
+.conference-and-carousel {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 2rem 10%;
 }
 
-.conference-and-publications > * {
+.section-title {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.columns-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.columns-container > * {
   flex: 1 1 400px; /* Grow equally, shrink equally, min width ~400px */
 }
 
-.publications-column {
+.carousel-column {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-.publications-column h2 {
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 2rem 1rem 1rem;
+  text-align: center;
+}
+
+.carousel-caption h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.carousel-caption p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.carousel-button:hover {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .columns-container {
+    flex-direction: column;
+  }
+  
+  .carousel-container {
+    height: 450px;
+  }
+  
+  .carousel-caption {
+    padding: 1.5rem 1rem 1rem;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.1rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.8rem;
+  }
 }
 </style>

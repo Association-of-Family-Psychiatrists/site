@@ -65,8 +65,20 @@ const props = defineProps({
 })
 
 const formattedDate = computed(() => {
-  const d = new Date(props.date)
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+  const raw = props.date?.trim()
+  if (!raw) return ''
+
+  // Check if input includes a day (e.g., 2026-05-01 or May 1, 2026)
+  const hasDay = /\b\d{1,2}\b/.test(raw)
+
+  const d = new Date(raw)
+  if (isNaN(d.getTime())) return raw // fallback to raw if invalid
+
+  const options = hasDay
+    ? { year: 'numeric', month: 'long', day: 'numeric' }
+    : { year: 'numeric', month: 'long' }
+
+  return d.toLocaleDateString(undefined, options)
 })
 
 const parsedDescription = computed(() => {

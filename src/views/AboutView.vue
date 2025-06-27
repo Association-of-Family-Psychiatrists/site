@@ -35,11 +35,25 @@
         </p>
       </div>
     </section>
+
+    <section class="officers">
+      <div class="section-content" id="officers-section">
+        <h2 class="section-heading">Our Leadership Team</h2>
+        <p>
+          Meet the dedicated professionals who guide our association and work tirelessly to advance
+          the field of family psychiatry.
+        </p>
+      </div>
+      
+      <CardGrid title="Executive Officers" :cards="officerCards" />
+    </section>
   </div>
 </template>
 
 <script setup>
 import Hero from '@components/Hero.vue'
+import CardGrid from '@components/CardGrid.vue'
+import { officerCards } from '@/data/memberData.js'
 </script>
 
 <style scoped>
@@ -87,6 +101,22 @@ p {
   font-size: 1.15rem;
   line-height: 1.75;
   color: inherit;
+}
+
+/* Officers Section */
+.officers {
+  background-color: var(--vt-c-white);
+  padding: 4rem 0;
+}
+
+#officers-section {
+  margin-bottom: 2rem;
+}
+
+#officers-section p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #666;
 }
 
 /* Responsive */

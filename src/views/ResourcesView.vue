@@ -52,6 +52,13 @@
         description="Resources for culture and family"
         link="/resources/culture-family"
       />
+
+      <InformationSection
+        class="animate-fade-slide"
+        heading="Training "
+        description="Resources for training"
+        link="/resources/training"
+      />
     </div>
   </section>
 </template>
@@ -59,37 +66,5 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import InformationSection from '@components/InformationSection.vue'
+import '@/assets/resources.css'
 </script>
-
-<style scoped>
-.resources {
-  padding: 4rem 2rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--color-accent);
-}
-
-/* Animation */
-.animate-fade-slide {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeSlideIn 0.8s ease forwards;
-}
-
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

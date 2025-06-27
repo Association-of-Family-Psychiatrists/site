@@ -45,21 +45,50 @@ const router = createRouter({
           name: 'resources-web',
           component: () => import('@views/resources/WebResourcesView.vue'),
         },
-        // {
-        //   path: 'child-adolescent',
-        //   name: 'resources-child-adolescent',
-        //   component: () => import('@views/ChildAdolescentView.vue'),
-        // },
-        // {
-        //   path: 'couples-adults',
-        //   name: 'resources-couples-adults',
-        //   component: () => import('@views/CouplesAdultsView.vue'),
-        // },
-        // {
-        //   path: 'culture-family',
-        //   name: 'resources-culture-family',
-        //   component: () => import('@views/CultureFamilyView.vue'),
-        // },
+        {
+          path: 'child-adolescent',
+          name: 'resources-child-adolescent',
+          component: () => import('@views/resources/ChildAdolescentView.vue'),
+          children: [
+            {
+              path: 'aacap',
+              name: 'resources-child-adolescent-aacap',
+              component: () => import('@views/resources/child-adolescent/AACAPView.vue'),
+            },
+            {
+              path: 'family-centered',
+              name: 'resources-child-adolescent-family-centered',
+              component: () => import('@views/resources/child-adolescent/FamilyCenteredView.vue'),
+            },
+          ],
+        },
+        {
+          path: 'couples-adults',
+          name: 'resources-couples-adults',
+          component: () => import('@views/resources/CouplesAdultsView.vue'),
+          children: [
+            {
+              path: 'psychiatric-resources',
+              name: 'resources-couples-adults-psychiatric-resources',
+              component: () => import('@views/resources/couples-adults/PsychiatricResourcesView.vue'),
+            },
+            {
+              path: 'books',
+              name: 'resources-couples-adults-books',
+              component: () => import('@views/resources/couples-adults/BooksView.vue'),
+            },
+          ],
+        },
+        {
+          path: 'culture-family',
+          name: 'resources-culture-family',
+          component: () => import('@views/resources/CultureFamilyView.vue'),
+        },   
+        {
+          path: 'training',
+          name: 'resources-training',
+          component: () => import('@views/resources/TrainingView.vue'),
+        },
       ],
     },
     {

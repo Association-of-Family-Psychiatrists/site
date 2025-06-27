@@ -27,7 +27,7 @@
       </transition>
 
       <transition name="fade-slide" appear>
-        <form @submit.prevent="handleCheckout" class="signup-form animated-item" v-if="!loading">
+        <form @submit.prevent="handleSubmit" class="signup-form animated-item" v-if="!loading">
           <input v-model="name" type="text" placeholder="Full Name" required :disabled="loading" />
           <input
             v-model="email"
@@ -43,15 +43,22 @@
             required
             :disabled="loading"
           />
-          <button class="join-button" type="submit" :disabled="loading">
-            {{ loading ? 'Processing…' : 'Become a Member' }}
-          </button>
+          
+          <!-- PayPal Button Container -->
+          <div id="paypal-button-container"></div>
+          
+          <p class="form-note" v-if="paypalLoaded">Complete your information above and click the PayPal button to proceed</p>
         </form>
       </transition>
 
       <div v-if="loading" class="loading-spinner">
-        <p>Redirecting to secure checkout…</p>
+        <p>Processing your payment…</p>
         <span class="spinner" />
+      </div>
+
+      <!-- Result Message -->
+      <div v-if="resultMessage" class="result-message" :class="resultType">
+        <p v-html="resultMessage"></p>
       </div>
     </div>
 
@@ -88,8 +95,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { loadStripe } from '@stripe/stripe-js'
+import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -98,6 +104,9 @@ const email = ref('')
 const phone = ref('')
 const loading = ref(false)
 const showExistingMemberModal = ref(false)
+const paypalLoaded = ref(false)
+const resultMessage = ref('')
+const resultType = ref('')
 
 const closeModal = () => {
   showExistingMemberModal.value = false
@@ -108,51 +117,134 @@ const contactUs = () => {
   router.push('/contact')
 }
 
-const handleCheckout = async () => {
-  console.log('Sending', {
-    name: name.value,
-    email: email.value,
-    phone: phone.value,
-  })
-  loading.value = true
+const handleSubmit = (e) => {
+  e.preventDefault()
+  // Form submission is handled by PayPal button
+}
 
-  try {
-    const stripe = await loadStripe(
-      'pk_test_51RXnmZ2LuuFdegO3Y0dk6gd65FMnwPV1DLKc1tRoC5JLs1GtodS6mCCzzsNfQgDYUxHcQOcXupKq5xTKvtmPl62V00UUfMxsSM',
-    )
+const showResult = (message, type = 'info') => {
+  resultMessage.value = message
+  resultType.value = type
+  setTimeout(() => {
+    resultMessage.value = ''
+    resultType.value = ''
+  }, 10000) // Clear after 10 seconds
+}
 
-    const response = await fetch(
-      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createCheckoutSession',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name.value,
-          email: email.value,
-          phone: phone.value,
-        }),
+onMounted(() => {
+  // Load PayPal SDK via CDN
+  const script = document.createElement('script')
+  script.src = 'https://www.paypal.com/sdk/js?client-id=AaaPWSEs6Fn13kOO5p9Kx7n9IQ8JmEoBWTATas189YUjlY9fspQT6WdQO7ew0vy9mtdfV2wcX-LnW0ib&currency=USD&components=buttons'
+  script.onload = async () => {
+    paypalLoaded.value = true
+    // Wait for Vue to finish rendering
+    await nextTick()
+    initializePayPal()
+  }
+  document.head.appendChild(script)
+})
+
+const initializePayPal = () => {
+  if (window.paypal) {
+    window.paypal.Buttons({
+      style: {
+        shape: "rect",
+        layout: "vertical",
+        color: "gold",
+        label: "paypal",
       },
-    )
+      message: {
+        amount: 50,
+      },
 
-    if (response.status === 409) {
-      // User already exists
-      showExistingMemberModal.value = true
-      loading.value = false
-      return
-    }
+      async createOrder() {
+        // Validate form first
+        if (!name.value || !email.value || !phone.value) {
+          showResult('Please fill in all required fields', 'error')
+          return
+        }
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+        try {
+          const response = await fetch(
+            'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createPayPalOrder',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: name.value,
+                email: email.value,
+                phone: phone.value,
+              }),
+            },
+          )
 
-    const session = await response.json()
+          const orderData = await response.json()
 
-    const { error } = await stripe.redirectToCheckout({ sessionId: session.id })
-    if (error) throw error
-  } catch (err) {
-    console.error(err)
-    alert('Something went wrong. Please try again.')
-    loading.value = false
+          if (response.status === 409) {
+            showExistingMemberModal.value = true
+            return
+          }
+
+          if (orderData.id) {
+            return orderData.id
+          }
+          
+          const errorDetail = orderData?.details?.[0]
+          const errorMessage = errorDetail
+            ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+            : JSON.stringify(orderData)
+
+          throw new Error(errorMessage)
+        } catch (error) {
+          console.error(error)
+          showResult(`Could not initiate PayPal Checkout...<br><br>${error}`, 'error')
+        }
+      },
+
+      async onApprove(data, actions) {
+        loading.value = true
+        console.log("Passing approved order ID to backend", data.orderID)
+        try {
+          const response = await fetch(
+            `https://us-central1-afp-site-c1bd9.cloudfunctions.net/capturePayPalOrder`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ orderID: data.orderID }),
+            },
+          )
+
+          const orderData = await response.json()
+          console.log("Order data", JSON.stringify(orderData))
+
+          // Successful transaction -> Show confirmation or thank you message
+          
+          showResult(
+            `Order ${orderData.status}: ${orderData.id}<br>
+            <br>Welcome to AFP! You will receive a confirmation email shortly.`,
+            'success'
+          )
+          
+          // Redirect to confirmation page after a delay
+          setTimeout(() => {
+            router.push('/confirmation')
+          }, 3000)
+          
+        } catch (error) {
+          console.error(error)
+          showResult(
+            `Sorry, your transaction could not be processed...<br><br>${error}`,
+            'error'
+          )
+        } finally {
+          loading.value = false
+        }
+      },
+    }).render('#paypal-button-container')
   }
 }
 </script>
@@ -224,29 +316,47 @@ h1 {
   font-family: 'Georgia', serif;
 }
 
-.join-button {
-  font-size: 1.25rem;
-  padding: 1rem 2rem;
-  background-color: var(--color-accent);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Georgia', serif;
+/* PayPal button container */
+#paypal-button-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem 0;
 }
 
-.join-button:disabled {
-  background-color: var(--color-accent);
-  opacity: 0.6;
-  cursor: not-allowed;
+.form-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
-.join-button:hover:enabled {
-  background-color: #c65e53;
+/* Result message */
+.result-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
 }
 
-/* Stripe loading spinner */
+.result-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.result-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.result-message.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+/* Loading spinner */
 .loading-spinner {
   margin-top: 2rem;
   font-size: 1rem;
