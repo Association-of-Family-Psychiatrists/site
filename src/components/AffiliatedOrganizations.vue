@@ -21,20 +21,37 @@ const containerRef = ref(null)
 const isInView = ref(false)
 
 let observer = null
+const isMobile = ref(false)
+
+function getThreshold() {
+  if (window.innerWidth <= 768) {
+    return 0.3
+  }
+  return 0.1
+}
 
 onMounted(() => {
+  isMobile.value = window.innerWidth <= 768
+  if (isMobile.value) {
+    // Instantly show circles on mobile
+    isInView.value = true
+    return
+  }
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          isInView.value = true
-          // Once animation starts, we can stop observing
+          void containerRef.value.offsetWidth
+          isInView.value = false
+          setTimeout(() => {
+            isInView.value = true
+          }, 10)
           observer.unobserve(entry.target)
         }
       })
     },
     {
-      threshold: 0.1 // Start animation when 30% of the component is visible
+      threshold: getThreshold(),
     }
   )
 
@@ -283,118 +300,46 @@ onUnmounted(() => {
   
   /* Adjust circle positions for mobile */
   .org-circle:nth-child(1).animate { 
-    animation: flyOut1Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
   .org-circle:nth-child(2).animate { 
-    animation: flyOut2Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
   .org-circle:nth-child(3).animate { 
-    animation: flyOut3Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
   .org-circle:nth-child(4).animate { 
-    animation: flyOut4Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
   .org-circle:nth-child(5).animate { 
-    animation: flyOut5Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
   .org-circle:nth-child(6).animate { 
-    animation: flyOut6Mobile 1.5s ease-out forwards;
-    animation-delay: var(--delay);
+    animation: none !important;
+    opacity: 1 !important;
   }
-}
-
-@keyframes flyOut1Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
+  .org-circle:nth-child(1) {
+    transform: translate(-50%, -50%) translate(0, -160px) scale(1) !important;
   }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
+  .org-circle:nth-child(2) {
+    transform: translate(-50%, -50%) translate(139px, -80px) scale(1) !important;
   }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(0, -160px) scale(1);
+  .org-circle:nth-child(3) {
+    transform: translate(-50%, -50%) translate(139px, 80px) scale(1) !important;
   }
-}
-
-@keyframes flyOut2Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
+  .org-circle:nth-child(4) {
+    transform: translate(-50%, -50%) translate(0, 160px) scale(1) !important;
   }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
+  .org-circle:nth-child(5) {
+    transform: translate(-50%, -50%) translate(-139px, 80px) scale(1) !important;
   }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(139px, -80px) scale(1);
-  }
-}
-
-@keyframes flyOut3Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(139px, 80px) scale(1);
-  }
-}
-
-@keyframes flyOut4Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(0, 160px) scale(1);
-  }
-}
-
-@keyframes flyOut5Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(-139px, 80px) scale(1);
-  }
-}
-
-@keyframes flyOut6Mobile {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) translate(-139px, -80px) scale(1);
+  .org-circle:nth-child(6) {
+    transform: translate(-50%, -50%) translate(-139px, -80px) scale(1) !important;
   }
 }
 </style> 

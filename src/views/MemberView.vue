@@ -72,7 +72,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import CardGrid from '@/components/CardGrid.vue'
-import { memberCards } from '@/data/memberData.js'
 
 const isVerified = ref(false)
 const memberName = ref('')
@@ -80,6 +79,7 @@ const memberEmail = ref('')
 const verifying = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
+const memberCards = ref([])
 
 // Check for existing session on page load
 onMounted(() => {
@@ -90,12 +90,46 @@ onMounted(() => {
       memberName.value = memberData.name
       memberEmail.value = memberData.email
       isVerified.value = true
+      // Fetch memberCards from backend
+      fetchMemberCards(memberData.name, memberData.email)
     } catch (error) {
       console.error('Error parsing saved member data:', error)
       localStorage.removeItem('afp_member')
     }
   }
 })
+
+const fetchMemberCards = async (name, email) => {
+  try {
+    const response = await fetch(
+      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/verifyMember',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email }),
+      }
+    )
+    const result = await response.json()
+    if (response.ok && result.isMember) {
+      memberCards.value = (result.members || []).map(m => ({
+        title: m.name,
+        subtitle: [m.specialization, m.location].filter(Boolean).join(' | '),
+        details: [
+          m.email ? `Email: ${m.email}` : '',
+          m.phone ? `Phone: ${m.phone}` : '',
+          m.description ? m.description : ''
+        ].filter(Boolean).join('\n')
+      }))
+    } else {
+      errorMessage.value = result.error || 'Failed to load members.'
+    }
+  } catch (error) {
+    console.error('Failed to fetch member cards:', error)
+    errorMessage.value = 'An error occurred while loading members.'
+  }
+}
 
 const verifyMember = async () => {
   if (!memberName.value || !memberEmail.value) {
@@ -108,7 +142,7 @@ const verifyMember = async () => {
   successMessage.value = ''
 
   try {
-    // Call Firebase function to verify membership
+    // Call Firebase function to verify membership and get members
     const response = await fetch(
       'https://us-central1-afp-site-c1bd9.cloudfunctions.net/verifyMember',
       {
@@ -133,7 +167,18 @@ const verifyMember = async () => {
         verifiedAt: new Date().toISOString()
       }
       localStorage.setItem('afp_member', JSON.stringify(memberData))
-      
+
+      // Set memberCards from backend
+      memberCards.value = (result.members || []).map(m => ({
+        title: m.name,
+        subtitle: [m.specialization, m.location].filter(Boolean).join(' | '),
+        details: [
+          m.email ? `Email: ${m.email}` : '',
+          m.phone ? `Phone: ${m.phone}` : '',
+          m.description ? m.description : ''
+        ].filter(Boolean).join('\n')
+      }))
+
       successMessage.value = 'Membership verified! Welcome to the member directory.'
       setTimeout(() => {
         isVerified.value = true

@@ -7,11 +7,18 @@
           Your membership with the Association of Family Psychiatrists has been successfully
           processed.
         </p>
+        <p class="order-id" v-if="orderId">
+          <strong>Your Order ID:</strong> {{ orderId }}
+        </p>
         <p class="followup">
-          You’ll receive a welcome email shortly with further details. We look forward to your
+          You'll receive a welcome email shortly with further details. We look forward to your
           participation in our community.
         </p>
-
+        <p class="next-steps">
+          <span>
+            To add your contact information to the <RouterLink to="/members">secure membership directory</RouterLink>, please email <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
+          </span>
+        </p>
         <RouterLink to="/" class="home-button">Return to Homepage</RouterLink>
       </div>
     </transition>
@@ -19,7 +26,10 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
+import { computed } from 'vue'
+const route = useRoute()
+const orderId = computed(() => route.query.orderId)
 </script>
 
 <style scoped>
@@ -53,7 +63,19 @@ h1 {
   color: var(--color-text);
 }
 
+.order-id {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
 .followup {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+}
+
+.next-steps {
   font-size: 1.1rem;
   margin-bottom: 2rem;
   color: var(--color-text);

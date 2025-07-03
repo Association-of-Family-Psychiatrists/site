@@ -221,17 +221,12 @@ const initializePayPal = () => {
           const orderData = await response.json()
           console.log("Order data", JSON.stringify(orderData))
 
-          // Successful transaction -> Show confirmation or thank you message
-          
-          showResult(
-            `Order ${orderData.status}: ${orderData.id}<br>
-            <br>Welcome to AFP! You will receive a confirmation email shortly.`,
-            'success'
-          )
-          
           // Redirect to confirmation page after a delay
           setTimeout(() => {
-            router.push('/confirmation')
+            router.push({
+              path: '/confirmation',
+              query: { orderId: orderData.id }
+            })
           }, 3000)
           
         } catch (error) {

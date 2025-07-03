@@ -53,7 +53,6 @@
 <script setup>
 import Hero from '@components/Hero.vue'
 import CardGrid from '@components/CardGrid.vue'
-import { officerCards } from '@/data/memberData.js'
 </script>
 
 <style scoped>
