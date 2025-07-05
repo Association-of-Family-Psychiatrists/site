@@ -7,16 +7,16 @@
           Your membership with the Association of Family Psychiatrists has been successfully
           processed.
         </p>
-        <p class="order-id" v-if="orderId">
-          <strong>Your Order ID:</strong> {{ orderId }}
-        </p>
+        <p class="order-id" v-if="orderId"><strong>Your Order ID:</strong> {{ orderId }}</p>
         <p class="followup">
           You'll receive a welcome email shortly with further details. We look forward to your
           participation in our community.
         </p>
         <p class="next-steps">
           <span>
-            To add your contact information to the <RouterLink to="/members">secure membership directory</RouterLink>, please email <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
+            To add your contact information to the
+            <RouterLink to="/members">secure membership directory</RouterLink>, please email
+            <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
           </span>
         </p>
         <RouterLink to="/" class="home-button">Return to Homepage</RouterLink>

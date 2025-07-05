@@ -2,11 +2,17 @@
   <div class="sister-organizations" id="sister-organizations" ref="containerRef">
     <h2>Sister Organizations</h2>
     <div class="organizations-container">
-      <div class="center-logo" :class="{ 'animate': isInView }">
+      <div class="center-logo" :class="{ animate: isInView }">
         <img src="/afp-logo.png" alt="AFP Logo" class="center-logo-img" />
       </div>
       <div class="organization-circles">
-        <div class="org-circle" v-for="i in 6" :key="i" :style="{ '--delay': `${i * 0.2}s` }" :class="{ 'animate': isInView }">
+        <div
+          class="org-circle"
+          v-for="i in 6"
+          :key="i"
+          :style="{ '--delay': `${i * 0.2}s` }"
+          :class="{ animate: isInView }"
+        >
           <div class="circle-placeholder">ORG {{ i }}</div>
         </div>
       </div>
@@ -52,7 +58,7 @@ onMounted(() => {
     },
     {
       threshold: getThreshold(),
-    }
+    },
   )
 
   if (containerRef.value) {
@@ -157,27 +163,27 @@ onUnmounted(() => {
 }
 
 /* Position circles in a circle around the center */
-.org-circle:nth-child(1).animate { 
+.org-circle:nth-child(1).animate {
   animation: flyOut1 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
-.org-circle:nth-child(2).animate { 
+.org-circle:nth-child(2).animate {
   animation: flyOut2 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
-.org-circle:nth-child(3).animate { 
+.org-circle:nth-child(3).animate {
   animation: flyOut3 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
-.org-circle:nth-child(4).animate { 
+.org-circle:nth-child(4).animate {
   animation: flyOut4 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
-.org-circle:nth-child(5).animate { 
+.org-circle:nth-child(5).animate {
   animation: flyOut5 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
-.org-circle:nth-child(6).animate { 
+.org-circle:nth-child(6).animate {
   animation: flyOut6 1.5s ease-out forwards;
   animation-delay: var(--delay);
 }
@@ -273,7 +279,8 @@ onUnmounted(() => {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -286,40 +293,40 @@ onUnmounted(() => {
   .organizations-container {
     height: 400px;
   }
-  
+
   .center-logo-img {
     width: 80px;
     height: 80px;
   }
-  
+
   .circle-placeholder {
     width: 70px;
     height: 70px;
     font-size: 0.9rem;
   }
-  
+
   /* Adjust circle positions for mobile */
-  .org-circle:nth-child(1).animate { 
+  .org-circle:nth-child(1).animate {
     animation: none !important;
     opacity: 1 !important;
   }
-  .org-circle:nth-child(2).animate { 
+  .org-circle:nth-child(2).animate {
     animation: none !important;
     opacity: 1 !important;
   }
-  .org-circle:nth-child(3).animate { 
+  .org-circle:nth-child(3).animate {
     animation: none !important;
     opacity: 1 !important;
   }
-  .org-circle:nth-child(4).animate { 
+  .org-circle:nth-child(4).animate {
     animation: none !important;
     opacity: 1 !important;
   }
-  .org-circle:nth-child(5).animate { 
+  .org-circle:nth-child(5).animate {
     animation: none !important;
     opacity: 1 !important;
   }
-  .org-circle:nth-child(6).animate { 
+  .org-circle:nth-child(6).animate {
     animation: none !important;
     opacity: 1 !important;
   }
@@ -342,4 +349,4 @@ onUnmounted(() => {
     transform: translate(-50%, -50%) translate(-139px, -80px) scale(1) !important;
   }
 }
-</style> 
+</style>

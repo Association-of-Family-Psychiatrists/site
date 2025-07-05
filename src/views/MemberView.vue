@@ -1,16 +1,13 @@
 <template>
   <section class="member-view">
     <h1 class="page-title animate-fade-slide">Our Members</h1>
-    <p class="page-subtitle animate-fade-slide">
-      Meet some of the dedicated professionals in our association.
-    </p>
 
     <!-- Member Verification Form -->
     <div v-if="!isVerified" class="verification-section animate-fade-slide">
       <div class="verification-card">
         <h2>Member Verification</h2>
         <p>Please enter your information to access the member directory.</p>
-        
+
         <form @submit.prevent="verifyMember" class="verification-form">
           <div class="form-group">
             <label for="memberName">Full Name</label>
@@ -23,7 +20,7 @@
               :disabled="verifying"
             />
           </div>
-          
+
           <div class="form-group">
             <label for="memberEmail">Email Address</label>
             <input
@@ -35,9 +32,13 @@
               :disabled="verifying"
             />
           </div>
-          
+
           <button type="submit" class="verify-button" :disabled="verifying">
-            {{ verifying ? 'Verifying...' : 'Verify Membership' }}
+            <div v-if="verifying" class="loading-container">
+              <div class="loading-circle"></div>
+              <span>Verifying...</span>
+            </div>
+            <span v-else>Verify Membership</span>
           </button>
         </form>
 
@@ -56,15 +57,19 @@
     <!-- Member Directory (only shown after verification) -->
     <div v-else class="member-directory animate-fade-slide">
       <div class="welcome-message">
-        <h2>Welcome, {{ memberName }}!</h2>
-        <p>Here are our current members:</p>
+        <p>Welcome, {{ memberName }}!</p>
       </div>
-      
-      <CardGrid title="Members" :cards="memberCards" />
-      
-      <button @click="logout" class="logout-button">
-        Sign Out
-      </button>
+
+      <!-- Loading state for member cards -->
+      <div v-if="loadingMembers" class="loading-section">
+        <div class="loading-circle large"></div>
+        <p>Loading member directory...</p>
+      </div>
+
+      <!-- Member cards when loaded -->
+      <CardGrid v-else :cards="memberCards" />
+
+      <button @click="logout" class="logout-button">Sign Out</button>
     </div>
   </section>
 </template>
@@ -77,6 +82,7 @@ const isVerified = ref(false)
 const memberName = ref('')
 const memberEmail = ref('')
 const verifying = ref(false)
+const loadingMembers = ref(false)
 const errorMessage = ref('')
 const successMessage = ref('')
 const memberCards = ref([])
@@ -100,6 +106,7 @@ onMounted(() => {
 })
 
 const fetchMemberCards = async (name, email) => {
+  loadingMembers.value = true
   try {
     const response = await fetch(
       'https://us-central1-afp-site-c1bd9.cloudfunctions.net/verifyMember',
@@ -109,18 +116,21 @@ const fetchMemberCards = async (name, email) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email }),
-      }
+      },
     )
     const result = await response.json()
     if (response.ok && result.isMember) {
-      memberCards.value = (result.members || []).map(m => ({
+      memberCards.value = (result.members || []).map((m) => ({
         title: m.name,
         subtitle: [m.specialization, m.location].filter(Boolean).join(' | '),
         details: [
-          m.email ? `Email: ${m.email}` : '',
-          m.phone ? `Phone: ${m.phone}` : '',
-          m.description ? m.description : ''
-        ].filter(Boolean).join('\n')
+          m.description ? m.description : '',
+          m.email ? `<br><br>Email: [${m.email}](mailto:${m.email})` : '',
+          m.phone ? `<br>Phone: ${m.phone}` : '',
+          m.website ? `<br>Website: [${m.website}](${m.website})` : '',
+        ]
+          .filter(Boolean)
+          .join(''),
       }))
     } else {
       errorMessage.value = result.error || 'Failed to load members.'
@@ -128,6 +138,8 @@ const fetchMemberCards = async (name, email) => {
   } catch (error) {
     console.error('Failed to fetch member cards:', error)
     errorMessage.value = 'An error occurred while loading members.'
+  } finally {
+    loadingMembers.value = false
   }
 }
 
@@ -154,7 +166,7 @@ const verifyMember = async () => {
           name: memberName.value,
           email: memberEmail.value,
         }),
-      }
+      },
     )
 
     const result = await response.json()
@@ -164,19 +176,22 @@ const verifyMember = async () => {
       const memberData = {
         name: memberName.value,
         email: memberEmail.value,
-        verifiedAt: new Date().toISOString()
+        verifiedAt: new Date().toISOString(),
       }
       localStorage.setItem('afp_member', JSON.stringify(memberData))
 
       // Set memberCards from backend
-      memberCards.value = (result.members || []).map(m => ({
+      memberCards.value = (result.members || []).map((m) => ({
         title: m.name,
         subtitle: [m.specialization, m.location].filter(Boolean).join(' | '),
         details: [
-          m.email ? `Email: ${m.email}` : '',
-          m.phone ? `Phone: ${m.phone}` : '',
-          m.description ? m.description : ''
-        ].filter(Boolean).join('\n')
+          m.description ? m.description : '',
+          m.email ? `<br><br>Email: [${m.email}](mailto:${m.email})` : '',
+          m.phone ? `<br>Phone: ${m.phone}` : '',
+          m.website ? `<br>Website: [${m.website}](${m.website})` : '',
+        ]
+          .filter(Boolean)
+          .join(''),
       }))
 
       successMessage.value = 'Membership verified! Welcome to the member directory.'
@@ -185,7 +200,9 @@ const verifyMember = async () => {
         successMessage.value = ''
       }, 1500)
     } else {
-      errorMessage.value = result.error || 'Membership not found. Please check your information or contact us if you believe this is an error.'
+      errorMessage.value =
+        result.error ||
+        'Membership not found. Please check your information or contact us if you believe this is an error.'
     }
   } catch (error) {
     console.error('Verification error:', error)
@@ -198,7 +215,7 @@ const verifyMember = async () => {
 const logout = () => {
   // Clear localStorage
   localStorage.removeItem('afp_member')
-  
+
   // Reset form state
   isVerified.value = false
   memberName.value = ''
@@ -217,13 +234,7 @@ const logout = () => {
 .page-title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--color-heading);
-}
-
-.page-subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 3rem;
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 /* Verification Section */
@@ -336,15 +347,8 @@ const logout = () => {
   margin-bottom: 2rem;
 }
 
-.welcome-message h2 {
-  font-size: 1.8rem;
-  color: var(--color-accent);
-  margin-bottom: 0.5rem;
-  font-family: 'Georgia', serif;
-}
-
 .welcome-message p {
-  color: #666;
+  color: #000;
   font-size: 1.1rem;
 }
 
@@ -364,6 +368,56 @@ const logout = () => {
 .logout-button:hover {
   background-color: var(--color-accent);
   color: white;
+}
+
+/* Loading Circle */
+.loading-circle {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.loading-circle.large {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+  margin-right: 0;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: var(--color-accent);
+}
+
+.loading-section p {
+  margin-top: 1rem;
+  font-family: 'Georgia', serif;
+  color: #666;
 }
 
 @keyframes fadeSlideIn {

@@ -43,11 +43,13 @@
             required
             :disabled="loading"
           />
-          
+
           <!-- PayPal Button Container -->
           <div id="paypal-button-container"></div>
-          
-          <p class="form-note" v-if="paypalLoaded">Complete your information above and click the PayPal button to proceed</p>
+
+          <p class="form-note" v-if="paypalLoaded">
+            Complete your information above and click the PayPal button to proceed
+          </p>
         </form>
       </transition>
 
@@ -134,7 +136,8 @@ const showResult = (message, type = 'info') => {
 onMounted(() => {
   // Load PayPal SDK via CDN
   const script = document.createElement('script')
-  script.src = 'https://www.paypal.com/sdk/js?client-id=AaaPWSEs6Fn13kOO5p9Kx7n9IQ8JmEoBWTATas189YUjlY9fspQT6WdQO7ew0vy9mtdfV2wcX-LnW0ib&currency=USD&components=buttons'
+  script.src =
+    'https://www.paypal.com/sdk/js?client-id=AaaPWSEs6Fn13kOO5p9Kx7n9IQ8JmEoBWTATas189YUjlY9fspQT6WdQO7ew0vy9mtdfV2wcX-LnW0ib&currency=USD&components=buttons'
   script.onload = async () => {
     paypalLoaded.value = true
     // Wait for Vue to finish rendering
@@ -146,100 +149,98 @@ onMounted(() => {
 
 const initializePayPal = () => {
   if (window.paypal) {
-    window.paypal.Buttons({
-      style: {
-        shape: "rect",
-        layout: "vertical",
-        color: "gold",
-        label: "paypal",
-      },
-      message: {
-        amount: 50,
-      },
+    window.paypal
+      .Buttons({
+        style: {
+          shape: 'rect',
+          layout: 'vertical',
+          color: 'gold',
+          label: 'paypal',
+        },
+        message: {
+          amount: 50,
+        },
 
-      async createOrder() {
-        // Validate form first
-        if (!name.value || !email.value || !phone.value) {
-          showResult('Please fill in all required fields', 'error')
-          return
-        }
-
-        try {
-          const response = await fetch(
-            'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createPayPalOrder',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                name: name.value,
-                email: email.value,
-                phone: phone.value,
-              }),
-            },
-          )
-
-          const orderData = await response.json()
-
-          if (response.status === 409) {
-            showExistingMemberModal.value = true
+        async createOrder() {
+          // Validate form first
+          if (!name.value || !email.value || !phone.value) {
+            showResult('Please fill in all required fields', 'error')
             return
           }
 
-          if (orderData.id) {
-            return orderData.id
-          }
-          
-          const errorDetail = orderData?.details?.[0]
-          const errorMessage = errorDetail
-            ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-            : JSON.stringify(orderData)
-
-          throw new Error(errorMessage)
-        } catch (error) {
-          console.error(error)
-          showResult(`Could not initiate PayPal Checkout...<br><br>${error}`, 'error')
-        }
-      },
-
-      async onApprove(data, actions) {
-        loading.value = true
-        console.log("Passing approved order ID to backend", data.orderID)
-        try {
-          const response = await fetch(
-            `https://us-central1-afp-site-c1bd9.cloudfunctions.net/capturePayPalOrder`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
+          try {
+            const response = await fetch(
+              'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createPayPalOrder',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  name: name.value,
+                  email: email.value,
+                  phone: phone.value,
+                }),
               },
-              body: JSON.stringify({ orderID: data.orderID }),
-            },
-          )
+            )
 
-          const orderData = await response.json()
-          console.log("Order data", JSON.stringify(orderData))
+            const orderData = await response.json()
 
-          // Redirect to confirmation page after a delay
-          setTimeout(() => {
-            router.push({
-              path: '/confirmation',
-              query: { orderId: orderData.id }
-            })
-          }, 3000)
-          
-        } catch (error) {
-          console.error(error)
-          showResult(
-            `Sorry, your transaction could not be processed...<br><br>${error}`,
-            'error'
-          )
-        } finally {
-          loading.value = false
-        }
-      },
-    }).render('#paypal-button-container')
+            if (response.status === 409) {
+              showExistingMemberModal.value = true
+              return
+            }
+
+            if (orderData.id) {
+              return orderData.id
+            }
+
+            const errorDetail = orderData?.details?.[0]
+            const errorMessage = errorDetail
+              ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+              : JSON.stringify(orderData)
+
+            throw new Error(errorMessage)
+          } catch (error) {
+            console.error(error)
+            showResult(`Could not initiate PayPal Checkout...<br><br>${error}`, 'error')
+          }
+        },
+
+        async onApprove(data, actions) {
+          loading.value = true
+          console.log('Passing approved order ID to backend', data.orderID)
+          try {
+            const response = await fetch(
+              `https://us-central1-afp-site-c1bd9.cloudfunctions.net/capturePayPalOrder`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderID: data.orderID }),
+              },
+            )
+
+            const orderData = await response.json()
+            console.log('Order data', JSON.stringify(orderData))
+
+            // Redirect to confirmation page after a delay
+            setTimeout(() => {
+              router.push({
+                path: '/confirmation',
+                query: { orderId: orderData.id },
+              })
+            }, 3000)
+          } catch (error) {
+            console.error(error)
+            showResult(`Sorry, your transaction could not be processed...<br><br>${error}`, 'error')
+          } finally {
+            loading.value = false
+          }
+        },
+      })
+      .render('#paypal-button-container')
   }
 }
 </script>

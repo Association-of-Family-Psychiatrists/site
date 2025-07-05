@@ -24,8 +24,7 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <FeaturedEvent :="featuredEventData" id="featured-event"/>
-
+    <FeaturedEvent :="featuredEventData" id="featured-event" />
 
     <div class="conference-and-carousel">
       <h2 class="section-title">Conference Highlights</h2>
@@ -36,12 +35,11 @@
 
         <div class="carousel-column" id="conference-carousel">
           <div class="carousel-container">
-            <div class="carousel-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-              <div 
-                v-for="(image, index) in conferenceImages" 
-                :key="index" 
-                class="carousel-slide"
-              >
+            <div
+              class="carousel-track"
+              :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+            >
+              <div v-for="(image, index) in conferenceImages" :key="index" class="carousel-slide">
                 <img :src="image.src" :alt="image.alt" class="carousel-image" />
                 <div class="carousel-caption">
                   <h3>{{ image.title }}</h3>
@@ -49,19 +47,19 @@
                 </div>
               </div>
             </div>
-            
+
             <button class="carousel-button prev" @click="previousSlide" aria-label="Previous slide">
               ‹
             </button>
             <button class="carousel-button next" @click="nextSlide" aria-label="Next slide">
               ›
             </button>
-            
+
             <div class="carousel-indicators">
-              <button 
-                v-for="(image, index) in conferenceImages" 
+              <button
+                v-for="(image, index) in conferenceImages"
                 :key="index"
-                class="indicator" 
+                class="indicator"
                 :class="{ active: currentSlide === index }"
                 @click="goToSlide(index)"
                 :aria-label="`Go to slide ${index + 1}`"
@@ -74,13 +72,19 @@
 
     <AffiliatedOrganizations id="affiliated-organizations" />
 
-
-    <CardGrid title="Affiliated Organizations" :cards="featuredCards" id="affiliated-organizations" />
+    <CardGrid
+      title="Affiliated Organizations"
+      :cards="featuredCards"
+      id="affiliated-organizations"
+    />
 
     <!-- <StatsBanner :stats="statsData" /> -->
 
- 
-    <ArticleGrid title="Featured Books / Publications" :articles="featuredArticles" id="featured-books" />
+    <ArticleGrid
+      title="Featured Books / Publications"
+      :articles="featuredArticles"
+      id="featured-books"
+    />
 
     <CardGrid
       title="2024 Winners of our Annual Award for Excellence in Family Care"
@@ -118,9 +122,8 @@ const nextSlide = () => {
 }
 
 const previousSlide = () => {
-  currentSlide.value = currentSlide.value === 0 
-    ? conferenceImages.value.length - 1 
-    : currentSlide.value - 1
+  currentSlide.value =
+    currentSlide.value === 0 ? conferenceImages.value.length - 1 : currentSlide.value - 1
 }
 
 const goToSlide = (index) => {
@@ -442,19 +445,19 @@ onUnmounted(() => {
   .columns-container {
     flex-direction: column;
   }
-  
+
   .carousel-container {
     height: 450px;
   }
-  
+
   .carousel-caption {
     padding: 1.5rem 1rem 1rem;
   }
-  
+
   .carousel-caption h3 {
     font-size: 1.1rem;
   }
-  
+
   .carousel-caption p {
     font-size: 0.8rem;
   }

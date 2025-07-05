@@ -44,8 +44,10 @@
           the field of family psychiatry.
         </p>
       </div>
-      
-      <CardGrid title="Executive Officers" :cards="officerCards" />
+
+      <div class="officers-directory">
+        <CardGrid title="Executive Officers" :cards="officerCards" />
+      </div>
     </section>
   </div>
 </template>
@@ -53,6 +55,7 @@
 <script setup>
 import Hero from '@components/Hero.vue'
 import CardGrid from '@components/CardGrid.vue'
+import { officerCards } from '@data/officerData.js'
 </script>
 
 <style scoped>
@@ -61,6 +64,7 @@ import CardGrid from '@components/CardGrid.vue'
   padding: 4rem 0;
   background-color: var(--color-background);
   color: var(--color-text);
+  text-align: center;
 }
 
 section {
@@ -104,8 +108,7 @@ p {
 
 /* Officers Section */
 .officers {
-  background-color: var(--vt-c-white);
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 #officers-section {
@@ -115,7 +118,12 @@ p {
 #officers-section p {
   max-width: 700px;
   margin: 0 auto;
-  color: #666;
+  color: var(--color-text);
+}
+
+.officers-directory {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Responsive */

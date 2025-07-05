@@ -17,18 +17,17 @@
       </button>
 
       <transition name="fade">
-        <p v-if="expanded" class="card-details">
-          {{ details }}
-        </p>
+        <div v-if="expanded" class="card-details" v-html="parsedDetails"></div>
       </transition>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { marked } from 'marked'
 
-defineProps({
+const props = defineProps({
   image: {
     type: String,
     default: '',
@@ -40,13 +39,17 @@ defineProps({
 
 const expanded = ref(false)
 const showImage = ref(true)
+
+const parsedDetails = computed(() => {
+  return props.details ? marked.parseInline(props.details) : ''
+})
 </script>
 
 <style scoped>
 .card {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-background-soft);
+  background-color: var(--color-background);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -84,6 +87,17 @@ const showImage = ref(true)
   color: var(--color-text);
   font-size: 0.95rem;
   line-height: 1.5;
+}
+
+.card-details a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.card-details a:hover {
+  color: var(--vt-c-indigo);
+  text-decoration: none;
 }
 
 .cta-button {
