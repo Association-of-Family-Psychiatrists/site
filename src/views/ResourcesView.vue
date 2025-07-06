@@ -58,6 +58,20 @@
         description="Resources for training"
         link="/resources/training"
       />
+
+      <InformationSection
+        class="animate-fade-slide"
+        heading="Family Treatment in Medical Education"
+        description=""
+        link="/resources/family-treatment"
+      />
+
+      <InformationSection
+        class="animate-fade-slide"
+        heading="Annual Resident/Fellow Recognition Award"
+        description="Nominations requested for excellence in family-oriented care"
+        link="/resources/award-recognition"
+      />
     </div>
   </section>
 </template>

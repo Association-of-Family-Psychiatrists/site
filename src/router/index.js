@@ -36,6 +36,16 @@ const router = createRouter({
           component: () => import('@views/resources/ListservView.vue'),
         },
         {
+          path: 'award-recognition',
+          name: 'resources-award-recognition',
+          component: () => import('@views/resources/AwardRecognitionView.vue'),
+        },
+        {
+          path: 'family-treatment',
+          name: 'resources-family-treatment',
+          component: () => import('@views/resources/FamilyTreatmentView.vue'),
+        },
+        {
           path: 'articles',
           name: 'resources-articles',
           component: () => import('@views/resources/ArticlesView.vue'),
