@@ -1,4 +1,4 @@
-import{C as i}from"./ContentPage-Dc7t9rt7.js";import{c as a,o as t}from"./index-DgQ9eTsl.js";const c={__name:"CultureFamilyResourcesView",setup(n){const e=[{heading:"Introduction",subheading:"The interaction of culture and family is critical to understanding family processes.",paragraphs:[`
+import{C as i}from"./ContentPage-BVMsIqIE.js";import{c as a,o as t}from"./index-C7OQCbCK.js";const c={__name:"CultureFamilyResourcesView",setup(n){const e=[{heading:"Introduction",subheading:"The interaction of culture and family is critical to understanding family processes.",paragraphs:[`
 The **task of the family** is to translate cultural norms and teach the child to deal with the culture(s) in which the family is immersed, while holding to its own boundaries and values, which may or may not reflect the dominant culture.
 
 Cultural studies began with ideas of the reification of different cultures (this is Japanese culture, this is Hispanic culture). We have moved to an understanding that for everyone, but particularly for emigrants to the US and may be first second or third generation Americans, multiple and complex cultural identities are the norm.
