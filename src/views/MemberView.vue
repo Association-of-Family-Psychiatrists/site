@@ -6,16 +6,19 @@
     <div v-if="!isVerified" class="verification-section animate-fade-slide">
       <div class="verification-card">
         <h2>Member Verification</h2>
-        <p>Please enter your information to access the member directory.</p>
+        <p>
+          Please enter your information to access the member directory. You can enter your name
+          without titles (e.g., "Jane Doe" instead of "Jane Doe, MD, DPM").
+        </p>
 
         <form @submit.prevent="verifyMember" class="verification-form">
           <div class="form-group">
-            <label for="memberName">Full Name</label>
+            <label for="memberName">Full Name (without titles)</label>
             <input
               id="memberName"
               v-model="memberName"
               type="text"
-              placeholder="Enter your full name"
+              placeholder="Enter your name (e.g., Judith Landau)"
               required
               :disabled="verifying"
             />
