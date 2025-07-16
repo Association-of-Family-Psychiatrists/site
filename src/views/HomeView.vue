@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <AffiliatedOrganizations id="affiliated-organizations" />
+    <!-- <AffiliatedOrganizations id="affiliated-organizations" /> -->
 
     <CardGrid
       title="Affiliated Organizations"
@@ -87,7 +87,7 @@
     />
 
     <CardGrid
-      title="2024 Winners of our Annual Award for Excellence in Family Care"
+      title="2025 Winners of our Annual Award for Excellence in Family Care"
       :cards="featuredAwardWinners"
       id="award-winners"
     />

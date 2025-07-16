@@ -75,17 +75,22 @@ export const featuredArticles = [
 ]
 
 export const featuredAwardWinners = [
-  { title: 'Janice Cho, MD' },
-  { title: 'Sarah Faitell, DO' },
-  { title: 'Eileen Glocer, MD' },
-  { title: 'Hannah Goddard, DO' },
-  { title: 'Jatin Julakanti, MD' },
-  { title: 'Hannah Leo, MD' },
-  { title: 'Kaajal Patel Tan, DO' },
-  { title: 'Michelle Prakash, MD' },
-  { title: 'Pallavi Tatapudy, MD' },
-  { title: 'Richard Seeber II, MD' },
-  { title: 'Alfonso Vera Jr, MD' },
+  { title: 'Adriana Cantos, MD' },
+  { title: 'Aimin Mitwally, DO' },
+  { title: 'Aisha Julakanti, MD' },
+  { title: 'Allred McKay, MD' },
+  { title: 'Allyson Folsom Davis, MD' },
+  { title: 'Alexander Norton, MD' },
+  { title: 'Ana-Maria McGill, DO' },
+  { title: 'Andrea Weir, DO' },
+  { title: 'Frank Direnno, MD' },
+  { title: 'Isabella Caldwell, MD' },
+  { title: 'Joseph Pareira, MD' },
+  { title: 'Mario Montelongo, MD' },
+  { title: 'Michael Destounis, MD' },
+  { title: 'Neharika Padala, MD' },
+  { title: 'Saagar Patel, DO' },
+  { title: 'Tyler Francisco, MD' },
 ]
 
 export const conferenceEventData = {
