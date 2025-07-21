@@ -158,27 +158,47 @@ export const publicationData = [
 
 export const conferenceCarouselData = [
   {
-    src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
-    alt: 'Conference attendees networking',
-    title: 'Networking Sessions',
-    description: 'Connect with fellow psychiatrists and mental health professionals',
+    src: new URL('@/assets/afp-conference-photos/image-1.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 1',
   },
   {
-    src: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop',
-    alt: 'Keynote speaker presentation',
-    title: 'Keynote Presentations',
-    description: 'Insightful talks from leading experts in family psychiatry',
+    src: new URL('@/assets/afp-conference-photos/image-2.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 2',
   },
   {
-    src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop',
-    alt: 'Workshop session',
-    title: 'Interactive Workshops',
-    description: 'Hands-on learning experiences and skill development',
+    src: new URL('@/assets/afp-conference-photos/image-3.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 3',
   },
   {
-    src: 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&h=600&fit=crop',
-    alt: 'Conference venue and atmosphere',
-    title: 'Conference Venue',
-    description: 'State-of-the-art facilities for an exceptional learning experience',
+    src: new URL('@/assets/afp-conference-photos/image-4.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 4',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-5.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 5',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-6.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 6',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-7.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 7',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-8.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 8',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-9.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 9',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-10.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 10',
+  },
+  {
+    src: new URL('@/assets/afp-conference-photos/image-11.png', import.meta.url).href,
+    alt: 'AFP Conference Photo 11',
   },
 ]

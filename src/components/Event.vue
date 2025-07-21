@@ -105,7 +105,6 @@ const fadeSlide = {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 2rem;
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 900px;
