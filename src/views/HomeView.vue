@@ -167,8 +167,6 @@ const conferenceImages = ref([
   },
 ])
 
-
-
 const currentSlide = ref(0)
 let autoPlayInterval = null
 
@@ -416,8 +414,6 @@ onUnmounted(() => {
   object-fit: cover;
 }
 
-
-
 .carousel-button {
   position: absolute;
   top: 50%;
@@ -484,7 +480,5 @@ onUnmounted(() => {
   .carousel-container {
     height: 450px;
   }
-
-
 }
 </style>

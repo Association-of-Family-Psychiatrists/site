@@ -18,7 +18,7 @@
               id="memberName"
               v-model="memberName"
               type="text"
-              placeholder="Enter your name (e.g., Judith Landau)"
+              placeholder="Enter your name (e.g., Jane Doe)"
               required
               :disabled="verifying"
             />
