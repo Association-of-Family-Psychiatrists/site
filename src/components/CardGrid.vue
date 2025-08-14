@@ -14,7 +14,6 @@ import Card from './Card.vue'
 defineProps({
   title: {
     type: String,
-    default: 'Featured Events',
   },
   cards: {
     type: Array,

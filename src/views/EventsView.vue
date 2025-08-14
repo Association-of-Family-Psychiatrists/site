@@ -1,7 +1,9 @@
 <template>
   <section class="events-view">
     <h1 class="animate-fade-slide">Upcoming Events</h1>
-    <Event v-for="event in eventData" :key="event.id" v-bind="event" />
+    <div class="events-container">
+      <Event v-for="event in eventData" :key="event.id" v-bind="event" />
+    </div>
   </section>
 </template>
 
@@ -22,6 +24,14 @@ import { eventData } from '@/data/eventData.js'
   margin-bottom: 2rem;
   color: var(--color-accent);
   text-align: center;
+}
+
+.events-container > * {
+  margin-bottom: 2rem;
+}
+
+.events-container > *:last-child {
+  margin-bottom: 0;
 }
 
 /* Animation */

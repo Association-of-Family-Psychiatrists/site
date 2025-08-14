@@ -36,6 +36,16 @@ const router = createRouter({
           component: () => import('@views/resources/ListservView.vue'),
         },
         {
+          path: 'award-recognition',
+          name: 'resources-award-recognition',
+          component: () => import('@views/resources/AwardRecognitionView.vue'),
+        },
+        {
+          path: 'family-treatment',
+          name: 'resources-family-treatment',
+          component: () => import('@views/resources/FamilyTreatmentView.vue'),
+        },
+        {
           path: 'articles',
           name: 'resources-articles',
           component: () => import('@views/resources/ArticlesView.vue'),
@@ -70,7 +80,8 @@ const router = createRouter({
             {
               path: 'psychiatric-resources',
               name: 'resources-couples-adults-psychiatric-resources',
-              component: () => import('@views/resources/couples-adults/PsychiatricResourcesView.vue'),
+              component: () =>
+                import('@views/resources/couples-adults/PsychiatricResourcesView.vue'),
             },
             {
               path: 'books',
@@ -83,11 +94,41 @@ const router = createRouter({
           path: 'culture-family',
           name: 'resources-culture-family',
           component: () => import('@views/resources/CultureFamilyView.vue'),
-        },   
+          children: [
+            {
+              path: 'resources',
+              name: 'resources-culture-family-resources',
+              component: () =>
+                import('@views/resources/culture-family/CultureFamilyResourcesView.vue'),
+            },
+            {
+              path: 'cultural-anthropology',
+              name: 'resources-culture-family-cultural-anthropology',
+              component: () =>
+                import('@views/resources/culture-family/CulturalAnthropologyView.vue'),
+            },
+          ],
+        },
         {
           path: 'training',
           name: 'resources-training',
           component: () => import('@views/resources/TrainingView.vue'),
+          children: [
+            {
+              path: 'curriculum-in-adult-psychiatric-residency-training',
+              name: 'resources-training-curriculum',
+              component: () =>
+                import(
+                  '@views/resources/training/CurriculumInAdultPsychiatricResidencyTrainingView.vue'
+                ),
+            },
+            {
+              path: 'training-programs-in-family-psychiatry',
+              name: 'resources-training-programs',
+              component: () =>
+                import('@views/resources/training/TrainingProgramsInFamilyPsychiatryView.vue'),
+            },
+          ],
         },
       ],
     },

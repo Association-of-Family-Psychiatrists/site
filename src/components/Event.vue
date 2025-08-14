@@ -26,7 +26,7 @@
         {{ linkLabel }}
       </a>
 
-        <!-- Optional Schedule -->
+      <!-- Optional Schedule -->
       <div v-if="schedule && schedule.length" class="schedule">
         <h3>Event Schedule</h3>
         <ul>
@@ -36,7 +36,7 @@
           </li>
         </ul>
       </div>
-    </div>  
+    </div>
   </article>
 </template>
 
@@ -86,7 +86,7 @@ const parsedDescription = computed(() => {
 })
 
 const parsedSchedule = computed(() => {
-  return props.schedule.map(item => ({
+  return props.schedule.map((item) => ({
     ...item,
     parsedTitle: marked.parseInline(item.title || ''),
   }))
@@ -96,7 +96,6 @@ const fadeSlide = {
   initial: { opacity: 0, y: 30 },
   enter: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
-
 </script>
 
 <style scoped>
@@ -106,7 +105,6 @@ const fadeSlide = {
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 2rem;
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 900px;

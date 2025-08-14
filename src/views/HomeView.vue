@@ -24,8 +24,7 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <FeaturedEvent :="featuredEventData" id="featured-event"/>
-
+    <FeaturedEvent :="featuredEventData" id="featured-event" />
 
     <div class="conference-and-carousel">
       <h2 class="section-title">Conference Highlights</h2>
@@ -36,32 +35,27 @@
 
         <div class="carousel-column" id="conference-carousel">
           <div class="carousel-container">
-            <div class="carousel-track" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-              <div 
-                v-for="(image, index) in conferenceImages" 
-                :key="index" 
-                class="carousel-slide"
-              >
+            <div
+              class="carousel-track"
+              :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+            >
+              <div v-for="(image, index) in conferenceImages" :key="index" class="carousel-slide">
                 <img :src="image.src" :alt="image.alt" class="carousel-image" />
-                <div class="carousel-caption">
-                  <h3>{{ image.title }}</h3>
-                  <p>{{ image.description }}</p>
-                </div>
               </div>
             </div>
-            
+
             <button class="carousel-button prev" @click="previousSlide" aria-label="Previous slide">
               ‹
             </button>
             <button class="carousel-button next" @click="nextSlide" aria-label="Next slide">
               ›
             </button>
-            
+
             <div class="carousel-indicators">
-              <button 
-                v-for="(image, index) in conferenceImages" 
+              <button
+                v-for="(image, index) in conferenceImages"
                 :key="index"
-                class="indicator" 
+                class="indicator"
                 :class="{ active: currentSlide === index }"
                 @click="goToSlide(index)"
                 :aria-label="`Go to slide ${index + 1}`"
@@ -72,18 +66,24 @@
       </div>
     </div>
 
-    <AffiliatedOrganizations id="affiliated-organizations" />
+    <!-- <AffiliatedOrganizations id="affiliated-organizations" /> -->
 
-
-    <CardGrid title="Affiliated Organizations" :cards="featuredCards" id="affiliated-organizations" />
+    <CardGrid
+      title="Affiliated Organizations"
+      :cards="featuredCards"
+      id="affiliated-organizations"
+    />
 
     <!-- <StatsBanner :stats="statsData" /> -->
 
- 
-    <ArticleGrid title="Featured Books / Publications" :articles="featuredArticles" id="featured-books" />
+    <ArticleGrid
+      title="Featured Books / Publications"
+      :articles="featuredArticles"
+      id="featured-books"
+    />
 
     <CardGrid
-      title="2024 Winners of our Annual Award for Excellence in Family Care"
+      title="2025 Winners of our Annual Award for Excellence in Family Care"
       :cards="featuredAwardWinners"
       id="award-winners"
     />
@@ -104,11 +104,68 @@ import {
   featuredArticles,
   conferenceEventData,
   featuredAwardWinners,
-  conferenceCarouselData,
 } from '@data/homeData.js'
 
-// Conference carousel data
-const conferenceImages = ref(conferenceCarouselData)
+// Import conference images
+import image1 from '@/assets/afp-conference-photos/image-1.png'
+import image2 from '@/assets/afp-conference-photos/image-2.png'
+import image3 from '@/assets/afp-conference-photos/image-3.png'
+import image4 from '@/assets/afp-conference-photos/image-4.png'
+import image5 from '@/assets/afp-conference-photos/image-5.png'
+import image6 from '@/assets/afp-conference-photos/image-6.png'
+import image7 from '@/assets/afp-conference-photos/image-7.png'
+import image8 from '@/assets/afp-conference-photos/image-8.png'
+import image9 from '@/assets/afp-conference-photos/image-9.png'
+import image10 from '@/assets/afp-conference-photos/image-10.png'
+import image11 from '@/assets/afp-conference-photos/image-11.png'
+
+// Conference carousel data with imported images
+const conferenceImages = ref([
+  {
+    src: image1,
+    alt: 'AFP Conference Photo 1',
+  },
+  {
+    src: image2,
+    alt: 'AFP Conference Photo 2',
+  },
+  {
+    src: image3,
+    alt: 'AFP Conference Photo 3',
+  },
+  {
+    src: image4,
+    alt: 'AFP Conference Photo 4',
+  },
+  {
+    src: image5,
+    alt: 'AFP Conference Photo 5',
+  },
+  {
+    src: image6,
+    alt: 'AFP Conference Photo 6',
+  },
+  {
+    src: image7,
+    alt: 'AFP Conference Photo 7',
+  },
+  {
+    src: image8,
+    alt: 'AFP Conference Photo 8',
+  },
+  {
+    src: image9,
+    alt: 'AFP Conference Photo 9',
+  },
+  {
+    src: image10,
+    alt: 'AFP Conference Photo 10',
+  },
+  {
+    src: image11,
+    alt: 'AFP Conference Photo 11',
+  },
+])
 
 const currentSlide = ref(0)
 let autoPlayInterval = null
@@ -118,9 +175,8 @@ const nextSlide = () => {
 }
 
 const previousSlide = () => {
-  currentSlide.value = currentSlide.value === 0 
-    ? conferenceImages.value.length - 1 
-    : currentSlide.value - 1
+  currentSlide.value =
+    currentSlide.value === 0 ? conferenceImages.value.length - 1 : currentSlide.value - 1
 }
 
 const goToSlide = (index) => {
@@ -317,7 +373,7 @@ onUnmounted(() => {
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
 }
 
@@ -356,29 +412,6 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.carousel-caption {
-  position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
-  padding: 2rem 1rem 1rem;
-  text-align: center;
-}
-
-.carousel-caption h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.carousel-caption p {
-  margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.9;
 }
 
 .carousel-button {
@@ -420,13 +453,14 @@ onUnmounted(() => {
 }
 
 .indicator {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .indicator.active {
@@ -442,21 +476,9 @@ onUnmounted(() => {
   .columns-container {
     flex-direction: column;
   }
-  
+
   .carousel-container {
     height: 450px;
-  }
-  
-  .carousel-caption {
-    padding: 1.5rem 1rem 1rem;
-  }
-  
-  .carousel-caption h3 {
-    font-size: 1.1rem;
-  }
-  
-  .carousel-caption p {
-    font-size: 0.8rem;
   }
 }
 </style>

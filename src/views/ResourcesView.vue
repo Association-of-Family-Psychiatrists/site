@@ -2,7 +2,7 @@
   <section class="resources">
     <!-- Show child route content if a child route is active -->
     <RouterView v-if="$route.name !== 'resources'" />
-    
+
     <!-- Show resources overview only when on the main resources page -->
     <div v-else>
       <h1 class="page-title animate-fade-slide">Resources</h1>
@@ -38,7 +38,6 @@
         link="/resources/child-adolescent"
       />
 
-      
       <InformationSection
         class="animate-fade-slide"
         heading="Couples & Adults "
@@ -58,6 +57,20 @@
         heading="Training "
         description="Resources for training"
         link="/resources/training"
+      />
+
+      <InformationSection
+        class="animate-fade-slide"
+        heading="Family Treatment in Medical Education"
+        description=""
+        link="/resources/family-treatment"
+      />
+
+      <InformationSection
+        class="animate-fade-slide"
+        heading="Annual Resident/Fellow Recognition Award"
+        description="Nominations requested for excellence in family-oriented care"
+        link="/resources/award-recognition"
       />
     </div>
   </section>
