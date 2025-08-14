@@ -137,7 +137,7 @@ onMounted(() => {
   // Load PayPal SDK via CDN
   const script = document.createElement('script')
   script.src =
-    'https://www.paypal.com/sdk/js?client-id=AaaPWSEs6Fn13kOO5p9Kx7n9IQ8JmEoBWTATas189YUjlY9fspQT6WdQO7ew0vy9mtdfV2wcX-LnW0ib&currency=USD&components=buttons'
+    'https://www.paypal.com/sdk/js?client-id=ATudL1zTvsJmaJ-kS6hmdf7L6FLM3mfdFMnkle5EGbA2Jfq12VfNagnkk_W8kDXr7J_jekw_dTEBx3RS&currency=USD&components=buttons'
   script.onload = async () => {
     paypalLoaded.value = true
     // Wait for Vue to finish rendering
