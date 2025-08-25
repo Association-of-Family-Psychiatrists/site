@@ -24,7 +24,7 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <FeaturedEvent :="featuredEventData" id="featured-event" />
+    <!-- <FeaturedEvent :="featuredEventData" id="featured-event" /> -->
 
     <div class="conference-and-carousel">
       <h2 class="section-title">Conference Highlights</h2>

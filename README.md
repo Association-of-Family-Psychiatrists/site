@@ -1,115 +1,120 @@
-# Frontend Documentation
+# Association of Family Psychiatrists (AFP)
 
-This is the [Vue 3](https://vuejs.org/) frontend for the Association of Family Psychiatrists website. It is built using [Vite](https://vitejs.dev/) and organized into modular components, views, and shared state. It integrates with [Firebase](https://firebase.google.com/) for backend functionality and [Stripe](https://stripe.com/) for payments.
+Welcome to the official website of the Association of Family Psychiatrists, a professional organization dedicated to advancing family psychiatry through education, research, and clinical practice.
+
+## 🌟 About AFP
+
+The Association of Family Psychiatrists is committed to promoting excellence in family-centered psychiatric care. Our organization brings together mental health professionals who specialize in treating individuals, couples, and families within their broader social and cultural contexts.
+
+## 🎯 What We Offer
+
+### 📚 Comprehensive Resources
+- **Child & Adolescent Psychiatry**: Specialized resources for treating young patients and their families
+- **Couples & Adult Psychiatry**: Tools and information for relationship and individual therapy
+- **Cultural & Family Resources**: Culturally sensitive approaches to family mental health
+- **Training Programs**: Educational resources and professional development opportunities
+- **Articles & Publications**: Latest research and clinical insights in family psychiatry
+
+### 📅 Events & Conferences
+- Annual conferences and workshops
+- Continuing education opportunities
+- Networking events for mental health professionals
+- Specialized training sessions
+
+### 👥 Membership Benefits
+- Access to exclusive resources and publications
+- Professional networking opportunities
+- Continuing education credits
+- Advocacy and representation in the field
+
+## 🔗 Quick Links
+
+- **Home**: Overview of our organization and latest updates
+- **About**: Learn about our mission, history, and leadership
+- **Resources**: Access our comprehensive library of mental health resources
+- **Events**: Find upcoming conferences and educational opportunities
+- **Membership**: Join our professional community
+- **Contact**: Get in touch with our team
+
+## 📱 User Experience
+
+Our website is designed with you in mind:
+- **Responsive Design**: Optimized for all devices
+- **Easy Navigation**: Intuitive menu structure
+- **Fast Loading**: Quick access to information
+- **Accessible**: Designed for users of all abilities
+
+## 🤝 Get Involved
+
+Whether you're a mental health professional, student, or interested in family psychiatry, there are many ways to get involved:
+
+- **Join as a Member**: Access exclusive resources and networking opportunities
+- **Attend Events**: Participate in our conferences and workshops
+- **Contribute Resources**: Share your expertise with the community
+- **Stay Connected**: Follow us for updates and announcements
 
 ---
 
-## 📁 Project Structure
+## 🚀 For Developers
+### 🛠️ Tech Stack
+
+- **Frontend**: Vue 3 + Composition API
+- **Build Tool**: Vite 6
+- **Styling**: CSS with modular components
+- **State Management**: Pinia
+- **Routing**: Vue Router 4
+- **Backend**: Firebase
+- **Payments**: Stripe
+- **Testing**: Vitest
+
+### 📁 Project Structure
 
 ```
-site/
-├── public/                      # Static assets (favicon, images)
-├── src/
-│   ├── assets/                  # Global styles, fonts, and logos
-│   ├── components/              # Reusable UI components (Hero, Event, etc.)
-│   ├── data/                    # Static JS data (dummy events, etc.)
-│   ├── views/                   # Page-level Vue components (Home, Membership)
-│   ├── firebase.js              # Firebase SDK initialization
-│   ├── router/                  # Vue Router configuration
-│   ├── stores/                  # (Optional) Global state using Pinia
-│   ├── App.vue                  # Root component
-│   └── main.js                  # Vite entry file
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md                   # You're here
+src/
+├── assets/                 # Global styles, images, and resources
+├── components/            # Reusable UI components
+├── data/                  # Static data files
+├── firebase.js           # Firebase configuration
+├── router/               # Vue Router setup
+├── stores/               # Pinia state management
+├── views/                # Page components
+│   ├── resources/        # Resource pages (articles, training, etc.)
+│   └── ...              # Other page views
+├── App.vue               # Root component
+└── main.js              # Application entry point
 ```
 
----
-
-## 🧩 Key Components
-
-### UI
-- `Hero.vue` – Page headers with background image
-- `Event.vue`, `FeaturedEvent.vue` – Event cards
-- `StatsBanner.vue`, `CardGrid.vue`, `PublicationCard.vue` – Homepage highlights
-
-### Layout
-- `Header.vue`, `Footer.vue` – Site navigation and global layout
-
----
-
-## 📄 Views
-
-- `HomeView.vue` – Homepage with scroll animations
-- `MembershipView.vue` – Membership form with Stripe integration
-- `MembershipConfirmationView.vue` – Displayed after successful checkout
-- `AboutView.vue`, `EventsView.vue`, `ResourcesView.vue`, etc.
-- `ContactView.vue` – Powered by Formspree (see below)
-
----
-
-## 📬 Contact Form Integration (Formspree)
-
-The **Contact** page uses [Formspree](https://formspree.io/) to send contact form submissions directly to an email address:
-
-```html
-<form action="https://formspree.io/f/{form_id}" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="_replyto" placeholder="Your Email" required />
-  <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-  <input type="hidden" name="_next" value="https://yoursite.com/thank-you" />
-  <button type="submit">Send Message</button>
-</form>
-```
-
-No backend setup is required for this feature.
-
----
-
-## 🔥 Firebase & Stripe
-
-- `src/firebase.js` initializes the Firebase app
-- `MembershipView.vue` securely communicates with Firebase Cloud Functions
-- Stripe checkout sessions are created server-side and accessed from the frontend
-
----
-
-## 🧪 Local Development
+### 🔧 Development Commands
 
 ```bash
-cd site
-npm install
-npm run dev
+npm run lint               # ESLint + Oxlint
+npm run format             # Prettier formatting
+npm run type-check         # TypeScript checking
+npm run dev                # Start development server
+npm run build              # Build for production
+npm run preview            # Preview production build
 ```
 
-App will be available at: `http://localhost:5173`
+### 📦 Key Dependencies
 
----
+- **Core**: Vue 3.5+, Vue Router 4, Pinia, Firebase
+- **UI & UX**: Vivus (SVG animations), DOMPurify, Marked (Markdown)
+- **Development**: Vite, ESLint, Prettier, Vitest
 
-## 🚀 Deployment
+### 🚀 Deployment
 
-This site is deployed to **GitHub Pages** using the following flow:
+The site is automatically deployed to GitHub Pages on push to main:
 
-### Format code before pushing:
-```bash
-npm run format
-git add .
-git commit -m "Update"
-git push
-```
-
-### Deploy:
 ```bash
 npm run deploy
 ```
 
-Ensure that `vite.config.js` has the correct `base` path for GitHub Pages:
-```js
-export default defineConfig({
-  base: '/your-repo-name/',
-  ...
-})
-```
-
 ---
+
+## 📞 Contact Information
+
+Have questions or need assistance? We're here to help:
+- **General / Membership Inquiries**: Use our contact form
+- **Event Information**: Check our events calendar
+- **Website & Development**: Reach out to Tanuj Siripurapu at `dev@tanuj.xyz`
+

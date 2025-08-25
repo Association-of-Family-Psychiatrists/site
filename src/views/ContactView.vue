@@ -13,7 +13,13 @@
 
     <div class="contact-form animate-fade-slide" style="animation-delay: 0.6s">
       <h2>Send Us a Message</h2>
-      <form action="https://formspree.io/f/xanjjwnj" method="POST" class="contact-form-form">
+      <form
+        action="https://formkeep.com/f/32d60a487d3c"
+        accept-charset="UTF-8"
+        enctype="multipart/form-data"
+        class="contact-form-form"
+        method="POST"
+      >
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="_replyto" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
