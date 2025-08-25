@@ -65,7 +65,18 @@ Whether you're a mental health professional, student, or interested in family ps
 - **Routing**: Vue Router 4
 - **Backend**: Firebase
 - **Payments**: Stripe
-- **Testing**: Vitest
+- **Contact Form**: Formkeep
+
+### ⚡ Features
+
+- **Component-Based Architecture**: Modular Vue components for maintainable code
+- **Responsive Design**: Mobile-first approach with CSS Grid and Flexbox
+- **Dynamic Content**: Firebase integration for real-time data management
+- **Secure Payments**: Stripe integration for membership processing
+- **SEO Optimized**: Meta tags and structured data for search engines
+- **Performance**: Lazy loading and code splitting for optimal loading speeds
+- **Accessibility**: ARIA labels and keyboard navigation support
+- **Form Handling**: Formkeep integration for reliable contact form submissions
 
 ### 📁 Project Structure
 
@@ -84,6 +95,41 @@ src/
 └── main.js              # Application entry point
 ```
 
+### 🧭 Navigation
+
+The website uses Vue Router 4 with hash-based routing for GitHub Pages compatibility:
+
+```
+/                           # Home page
+/about                      # About AFP organization
+/events                     # Events and conferences
+/resources                  # Main resources hub
+├── /listserv              # Listserv information
+├── /award-recognition     # Awards and recognition
+├── /family-treatment      # Family treatment resources
+├── /articles              # Articles and publications
+├── /web                   # Web resources
+├── /child-adolescent      # Child & adolescent psychiatry
+│   ├── /aacap            # AACAP resources
+│   └── /family-centered  # Family-centered care
+├── /couples-adults        # Couples & adult psychiatry
+│   ├── /psychiatric-resources # Psychiatric resources
+│   └── /books            # Book recommendations
+├── /culture-family        # Cultural & family resources
+│   └── /resources        # Cultural resources
+└── /training              # Training programs
+      ├── /curriculum      # Residency curriculum
+      └── /programs        # Training programs
+/membership                 # Membership application
+/contact                    # Contact form
+```
+
+**Key Navigation Features:**
+- **Nested Routes**: Resources section uses child routes for organization
+- **Lazy Loading**: Child routes are dynamically imported for performance
+- **Hash Router**: Compatible with GitHub Pages hosting
+- **Breadcrumb Support**: Built-in navigation hierarchy
+
 ### 🔧 Development Commands
 
 ```bash
@@ -93,22 +139,8 @@ npm run type-check         # TypeScript checking
 npm run dev                # Start development server
 npm run build              # Build for production
 npm run preview            # Preview production build
+npm run deploy             # Deploy to a gh-pages branch
 ```
-
-### 📦 Key Dependencies
-
-- **Core**: Vue 3.5+, Vue Router 4, Pinia, Firebase
-- **UI & UX**: Vivus (SVG animations), DOMPurify, Marked (Markdown)
-- **Development**: Vite, ESLint, Prettier, Vitest
-
-### 🚀 Deployment
-
-The site is automatically deployed to GitHub Pages on push to main:
-
-```bash
-npm run deploy
-```
-
 ---
 
 ## 📞 Contact Information
