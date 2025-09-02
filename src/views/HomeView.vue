@@ -470,6 +470,12 @@ onUnmounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .indicator.active {
