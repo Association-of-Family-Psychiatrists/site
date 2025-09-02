@@ -45,10 +45,14 @@
             </div>
 
             <button class="carousel-button prev" @click="previousSlide" aria-label="Previous slide">
-              ‹
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
             </button>
             <button class="carousel-button next" @click="nextSlide" aria-label="Next slide">
-              ›
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
             </button>
 
             <div class="carousel-indicators">
@@ -427,6 +431,11 @@ onUnmounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
 }
 
 .carousel-button:hover {
