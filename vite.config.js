@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { sitemap } from 'vite-plugin-sitemap'
+import Sitemap from 'vite-plugin-sitemap'
 import path from 'path'
 
 export default defineConfig({
   plugins: [
     vue(),
-    sitemap({
+    Sitemap({
       hostname: 'https://familypsychiatrists.org', // Update with actual domain
-      routes: [
+      dynamicRoutes: [
         '/',
         '/about',
         '/resources',
@@ -37,7 +37,8 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date(),
-      readable: true
+      readable: true,
+      generateRobotsTxt: true
     })
   ],
   base: "/",
@@ -54,14 +55,6 @@ export default defineConfig({
     script: 'async',
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['vue', 'vue-router'],
-          utils: ['pinia']
-        }
-      }
-    },
     minify: 'terser',
     terserOptions: {
       compress: {

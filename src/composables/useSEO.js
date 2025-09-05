@@ -4,7 +4,7 @@ import { generatePageMeta, generateStructuredData } from '@/utils/seo.js'
 export function useSEO(pageData = {}) {
   const meta = generatePageMeta(pageData)
 
-  // Set the page meta tags
+  // Set the page meta tags using useHead
   useHead({
     title: meta.title,
     meta: [
