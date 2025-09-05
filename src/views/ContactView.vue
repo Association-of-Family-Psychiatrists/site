@@ -6,9 +6,7 @@
     </p>
 
     <div class="contact-info animate-fade-slide" style="animation-delay: 0.4s">
-      <p>Email: <a href="mailto:info@familypsychiatrists.org">info@familypsychiatrists.org</a></p>
-      <p>Phone: (555) 123-4567</p>
-      <p>Mailing Address: 123 Main Street, Suite 456, San Francisco, CA 94105</p>
+      <p>Email: <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a></p>
     </div>
 
     <div class="contact-form animate-fade-slide" style="animation-delay: 0.6s">
