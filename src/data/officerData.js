@@ -1,6 +1,6 @@
 export const officerCards = [
   {
-    title: 'Rao Gogenini',
+    title: 'Rama Rao Gogenini',
     subtitle: 'President',
     details: 'Leading the Association of Family Psychiatrists with dedication and vision.',
   },
