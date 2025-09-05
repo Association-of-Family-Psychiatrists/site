@@ -26,7 +26,7 @@ export const officerCards = [
   },
   {
     title: 'Ellen Berman',
-    subtitle: 'Past President',
+    subtitle: 'Former President',
     details: 'Providing guidance and continuity based on previous leadership experience.',
   },
 ]
