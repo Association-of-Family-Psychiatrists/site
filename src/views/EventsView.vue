@@ -9,7 +9,29 @@
 
 <script setup>
 import Event from '@/components/Event.vue'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
 import { eventData } from '@/data/eventData.js'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.events,
+  path: '/events',
+})
+
+// Structured data for events page
+useStructuredData('Event', {
+  '@type': 'Event',
+  name: 'Family Psychiatry Events and Conferences',
+  description:
+    'Stay updated with upcoming conferences, workshops, and events for family psychiatrists and mental health professionals.',
+  organizer: {
+    '@type': 'Organization',
+    name: 'Association of Family Psychiatrists',
+  },
+  eventStatus: 'EventScheduled',
+  eventAttendanceMode: 'MixedEventAttendanceMode',
+})
 </script>
 
 <style scoped>

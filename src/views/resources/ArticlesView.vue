@@ -4,6 +4,47 @@
 
 <script setup>
 import ContentPage from '@components/ContentPage.vue'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+
+// SEO setup
+useSEO({
+  title: 'Articles of Interest',
+  description:
+    'A comprehensive library of articles of interest to family psychiatrists and mental health professionals. Research papers, clinical studies, and professional publications.',
+  keywords: [
+    'psychiatry articles',
+    'family therapy research',
+    'mental health publications',
+    'psychiatric studies',
+    'clinical research',
+  ],
+  path: '/resources/articles',
+})
+
+// Structured data for articles collection
+useStructuredData('CollectionPage', {
+  '@type': 'CollectionPage',
+  name: 'Articles of Interest for Family Psychiatrists',
+  description:
+    'A library of articles of interest to our members including research papers, clinical studies, and professional publications.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Family Functioning Assessment',
+        description: 'Research on the Brief Assessment of Family Functioning Scale',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'McMaster Family Therapy',
+        description: 'Encyclopedia entry on McMaster Family Therapy approach',
+      },
+    ],
+  },
+})
 
 const contentSections = [
   {

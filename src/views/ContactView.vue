@@ -30,7 +30,33 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.contact,
+  path: '/contact',
+})
+
+// Structured data for contact page
+useStructuredData('ContactPage', {
+  '@type': 'ContactPage',
+  name: 'Contact the Association of Family Psychiatrists',
+  description:
+    'Get in touch with the Association of Family Psychiatrists. Contact information and ways to reach our team.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Association of Family Psychiatrists',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'info@familypsychiatrists.org', // Update with actual email
+    },
+  },
+})
+</script>
 
 <style scoped>
 .contact-view {

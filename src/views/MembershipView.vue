@@ -99,6 +99,30 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.membership,
+  path: '/membership',
+})
+
+// Structured data for membership page
+useStructuredData('WebPage', {
+  '@type': 'WebPage',
+  name: 'Join the Association of Family Psychiatrists',
+  description:
+    'Become a member of the Association of Family Psychiatrists and join our professional network dedicated to advancing family mental health.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Association of Family Psychiatrists',
+    membership: {
+      '@type': 'OrganizationRole',
+      roleName: 'Member',
+    },
+  },
+})
 
 const router = useRouter()
 const name = ref('')

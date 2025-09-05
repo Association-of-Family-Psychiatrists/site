@@ -53,6 +53,12 @@ const renderMarkdown = (text) => {
   const rawHtml = marked.parse(text, {
     breaks: true,
   })
+
+  // During SSR, skip DOMPurify sanitization as it's not available
+  if (import.meta.env.SSR) {
+    return rawHtml
+  }
+
   return DOMPurify.sanitize(rawHtml)
 }
 </script>

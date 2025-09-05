@@ -97,7 +97,7 @@ src/
 
 ### 🧭 Navigation
 
-The website uses Vue Router 4 with hash-based routing for GitHub Pages compatibility:
+The website uses Vue Router 4 with browser history routing and Static Site Generation (SSG):
 
 ```
 /                           # Home page
@@ -127,7 +127,8 @@ The website uses Vue Router 4 with hash-based routing for GitHub Pages compatibi
 **Key Navigation Features:**
 - **Nested Routes**: Resources section uses child routes for organization
 - **Lazy Loading**: Child routes are dynamically imported for performance
-- **Hash Router**: Compatible with GitHub Pages hosting
+- **Static Site Generation**: Pre-rendered pages for optimal SEO and performance
+- **Browser History**: Clean URLs without hash fragments
 - **Breadcrumb Support**: Built-in navigation hierarchy
 
 ### 🔧 Development Commands
@@ -137,10 +138,24 @@ npm run lint               # ESLint + Oxlint
 npm run format             # Prettier formatting
 npm run type-check         # TypeScript checking
 npm run dev                # Start development server
-npm run build              # Build for production
+npm run build              # Build static site for production
 npm run preview            # Preview production build
-npm run deploy             # Deploy to a gh-pages branch
 ```
+
+### 🚀 Deployment
+
+The site is deployed on **Cloudflare Pages** with Static Site Generation (SSG) using `vite-ssg`:
+
+- **Build Command**: `npm run build`
+- **Build Output Directory**: `dist`
+- **SPA Fallback**: Configured via `_redirects` file for client-side routing
+- **Performance**: Pre-rendered pages for optimal SEO and loading speeds
+
+**Deployment Configuration:**
+- `wrangler.toml`: Cloudflare Pages configuration
+- `public/_redirects`: SPA fallback routing
+- Static site generation for all routes
+
 ---
 
 ## 📞 Contact Information

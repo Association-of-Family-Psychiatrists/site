@@ -50,6 +50,7 @@ import { RouterLink } from 'vue-router'
 const drawerOpen = ref(false)
 
 function handleClickOutside(event) {
+  if (import.meta.env.SSR) return
   const drawer = document.querySelector('.mobile-drawer')
   const hamburger = document.querySelector('.hamburger')
 
@@ -64,11 +65,15 @@ function handleClickOutside(event) {
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
+  if (!import.meta.env.SSR) {
+    document.addEventListener('click', handleClickOutside)
+  }
 })
 
 onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
+  if (!import.meta.env.SSR) {
+    document.removeEventListener('click', handleClickOutside)
+  }
 })
 </script>
 

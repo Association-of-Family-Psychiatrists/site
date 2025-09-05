@@ -45,12 +45,30 @@
             </div>
 
             <button class="carousel-button prev" @click="previousSlide" aria-label="Previous slide">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="15,18 9,12 15,6"></polyline>
               </svg>
             </button>
             <button class="carousel-button next" @click="nextSlide" aria-label="Next slide">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <polyline points="9,18 15,12 9,6"></polyline>
               </svg>
             </button>
@@ -102,6 +120,8 @@ import CardGrid from '@components/CardGrid.vue'
 import ArticleGrid from '@components/ArticleGrid.vue'
 import Event from '@components/Event.vue'
 import AffiliatedOrganizations from '@components/AffiliatedOrganizations.vue'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
 import {
   featuredEventData,
   featuredCards,
@@ -109,6 +129,31 @@ import {
   conferenceEventData,
   featuredAwardWinners,
 } from '@data/homeData.js'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.home,
+  path: '/',
+})
+
+// Structured data for organization
+useStructuredData('Organization', {
+  '@type': 'Organization',
+  name: 'Association of Family Psychiatrists',
+  description:
+    'Promoting mental wellness and supporting family psychiatry through education, advocacy, and community.',
+  url: 'https://familypsychiatrists.org',
+  logo: 'https://familypsychiatrists.org/afp-logo.png',
+  sameAs: [
+    'https://twitter.com/FamilyPsych', // Update with actual social media URLs
+    'https://linkedin.com/company/association-of-family-psychiatrists',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'info@familypsychiatrists.org', // Update with actual email
+  },
+})
 
 // Import conference images
 import image1 from '@/assets/afp-conference-photos/image-1.png'
@@ -188,6 +233,7 @@ const goToSlide = (index) => {
 }
 
 const startAutoPlay = () => {
+  if (import.meta.env.SSR) return
   autoPlayInterval = setInterval(nextSlide, 5000) // Change slide every 5 seconds
 }
 
@@ -199,11 +245,15 @@ const stopAutoPlay = () => {
 }
 
 onMounted(() => {
-  startAutoPlay()
+  if (!import.meta.env.SSR) {
+    startAutoPlay()
+  }
 })
 
 onUnmounted(() => {
-  stopAutoPlay()
+  if (!import.meta.env.SSR) {
+    stopAutoPlay()
+  }
 })
 </script>
 

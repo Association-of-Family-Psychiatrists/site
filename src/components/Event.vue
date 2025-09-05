@@ -1,6 +1,6 @@
 <!-- src/components/Event.vue -->
 <template>
-  <article :id="id" class="event-card animate-fade-slide" v-motion="fadeSlide">
+  <article :id="id" class="event-card animate-fade-slide">
     <!-- Optional image -->
     <img v-if="image" :src="image" :alt="title" class="event-image" />
 
@@ -68,34 +68,62 @@ const formattedDate = computed(() => {
   const raw = props.date?.trim()
   if (!raw) return ''
 
-  // Check if input includes a day (e.g., 2026-05-01 or May 1, 2026)
-  const hasDay = /\b\d{1,2}\b/.test(raw)
+  try {
+    // Check if input includes a day (e.g., 2026-05-01 or May 1, 2026)
+    const hasDay = /\b\d{1,2}\b/.test(raw)
 
-  const d = new Date(raw)
-  if (isNaN(d.getTime())) return raw // fallback to raw if invalid
+    const d = new Date(raw)
+    if (isNaN(d.getTime())) return raw // fallback to raw if invalid
 
-  const options = hasDay
-    ? { year: 'numeric', month: 'long', day: 'numeric' }
-    : { year: 'numeric', month: 'long' }
+    const options = hasDay
+      ? { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }
+      : { year: 'numeric', month: 'long', timeZone: 'UTC' }
 
-  return d.toLocaleDateString(undefined, options)
+    // Use consistent locale and timezone for SSR and client
+    return d.toLocaleDateString('en-US', options)
+  } catch (error) {
+    console.warn('Error formatting date:', error)
+    return raw
+  }
 })
 
 const parsedDescription = computed(() => {
-  return props.description ? marked.parseInline(props.description) : ''
+  if (!props.description) return ''
+  try {
+    // Use consistent markdown parsing for both SSR and client
+    const result = marked.parseInline(props.description, {
+      breaks: true,
+      gfm: true,
+    })
+    return result
+  } catch (error) {
+    console.warn('Error parsing description markdown:', error)
+    return props.description
+  }
 })
 
 const parsedSchedule = computed(() => {
-  return props.schedule.map((item) => ({
-    ...item,
-    parsedTitle: marked.parseInline(item.title || ''),
-  }))
+  if (!props.schedule || !Array.isArray(props.schedule)) {
+    return []
+  }
+  return props.schedule.map((item) => {
+    try {
+      return {
+        ...item,
+        parsedTitle: marked.parseInline(item.title || '', {
+          breaks: true,
+          gfm: true,
+        }),
+      }
+    } catch (error) {
+      console.warn('Error parsing schedule item markdown:', error)
+      return {
+        ...item,
+        parsedTitle: item.title || '',
+      }
+    }
+  })
 })
-
-const fadeSlide = {
-  initial: { opacity: 0, y: 30 },
-  enter: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-}
 </script>
 
 <style scoped>
@@ -110,6 +138,19 @@ const fadeSlide = {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .event-image {

@@ -55,7 +55,29 @@
 <script setup>
 import Hero from '@components/Hero.vue'
 import CardGrid from '@components/CardGrid.vue'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
 import { officerCards } from '@data/officerData.js'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.about,
+  path: '/about',
+})
+
+// Structured data for About page
+useStructuredData('AboutPage', {
+  '@type': 'AboutPage',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Association of Family Psychiatrists',
+    description:
+      'We strive to support psychiatrists and mental health professionals who work with families, providing resources, training, and a professional network to promote mental wellness at every stage of life.',
+    foundingDate: '2020', // Update with actual founding date
+    numberOfEmployees: '50-100', // Update with actual range
+    areaServed: 'United States',
+  },
+})
 </script>
 
 <style scoped>

@@ -79,5 +79,44 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import InformationSection from '@components/InformationSection.vue'
+import { useSEO, useStructuredData } from '@/composables/useSEO.js'
+import { pageSeoData } from '@/utils/seo.js'
 import '@/assets/resources.css'
+
+// SEO setup
+useSEO({
+  ...pageSeoData.resources,
+  path: '/resources',
+})
+
+// Structured data for resources page
+useStructuredData('CollectionPage', {
+  '@type': 'CollectionPage',
+  name: 'Resources for Family Psychiatrists',
+  description:
+    'Comprehensive resources for family psychiatrists including articles, training materials, web resources, and professional development tools.',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Listserv',
+        description: 'Join the discussion group of the Association of Family Psychiatry',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Articles of Interest',
+        description: 'Archived articles of interest to our members',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Web Resources',
+        description: 'General web resources for family psychiatrists',
+      },
+    ],
+  },
+})
 </script>
