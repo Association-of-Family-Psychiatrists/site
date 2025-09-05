@@ -23,7 +23,13 @@
       </transition>
 
       <transition name="fade-slide" appear>
-        <h2 class="signup-heading animated-item">Join Now</h2>
+        <div class="pricing-section animated-item">
+          <h2 class="signup-heading">Join Now</h2>
+          <div class="price-display">
+            <span class="price-amount">${{ PAYPAL_CONFIG.membershipPrice }}</span>
+            <!-- <span class="price-period">per year</span> -->
+          </div>
+        </div>
       </transition>
 
       <transition name="fade-slide" appear>
@@ -101,6 +107,7 @@ import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSEO, useStructuredData } from '@/composables/useSEO.js'
 import { pageSeoData } from '@/utils/seo.js'
+import { getPayPalSDKUrl, PAYPAL_CONFIG } from '@/config/paypal.js'
 
 // SEO setup
 useSEO({
@@ -160,8 +167,7 @@ const showResult = (message, type = 'info') => {
 onMounted(() => {
   // Load PayPal SDK via CDN
   const script = document.createElement('script')
-  script.src =
-    'https://www.paypal.com/sdk/js?client-id=ATudL1zTvsJmaJ-kS6hmdf7L6FLM3mfdFMnkle5EGbA2Jfq12VfNagnkk_W8kDXr7J_jekw_dTEBx3RS&currency=USD&components=buttons'
+  script.src = getPayPalSDKUrl()
   script.onload = async () => {
     paypalLoaded.value = true
     // Wait for Vue to finish rendering
@@ -182,7 +188,7 @@ const initializePayPal = () => {
           label: 'paypal',
         },
         message: {
-          amount: 50,
+          amount: PAYPAL_CONFIG.membershipPrice,
         },
 
         async createOrder() {
@@ -292,10 +298,35 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.pricing-section {
+  margin: 3rem 0 1rem;
+}
+
 .signup-heading {
   font-size: 1.8rem;
-  margin: 3rem 0 1rem;
+  margin: 0 0 1rem;
   color: var(--color-accent);
+}
+
+.price-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.price-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  font-family: 'Georgia', serif;
+}
+
+.price-period {
+  font-size: 1rem;
+  color: var(--color-text);
+  font-style: italic;
 }
 
 .intro {
