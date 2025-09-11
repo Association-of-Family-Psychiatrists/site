@@ -154,4 +154,12 @@ export const pageSeoData = {
     keywords: ['contact AFP', 'get in touch', 'psychiatry organization contact'],
     type: 'website',
   },
+  thankYou: {
+    title: 'Thank You',
+    description:
+      'Thank you for contacting the Association of Family Psychiatrists. Your message has been received and we will respond soon.',
+    keywords: ['thank you', 'message received', 'contact confirmation'],
+    type: 'website',
+    noindex: true, // Don't index thank you pages
+  },
 }

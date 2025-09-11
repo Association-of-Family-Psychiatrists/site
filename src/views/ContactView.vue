@@ -4,19 +4,20 @@
     <p class="page-subtitle animate-fade-slide" style="animation-delay: 0.2s">
       We'd love to hear from you! Reach out with any questions, suggestions, or inquiries.
     </p>
-
+<!-- 
     <div class="contact-info animate-fade-slide" style="animation-delay: 0.4s">
       <p>Email: <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a></p>
-    </div>
+    </div> -->
 
     <div class="contact-form animate-fade-slide" style="animation-delay: 0.6s">
       <h2>Send Us a Message</h2>
       <form
-        action="https://formkeep.com/f/32d60a487d3c"
-        accept-charset="UTF-8"
+      action="https://forms.tanuj.xyz/afp/submit"
+      accept-charset="UTF-8"
         enctype="multipart/form-data"
         class="contact-form-form"
         method="POST"
+        target="_self"
       >
         <input type="text" name="name" placeholder="Your Name" required />
         <input type="email" name="_replyto" placeholder="Your Email" required />

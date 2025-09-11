@@ -7,6 +7,7 @@ import ResourcesView from '@views/ResourcesView.vue'
 import MemberView from '@views/MemberView.vue'
 import EventsView from '@views/EventsView.vue'
 import ContactView from '@views/ContactView.vue'
+import ThankYouView from '@views/ThankYouView.vue'
 
 export const routes = [
   {
@@ -142,6 +143,11 @@ export const routes = [
     path: '/contact',
     name: 'contact',
     component: ContactView,
+  },
+  {
+    path: '/thank-you',
+    name: 'thank-you',
+    component: ThankYouView,
   },
   {
     path: '/confirmation',
