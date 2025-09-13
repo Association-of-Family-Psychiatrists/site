@@ -20,7 +20,7 @@
         target="_self"
       >
         <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="_replyto" placeholder="Your Email" required />
+        <input type="email" name="email" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         <input type="hidden" name="_next" value="https://yoursite.com/thank-you" />
         <button type="submit" class="cta-button">Send Message</button>
