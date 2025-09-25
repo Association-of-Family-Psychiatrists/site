@@ -12,24 +12,21 @@ export const featuredEventData = {
 
 export const featuredCards = [
   {
-    image:
-      'https://media.istockphoto.com/id/1317804584/photo/one-businesswoman-studio-portrait-looking-at-the-camera.jpg?s=2048x2048&w=is&k=20&c=bUHQJBt4Nbp0IEngDcXMMQteAnGi7fz1WpEuq3zLrOI=',
+    image: new URL('@/assets/img/affiliate/affiliate-1.jpg', import.meta.url).href,
     title: 'AACAP',
     subtitle: 'Annual Meeting • October 2025',
     details:
       'The American Academy of Child and Adolescent Psychiatry (AACAP) is the leading national professional medical association dedicated to promoting healthy development and the mental health of children, adolescents, and families. Join us for their annual meeting featuring cutting-edge research, clinical workshops, and networking opportunities with child and adolescent psychiatry experts.',
   },
   {
-    image:
-      'https://media.istockphoto.com/id/1411002384/photo/nurses-meeting.jpg?s=2048x2048&w=is&k=20&c=M5E3-J6IVCX6cvVBGyfedmTXEPjedRxyE2NZMkdv9hM=',
+    image: new URL('@/assets/img/affiliate/affilliate-2.jpg', import.meta.url).href,
     title: 'APA',
     subtitle: 'Annual Meeting • May 2026',
     details:
       "The American Psychiatric Association (APA) is the world's largest psychiatric organization, representing more than 38,000 physician members specializing in the diagnosis, treatment, prevention, and research of mental illnesses. Their annual meeting brings together psychiatrists from around the world for education, networking, and the latest advances in psychiatric care and research.",
   },
   {
-    image:
-      'https://media.istockphoto.com/id/1783743772/photo/female-speaker-giving-a-presentation-during-business-seminar-at-convention-center.jpg?s=2048x2048&w=is&k=20&c=h7aIvTLP5PhWfrp54V_yUhtoD1cZqqwauSmqMAsbnyw=',
+    image: new URL('@/assets/img/affiliate/affiliate-3.jpg', import.meta.url).href,
     title: 'Annual AFP Conference',
     subtitle: 'Virtual • March 2026',
     details:
@@ -58,19 +55,16 @@ export const statsData = [
 export const featuredArticles = [
   {
     title: 'Coping With Problematic Effects of Social Media',
-    thumbnail:
-      'https://images.squarespace-cdn.com/content/v1/6267042fe703aa417b69ec37/ff56a26d-ca75-4256-8854-6ddba48c6fc5/Teenage+girl+using+smart+phone+at+home+stock+photo.jpg?format=2500w',
+    thumbnail: new URL('@/assets/img/featured/feature-1.jpg', import.meta.url).href,
     url: 'https://www.psychologytoday.com/us/blog/psychiatrys-think-tank/202501/coping-with-problematic-effects-of-social-media',
   },
   {
     title: 'Community Support Strategies',
-    thumbnail:
-      'https://media.istockphoto.com/id/1465173464/photo/business-network-concept-teamwork-partnership-human-resources.jpg?s=2048x2048&w=is&k=20&c=45hL9SREGO-8XjTxsmFy1Iph1lHSxEqD-MTkVlodM_o=',
+    thumbnail: new URL('@/assets/img/featured/feature-2.jpg', import.meta.url).href,
   },
   {
     title: 'Trauma-Informed Care',
-    thumbnail:
-      'https://media.istockphoto.com/id/2206797715/photo/cubes-form-the-expression-ptsd.jpg?s=2048x2048&w=is&k=20&c=w4i03qsp8ue3YYBBhSuqcaAwzhfmyWGuEBmA2QkN2Tg=',
+    thumbnail: new URL('@/assets/img/featured/feature-3.jpg', import.meta.url).href,
   },
 ]
 
@@ -94,7 +88,7 @@ export const featuredAwardWinners = [
 ]
 
 export const conferenceEventData = {
-  title: 'Highlights: 2024 Annual Family Psychiatry Conference',
+  title: 'Highlights: 2025 Annual Family Psychiatry Conference',
   date: 'September 21, 2025',
   time: '9:00 AM – 4:00 PM PT',
   description:

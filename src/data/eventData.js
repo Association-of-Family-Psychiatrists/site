@@ -36,7 +36,7 @@ export const eventData = [
     location: 'Online',
     description: 'A virtual seminar exploring the latest research in psychiatry.',
     image:
-      'https://media.istockphoto.com/id/1496377921/photo/group-of-people-applauding.jpg?s=2048x2048&w=is&k=20&c=xuCCbqrrZoE0jKxLd8aW2U3dSjxwJaKw99EDea1q91w=',
+      new URL('@/assets/img/affiliate/affiliate-3.jpg', import.meta.url).href,
     // rsvpLink: 'https://example.com/access-webinar',
   },
 ]
