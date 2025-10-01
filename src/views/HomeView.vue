@@ -109,6 +109,12 @@
       :cards="featuredAwardWinners"
       id="award-winners"
     />
+
+    <CardGrid
+      title="Our Leadership Team"
+      :cards="coreOfficers"
+      id="leadership-team"
+    />
   </section>
 </template>
 
@@ -129,6 +135,10 @@ import {
   conferenceEventData,
   featuredAwardWinners,
 } from '@data/homeData.js'
+import { officerCards } from '@data/officerData.js'
+
+// Filter to show only core executive officers (first 6)
+const coreOfficers = officerCards.slice(0, 4)
 
 // SEO setup
 useSEO({
