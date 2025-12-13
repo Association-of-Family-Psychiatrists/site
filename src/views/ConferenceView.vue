@@ -279,14 +279,98 @@
           <p>CME and CEUs: Alliant will pay for this and does not charge for them.</p>
         </div>
       </div>
+
+      <!-- Registration Form -->
+      <div class="registration-form-section">
+        <h3>Register Now</h3>
+        <form @submit.prevent="handleSubmit" class="conference-signup-form" v-if="!loading">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input
+              id="name"
+              v-model="name"
+              type="text"
+              placeholder="Full Name"
+              required
+              :disabled="loading"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input
+              id="email"
+              v-model="email"
+              type="email"
+              placeholder="Email Address"
+              required
+              :disabled="loading"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input
+              id="phone"
+              v-model="phone"
+              type="tel"
+              placeholder="Phone Number"
+              required
+              :disabled="loading"
+            />
+          </div>
+          <div class="form-group">
+            <label for="registrationType">Registration Type *</label>
+            <select
+              id="registrationType"
+              v-model="registrationType"
+              required
+              :disabled="loading || !conferenceConfig"
+              @change="updatePrice"
+            >
+              <option value="">Select registration type</option>
+              <option
+                v-for="option in availableRegistrationTypes"
+                :key="option.value"
+                :value="option.value"
+              >
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+
+          <div v-if="selectedPrice > 0" class="price-display">
+            <span class="price-label">Total:</span>
+            <span class="price-amount">${{ selectedPrice }}</span>
+          </div>
+
+          <!-- PayPal Button Container -->
+          <div v-if="registrationType" id="conference-paypal-button-container"></div>
+          <p v-else class="form-note">Please select a registration type to continue</p>
+
+          <p class="form-note" v-if="paypalLoaded && registrationType">
+            Complete your information above and click the PayPal button to proceed
+          </p>
+        </form>
+
+        <div v-if="loading" class="loading-spinner">
+          <p>Processing your registration…</p>
+          <span class="spinner" />
+        </div>
+
+        <!-- Result Message -->
+        <div v-if="resultMessage" class="result-message" :class="resultType">
+          <p v-html="resultMessage"></p>
+        </div>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted, nextTick, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useSEO } from '@/composables/useSEO.js'
 import { pageSeoData } from '@/utils/seo.js'
+import { getSandboxPayPalSDKUrl, PAYPAL_CONFIG } from '@/config/paypal.js'
 
 // Import logos
 import logoFpi from '@/assets/conferencewebsiteinformation/logo_fpi.jpeg'
@@ -309,10 +393,229 @@ useSEO({
   path: '/conference',
 })
 
-// Ensure page scrolls to top on mount
-onMounted(() => {
-  window.scrollTo({ top: 0, behavior: 'instant' })
+// Registration form state
+const router = useRouter()
+const name = ref('')
+const email = ref('')
+const phone = ref('')
+const registrationType = ref('')
+const loading = ref(false)
+const paypalLoaded = ref(false)
+const resultMessage = ref('')
+const resultType = ref('')
+const conferenceConfig = ref(null)
+const availableRegistrationTypes = ref([])
+
+const selectedPrice = computed(() => {
+  if (!registrationType.value) return 0
+  return PAYPAL_CONFIG.conferencePrices[registrationType.value] || 0
 })
+
+const updatePrice = () => {
+  // Price updates automatically via computed property
+  // Re-initialize PayPal button when registration type changes
+  if (paypalLoaded.value && registrationType.value) {
+    nextTick(() => {
+      initializePayPal()
+    })
+  }
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault()
+  // Form submission is handled by PayPal button
+}
+
+const showResult = (message, type = 'info') => {
+  resultMessage.value = message
+  resultType.value = type
+  setTimeout(() => {
+    resultMessage.value = ''
+    resultType.value = ''
+  }, 10000) // Clear after 10 seconds
+}
+
+// Fetch conference config from backend
+const fetchConferenceConfig = async () => {
+  try {
+    const response = await fetch(
+      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/getConferenceConfig'
+    )
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch conference configuration')
+    }
+    
+    const config = await response.json()
+    conferenceConfig.value = config
+    
+    // Determine available registration types based on currentRegistrationWindow
+    const currentWindow = config.currentRegistrationWindow.current || 'regular'
+    const paidOptions = []
+    
+    console.log("currentWindow", currentWindow)
+    // Add all paid options up to and including the current window
+    if (currentWindow === 'early-bird') {
+      paidOptions.push({ value: 'early-bird', label: 'Early-bird - $75' })
+    } else if (currentWindow === 'regular') {
+      paidOptions.push({ value: 'regular', label: 'Regular - $90' })
+    } else if (currentWindow === 'late') {
+      paidOptions.push({ value: 'late', label: 'Late Registration - $95' })
+    }
+
+    console.log("Paid options", paidOptions)
+    
+    // Always include free options
+    const freeOptions = [
+      { value: 'student', label: 'Student - Free' },
+      { value: 'trainee', label: 'Trainee - Free' },
+      { value: 'panelist', label: 'Panelist - Free' }
+    ]
+    
+    availableRegistrationTypes.value = [...paidOptions, ...freeOptions]
+  } catch (error) {
+    console.error('Error fetching conference config:', error)
+    showResult('Failed to load registration options. Please refresh the page.', 'error')
+    // Fallback to default options
+    availableRegistrationTypes.value = [
+      { value: 'regular', label: 'Regular - $90' },
+      { value: 'late', label: 'Late Registration - $95' },
+      { value: 'student', label: 'Student - Free' },
+      { value: 'trainee', label: 'Trainee - Free' },
+      { value: 'panelist', label: 'Panelist - Free' }
+    ]
+  }
+}
+
+// Ensure page scrolls to top on mount
+onMounted(async () => {
+  window.scrollTo({ top: 0, behavior: 'instant' })
+  
+  // Fetch conference config first
+  await fetchConferenceConfig()
+  
+  // Load PayPal SDK via CDN (using sandbox credentials)
+  const script = document.createElement('script')
+  script.src = getSandboxPayPalSDKUrl()
+  script.onload = async () => {
+    paypalLoaded.value = true
+    // Wait for Vue to finish rendering
+    await nextTick()
+    // Only initialize if registration type is already selected
+    if (registrationType.value) {
+      initializePayPal()
+    }
+  }
+  document.head.appendChild(script)
+})
+
+const initializePayPal = () => {
+  if (window.paypal) {
+    // Clear any existing button
+    const container = document.getElementById('conference-paypal-button-container')
+    if (container) {
+      container.innerHTML = ''
+    }
+    
+    window.paypal
+      .Buttons({
+        style: {
+          shape: 'rect',
+          layout: 'vertical',
+          color: 'gold',
+          label: 'paypal',
+        },
+        message: {
+          amount: selectedPrice.value || PAYPAL_CONFIG.conferencePrices.regular,
+        },
+
+        async createOrder() {
+          // Validate form first
+          if (!name.value || !email.value || !phone.value || !registrationType.value) {
+            showResult('Please fill in all required fields', 'error')
+            return
+          }
+
+          try {
+            const response = await fetch(
+              'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createConferencePayPalOrder',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  name: name.value,
+                  email: email.value,
+                  phone: phone.value,
+                  registrationType: registrationType.value,
+                }),
+              },
+            )
+
+            const orderData = await response.json()
+
+            if (!response.ok) {
+              const errorMessage = orderData.error || 'Failed to create order'
+              throw new Error(errorMessage)
+            }
+
+            if (orderData.id) {
+              return orderData.id
+            }
+
+            const errorDetail = orderData?.details?.[0]
+            const errorMessage = errorDetail
+              ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+              : JSON.stringify(orderData)
+
+            throw new Error(errorMessage)
+          } catch (error) {
+            console.error(error)
+            showResult(`Could not initiate PayPal Checkout...<br><br>${error.message}`, 'error')
+          }
+        },
+
+        async onApprove(data, actions) {
+          loading.value = true
+          console.log('Passing approved conference order ID to backend', data.orderID)
+          try {
+            const response = await fetch(
+              `https://us-central1-afp-site-c1bd9.cloudfunctions.net/captureConferencePayPalOrder`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderID: data.orderID }),
+              },
+            )
+
+            const orderData = await response.json()
+            console.log('Conference order data', JSON.stringify(orderData))
+
+            if (!response.ok) {
+              throw new Error(orderData.error || 'Failed to capture order')
+            }
+
+            // Redirect to confirmation page after a delay
+            setTimeout(() => {
+              router.push({
+                path: '/confirmation',
+                query: { orderId: orderData.id, type: 'conference' },
+              })
+            }, 3000)
+          } catch (error) {
+            console.error(error)
+            showResult(`Sorry, your registration could not be processed...<br><br>${error.message}`, 'error')
+          } finally {
+            loading.value = false
+          }
+        },
+      })
+      .render('#conference-paypal-button-container')
+  }
+}
 
 // Panelists data
 const panel1Panelists = [{ name: 'Dr. Noah Spector' }, { name: 'Dr. Rishi Kapur' }]
@@ -756,6 +1059,152 @@ const presenters = [
 .payment-info p,
 .ce-info p {
   line-height: 1.6;
+}
+
+/* Registration Form Section */
+.registration-form-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.registration-form-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+.conference-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text-dark, #333);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: 'Georgia', serif;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.price-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+.price-label {
+  font-size: 1.1rem;
+  color: var(--color-text-dark, #333);
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  font-family: 'Georgia', serif;
+}
+
+#conference-paypal-button-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+}
+
+.form-note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.loading-spinner {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.spinner {
+  display: inline-block;
+  margin-top: 0.5rem;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid var(--color-text-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.result-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.result-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.result-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.result-message.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
 }
 
 /* Responsive Design */

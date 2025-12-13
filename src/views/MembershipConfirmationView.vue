@@ -2,23 +2,47 @@
   <section class="confirmation">
     <transition name="fade-slide" appear>
       <div class="confirmation-content">
-        <h1>Thank You for Becoming a Member</h1>
-        <p class="message">
-          Your membership with the Association of Family Psychiatrists has been successfully
-          processed.
-        </p>
-        <p class="order-id" v-if="orderId"><strong>Your Order ID:</strong> {{ orderId }}</p>
-        <p class="followup">
-          You'll receive a welcome email shortly with further details. We look forward to your
-          participation in our community.
-        </p>
-        <p class="next-steps">
-          <span>
-            To add your contact information to the
-            <RouterLink to="/members">secure membership directory</RouterLink>, please email
-            <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
-          </span>
-        </p>
+        <!-- Membership Confirmation -->
+        <template v-if="!isConference">
+          <h1>Thank You for Becoming a Member</h1>
+          <p class="message">
+            Your membership with the Association of Family Psychiatrists has been successfully
+            processed.
+          </p>
+          <p class="order-id" v-if="orderId"><strong>Your Order ID:</strong> {{ orderId }}</p>
+          <p class="followup">
+            You'll receive a welcome email shortly with further details. We look forward to your
+            participation in our community.
+          </p>
+          <p class="next-steps">
+            <span>
+              To add your contact information to the
+              <RouterLink to="/members">secure membership directory</RouterLink>, please email
+              <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
+            </span>
+          </p>
+        </template>
+
+        <!-- Conference Registration Confirmation -->
+        <template v-else>
+          <h1>Conference Registration Confirmed</h1>
+          <p class="message">
+            Your registration for the AFP Conference: "Bridging Minds, Systems and Relationships:
+            Biopsychorelational Healing" has been successfully processed.
+          </p>
+          <p class="order-id" v-if="orderId"><strong>Your Order ID:</strong> {{ orderId }}</p>
+          <p class="followup">
+            You'll receive a confirmation email shortly with further details about the conference.
+            We look forward to seeing you on April 04, 2026!
+          </p>
+          <p class="next-steps">
+            <span>
+              If you have any questions about the conference, please contact us at
+              <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a>.
+            </span>
+          </p>
+        </template>
+
         <RouterLink to="/" class="home-button">Return to Homepage</RouterLink>
       </div>
     </transition>
@@ -28,8 +52,10 @@
 <script setup>
 import { RouterLink, useRoute } from 'vue-router'
 import { computed } from 'vue'
+
 const route = useRoute()
 const orderId = computed(() => route.query.orderId)
+const isConference = computed(() => route.query.type === 'conference')
 </script>
 
 <style scoped>
