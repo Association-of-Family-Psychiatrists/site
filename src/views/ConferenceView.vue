@@ -283,7 +283,7 @@
       <!-- Registration Form -->
       <div class="registration-form-section">
         <h3>Register Now</h3>
-        <form @submit.prevent="handleSubmit" class="conference-signup-form" v-if="!loading">
+        <form @submit.prevent="handleSubmit" class="conference-signup-form">
           <div class="form-group">
             <label for="name">Full Name *</label>
             <input
@@ -341,20 +341,44 @@
             <span class="price-label">Total:</span>
             <span class="price-amount">${{ selectedPrice }}</span>
           </div>
+          <div v-else-if="selectedPrice === 0 && registrationType" class="price-display free">
+            <span class="price-label">Registration Fee:</span>
+            <span class="price-amount">Free</span>
+          </div>
 
-          <!-- PayPal Button Container -->
-          <div v-if="registrationType" id="conference-paypal-button-container"></div>
-          <p v-else class="form-note">Please select a registration type to continue</p>
+          <!-- PayPal Button Container (for paid registrations) -->
+          <div v-if="registrationType && selectedPrice > 0 && !loading" id="conference-paypal-button-container"></div>
+          
+          <!-- Register Button (for free registrations) -->
+          <button
+            v-if="registrationType && selectedPrice === 0 && !loading"
+            type="submit"
+            class="register-button"
+          >
+            Register
+          </button>
+          
+          <!-- Loading State for Free Registration -->
+          <div v-if="registrationType && selectedPrice === 0 && loading" class="loading-state">
+            <span class="spinner"></span>
+            <p>Processing your registration…</p>
+          </div>
+          
+          <!-- Loading State for Paid Registration (PayPal) -->
+          <div v-if="registrationType && selectedPrice > 0 && loading" class="loading-state">
+            <span class="spinner"></span>
+            <p>Processing your payment…</p>
+          </div>
+          
+          <p v-if="!registrationType" class="form-note">Please select a registration type to continue</p>
 
-          <p class="form-note" v-if="paypalLoaded && registrationType">
+          <p class="form-note" v-if="paypalLoaded && registrationType && selectedPrice > 0">
             Complete your information above and click the PayPal button to proceed
           </p>
+          <p class="form-note" v-if="registrationType && selectedPrice === 0 && !loading">
+            Complete your information above and click Register to complete your free registration
+          </p>
         </form>
-
-        <div v-if="loading" class="loading-spinner">
-          <p>Processing your registration…</p>
-          <span class="spinner" />
-        </div>
 
         <!-- Result Message -->
         <div v-if="resultMessage" class="result-message" :class="resultType">
@@ -421,9 +445,69 @@ const updatePrice = () => {
   }
 }
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
-  // Form submission is handled by PayPal button
+  
+  // For free registrations, handle directly
+  if (selectedPrice.value === 0) {
+    await handleFreeRegistration()
+  }
+  // For paid registrations, form submission is handled by PayPal button
+}
+
+const handleFreeRegistration = async () => {
+  // Validate form first
+  if (!name.value || !email.value || !phone.value || !registrationType.value) {
+    showResult('Please fill in all required fields', 'error')
+    return
+  }
+
+  // Validate it's a free registration type
+  if (registrationType.value !== 'student' &&
+      registrationType.value !== 'trainee' &&
+      registrationType.value !== 'panelist') {
+    showResult('Invalid registration type for free registration', 'error')
+    return
+  }
+
+  loading.value = true
+
+  try {
+    const response = await fetch(
+      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/registerFreeConference',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          phone: phone.value,
+          registrationType: registrationType.value,
+        }),
+      },
+    )
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to register')
+    }
+
+    // Redirect to confirmation page after a delay
+    setTimeout(() => {
+      router.push({
+        path: '/confirmation',
+        query: { orderId: result.orderId, type: 'conference' },
+      })
+    }, 2000)
+  } catch (error) {
+    console.error(error)
+    showResult(`Sorry, your registration could not be processed...<br><br>${error.message}`, 'error')
+  } finally {
+    loading.value = false
+  }
 }
 
 const showResult = (message, type = 'info') => {
@@ -1131,6 +1215,11 @@ const presenters = [
   border-radius: 6px;
 }
 
+.price-display.free {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+}
+
 .price-label {
   font-size: 1.1rem;
   color: var(--color-text-dark, #333);
@@ -1147,6 +1236,61 @@ const presenters = [
   width: 100%;
   max-width: 400px;
   margin: 1rem auto;
+}
+
+.register-button {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Georgia', serif;
+  display: block;
+}
+
+.register-button:hover:not(:disabled) {
+  background-color: #c65e53;
+}
+
+.register-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  margin: 1rem auto;
+  max-width: 400px;
+}
+
+.loading-state .spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-state p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text-dark, #333);
+  font-weight: 500;
 }
 
 .form-note {
