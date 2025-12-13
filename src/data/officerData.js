@@ -11,7 +11,7 @@ export const officerCards = [
     details: 'Representing the association in external assemblies and partnerships.',
   },
   {
-    title: 'Alison Heru, MD',
+    title: 'Allison Heru, MD',
     subtitle: 'Treasurer',
     details: 'Overseeing financial management and budgetary planning.',
   },
@@ -47,7 +47,7 @@ export const officerCards = [
     details: 'Advocating for family psychiatry and professional development.',
   },
   {
-    title: 'Neha Sharma, DO',
+    title: 'Niha Sharma, DO',
     subtitle: 'Councilor',
     details: 'Promoting evidence-based family psychiatric care.',
   },

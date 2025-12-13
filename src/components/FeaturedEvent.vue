@@ -1,8 +1,8 @@
 <template>
-  <section class="featured-event" :class="{ 'no-image': !image }">
-    <img v-if="image" :src="image" alt="Event image" class="event-image animate-left" />
+  <section class="featured-event">
+    <img :src="image" alt="Event image" class="event-image animate-left" />
 
-    <div class="event-details animate-right" :class="{ 'full-width': !image }">
+    <div class="event-details animate-right">
       <h2 class="event-title">{{ title }}</h2>
       <p class="event-meta">{{ date }} &bullet; {{ location }}</p>
       <p class="event-description">{{ description }}</p>
@@ -47,18 +47,12 @@ defineProps({
 .event-details {
   flex: 1;
   min-width: 250px;
-  padding: 3rem 5rem;
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 3px solid var(--color-accent);
-}
-
-.event-details.full-width {
-  flex: 1 1 100%;
-  max-width: 100%;
-  text-align: center;
 }
 
 .event-title {
@@ -117,10 +111,6 @@ defineProps({
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.featured-event.no-image {
-  justify-content: center;
 }
 
 /* Mobile */

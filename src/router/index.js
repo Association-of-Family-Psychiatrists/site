@@ -8,7 +8,6 @@ import MemberView from '@views/MemberView.vue'
 import EventsView from '@views/EventsView.vue'
 import ContactView from '@views/ContactView.vue'
 import ThankYouView from '@views/ThankYouView.vue'
-import ConferenceView from '@views/ConferenceView.vue'
 
 export const routes = [
   {
@@ -141,11 +140,6 @@ export const routes = [
     component: EventsView,
   },
   {
-    path: '/conference',
-    name: 'conference',
-    component: ConferenceView,
-  },
-  {
     path: '/contact',
     name: 'contact',
     component: ContactView,
@@ -183,11 +177,7 @@ const router = createRouter({
         behavior: 'smooth',
       }
     }
-    // Always scroll to top for new routes
-    if (savedPosition) {
-      return savedPosition
-    }
-    return { top: 0, behavior: 'instant' }
+    return { top: 0 }
   },
 })
 
