@@ -24,6 +24,75 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
+    <!-- Special Announcements Section -->
+    <div class="announcements-section" id="announcements">
+      <div class="announcements-container">
+        <h2 class="announcements-title">Special Announcements</h2>
+        <div class="announcements-content">
+          <p class="announcements-greeting">
+            Dear Colleagues, Happy Holidays! On behalf of the Association of Family Psychiatrists
+            (AFP), we wish you and your families a wonderful, healthy, and successful New Year. We
+            are pleased to share two important announcements highlighting AFP's continued commitment
+            to recognizing excellence in family-oriented psychiatry, education, and scholarship.
+          </p>
+
+          <div class="announcement-cards">
+            <div class="announcement-card">
+              <h3>10th Annual Resident and Fellow Recognition Award</h3>
+              <p>
+                We are excited to announce the 10th Annual Resident and Fellow Recognition Award for
+                Excellence in Family-Oriented Care. This award highlights outstanding contributions
+                to family-oriented clinical care and supports the next generation of family
+                psychiatrists.
+              </p>
+              <ul>
+                <li>Certificate of recognition</li>
+                <li>Invitation to AFP Annual Meeting</li>
+                <li>One year of mentoring with a senior AFP member</li>
+              </ul>
+              <p class="eligibility">
+                <strong>Eligibility:</strong> 3rd- or 4th-year psychiatry residents or fellows who
+                demonstrate commitment to family-oriented care.
+              </p>
+            </div>
+
+            <div class="announcement-card">
+              <h3>The Berman Award for Best Written or Media Content (2026)</h3>
+              <p>
+                Launching the inaugural Berman Award for the best content on any aspect of family
+                work. Eligible submissions include books, articles, posters, videos, blogs,
+                podcasts, or conference presentations.
+              </p>
+              <ul>
+                <li>First-place: $200–$250</li>
+                <li>Second- and third-place: Books on family psychiatry or family therapy</li>
+              </ul>
+              <p class="eligibility">
+                <strong>Eligibility:</strong> Residents, fellows, and early-career psychiatrists
+                (within first five years after training).
+              </p>
+            </div>
+          </div>
+
+          <div class="announcements-submission">
+            <h3>Submission Information</h3>
+            <p>
+              Please email a brief description of the nominee's/submitter's work and CV to Dr.
+              Rajesh Mehta:
+            </p>
+            <p class="contact-info">
+              <a href="mailto:rmeht2033@gmail.com">rmeht2033@gmail.com</a> or
+              <a href="mailto:Rajesh.Mehta@CHKD.org">Rajesh.Mehta@CHKD.org</a>
+            </p>
+            <p class="deadline"><strong>Submission Deadline: Friday, February 27, 2026</strong></p>
+            <RouterLink to="/resources/award-recognition" class="announcements-link"
+              >Learn More & Submit →</RouterLink
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- <FeaturedEvent :="featuredEventData" id="featured-event" /> -->
 
     <div class="conference-and-carousel">
@@ -416,6 +485,182 @@ onUnmounted(() => {
 
 .cta-button:hover {
   background-color: #c65e53;
+}
+
+.announcements-section {
+  width: 100%;
+  background: white;
+  padding: 4rem 2rem;
+  margin: 0 auto;
+}
+
+.announcements-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.announcements-title {
+  font-size: 2.25rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.announcements-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.announcements-greeting {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text, #555);
+  margin-bottom: 1rem;
+}
+
+.announcement-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.announcement-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--color-accent);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.announcement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.announcement-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.announcement-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--color-text, #555);
+}
+
+.announcement-card ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.announcement-card li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text, #555);
+}
+
+.announcement-card .eligibility {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.announcements-submission {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--color-accent);
+  text-align: center;
+}
+
+.announcements-submission h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-heading, #333);
+}
+
+.announcements-submission p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--color-text, #555);
+}
+
+.announcements-submission .contact-info {
+  font-size: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.announcements-submission .contact-info a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.5rem;
+}
+
+.announcements-submission .contact-info a:hover {
+  text-decoration: underline;
+}
+
+.announcements-submission .deadline {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  margin: 2rem 0 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.announcements-link {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+}
+
+.announcements-link:hover {
+  background-color: #b8500c;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .announcements-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .announcements-title {
+    font-size: 1.75rem;
+  }
+
+  .announcement-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .announcements-submission {
+    padding: 2rem 1.5rem;
+  }
+
+  .announcements-submission .deadline {
+    font-size: 1.1rem;
+  }
 }
 
 .conference-and-carousel {

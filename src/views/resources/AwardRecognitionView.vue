@@ -6,29 +6,123 @@
     </h1>
 
     <div class="nomination-text">
-      <h2>Nominate an Outstanding Trainee</h2>
-      <p>
-        We are requesting that you nominate one 3rd or 4th year resident and/or one child or adult
-        fellow from your program for this honor. Please select the candidate who best embraces the
-        values of a family psychiatrist and shows consistent, advanced interest in family work at
-        the child or adult level.
+      <p class="greeting">
+        Dear Colleagues,<br />
+        Happy Holidays! On behalf of the Association of Family Psychiatrists (AFP), we wish you and
+        your families a wonderful, healthy, and successful New Year. We are pleased to share two
+        important announcements highlighting AFP's continued commitment to recognizing excellence in
+        family-oriented psychiatry, education, and scholarship.
       </p>
-      <ul>
-        <li>Seeking out extra teaching or supervision in family care</li>
-        <li>
-          Consistently seeing families in treatment, whether in consultation, psychoeducation or
-          family therapy
-        </li>
-        <li>Advocacy work with NAMI or other organizations</li>
-        <li>Academic presentations (posters, grand rounds, etc.)</li>
-        <li>Writing columns, books or journal articles about family-oriented issues</li>
-      </ul>
-      <p>
-        The deadline for nomination is April 1. Please email a description of the resident's work
-        with families, as well as their CV, to Randi Libbon, MD at
-        <a href="mailto:Randi.libbon@cuanschutz.edu">Randi.libbon@cuanschutz.edu</a>.
-      </p>
+
+      <!-- 10th Annual Resident and Fellow Recognition Award -->
+      <div class="award-section">
+        <h2>10th Annual Resident and Fellow Recognition Award for Excellence in Family-Oriented Care</h2>
+        <p>
+          We are excited to announce the 10th Annual Resident and Fellow Recognition Award for
+          Excellence in Family-Oriented Care, presented by the Association of Family Psychiatrists
+          (AFP). This award highlights outstanding contributions to family-oriented clinical care and
+          supports the next generation of family psychiatrists.
+        </p>
+
+        <h3>Awardees Will Receive:</h3>
+        <ul>
+          <li>A certificate of recognition</li>
+          <li>An invitation to attend the AFP Annual Meeting</li>
+          <li>An invitation to attend the AFP Meeting held during the APA Annual Meeting</li>
+          <li>
+            One year of mentoring or other significant family-oriented learning experiences with a
+            senior AFP member
+          </li>
+        </ul>
+
+        <h3>Eligibility & Nomination Criteria</h3>
+        <p>
+          We invite nominations of 3rd- or 4th-year psychiatry residents or fellows who demonstrate:
+        </p>
+        <ul>
+          <li>A commitment to family-oriented care through supervision, teaching, or advocacy</li>
+          <li>Consistent involvement of families in treatment</li>
+          <li>
+            Contributions such as advocacy, presentations, or publications focused on family-oriented
+            care
+          </li>
+        </ul>
+        <p>
+          Nominees should have experience in psychoeducation and family consultation, with a strong
+          focus on involving families in treatment.
+        </p>
+      </div>
+
+      <!-- Berman Award -->
+      <div class="award-section">
+        <h2>The Berman Award for Best Written or Media Content of the Year (2026)</h2>
+        <p>
+          We are also excited to announce the launch of the inaugural Berman Award, beginning with
+          2026 submissions, best content on any aspect of family works each year starting in 2025.
+        </p>
+
+        <p>
+          Eligible submissions may include a book, article, poster, YouTube video, blog, podcast, or
+          conference presentation focused on psychoeducation, family therapy, or family consultation
+          in any medical field, including psychiatry, medicine, surgery, addiction, and related
+          disciplines. Publicly presented content refers to work that was accessible to the field
+          and/or the public in the given year.
+        </p>
+
+        <h3>Eligibility:</h3>
+        <ul>
+          <li>
+            Open to residents, fellows, and early-career psychiatrists (within the first five years
+            after completing training)
+          </li>
+          <li>The submitting author must be the sole author or first author</li>
+          <li>Preference will be given to AFP or AACAP members</li>
+          <li>Content may be self-submitted or nominated by others</li>
+        </ul>
+
+        <h3>Awards:</h3>
+        <ul>
+          <li>First-place award: $200–$250</li>
+          <li>
+            Second- and third-place awards: Books on family psychiatry or family therapy authored or
+            edited by AFP or AACAP members
+          </li>
+        </ul>
+
+        <p>
+          The award and winners will be announced at the 2026 AFP Annual Conference (April 2026 more
+          information yet to come).
+        </p>
+      </div>
+
+      <!-- Submission Details -->
+      <div class="submission-section">
+        <h2>Submission Details (for Both Awards)</h2>
+        <p>Please email:</p>
+        <ul>
+          <li>A brief description of the nominee's or submitter's work, and</li>
+          <li>A CV</li>
+        </ul>
+        <p>
+          to Dr. Rajesh Mehta at:
+          <a href="mailto:rmeht2033@gmail.com">rmeht2033@gmail.com</a> or
+          <a href="mailto:Rajesh.Mehta@CHKD.org">Rajesh.Mehta@CHKD.org</a>
+        </p>
+        <p class="deadline">
+          <strong>Submission Deadline: Friday, February 27, 2026</strong>
+        </p>
+      </div>
     </div>
+
+    <!-- 2024 Winners -->
+    <section class="card-grid-section">
+      <h2 class="grid-title">2024 Winners of Our Annual Award for Excellence in Family Care</h2>
+      <div class="card-grid">
+        <div v-for="(card, index) in awardCards2024" :key="index" class="award-card">
+          <h3 class="award-card-title">{{ card.title }}</h3>
+        </div>
+      </div>
+    </section>
 
     <!-- 2023 Winners -->
     <section class="card-grid-section">
@@ -38,16 +132,6 @@
           <h3 class="award-card-title">{{ card.title }}</h3>
           <p class="award-card-subtitle">{{ card.subtitle }}</p>
           <p class="award-card-description">{{ card.description }}</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2024 Winners -->
-    <section class="card-grid-section">
-      <h2 class="grid-title">2024 Winners of Our Annual Award for Excellence in Family Care</h2>
-      <div class="card-grid">
-        <div v-for="(card, index) in awardCards2024" :key="index" class="award-card">
-          <h3 class="award-card-title">{{ card.title }}</h3>
         </div>
       </div>
     </section>
@@ -168,6 +252,55 @@ const awardCards2024 = [
   font-size: 1rem;
   margin-bottom: 1rem;
   color: var(--color-text, #555);
+  line-height: 1.6;
+}
+
+.nomination-text .greeting {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.award-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--color-accent, #ca590d);
+}
+
+.award-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--color-heading, #333);
+}
+
+.award-section h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-heading, #333);
+}
+
+.submission-section {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: var(--color-surface, #f9f9f9);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--color-accent, #ca590d);
+}
+
+.submission-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-heading, #333);
+}
+
+.submission-section .deadline {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 0.25rem;
+  color: var(--color-accent, #ca590d);
 }
 
 .nomination-text ul {
