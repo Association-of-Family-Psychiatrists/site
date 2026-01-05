@@ -347,8 +347,11 @@
           </div>
 
           <!-- PayPal Button Container (for paid registrations) -->
-          <div v-if="registrationType && selectedPrice > 0 && !loading" id="conference-paypal-button-container"></div>
-          
+          <div
+            v-if="registrationType && selectedPrice > 0 && !loading"
+            id="conference-paypal-button-container"
+          ></div>
+
           <!-- Register Button (for free registrations) -->
           <button
             v-if="registrationType && selectedPrice === 0 && !loading"
@@ -357,20 +360,22 @@
           >
             Register
           </button>
-          
+
           <!-- Loading State for Free Registration -->
           <div v-if="registrationType && selectedPrice === 0 && loading" class="loading-state">
             <span class="spinner"></span>
             <p>Processing your registration…</p>
           </div>
-          
+
           <!-- Loading State for Paid Registration (PayPal) -->
           <div v-if="registrationType && selectedPrice > 0 && loading" class="loading-state">
             <span class="spinner"></span>
             <p>Processing your payment…</p>
           </div>
-          
-          <p v-if="!registrationType" class="form-note">Please select a registration type to continue</p>
+
+          <p v-if="!registrationType" class="form-note">
+            Please select a registration type to continue
+          </p>
 
           <p class="form-note" v-if="paypalLoaded && registrationType && selectedPrice > 0">
             Complete your information above and click the PayPal button to proceed
@@ -408,6 +413,7 @@ import noahSpectorImg from '@/assets/conferencewebsiteinformation/Noah Spector.j
 import rishiKapurImg from '@/assets/conferencewebsiteinformation/Rishi Kapur.JPG'
 import daneshpourImg from '@/assets/conferencewebsiteinformation/Dr. Manijeh Daneshpour.jpg'
 import shaligramImg from '@/assets/conferencewebsiteinformation/Shaligram-Dee headshot.jpg'
+import michelleRickerbyImg from '@/assets/conferencewebsiteinformation/Dr Michelle Rickerby.jpg'
 
 // SEO setup
 useSEO({
@@ -447,7 +453,7 @@ const updatePrice = () => {
 
 const handleSubmit = async (e) => {
   e.preventDefault()
-  
+
   // For free registrations, handle directly
   if (selectedPrice.value === 0) {
     await handleFreeRegistration()
@@ -463,9 +469,11 @@ const handleFreeRegistration = async () => {
   }
 
   // Validate it's a free registration type
-  if (registrationType.value !== 'student' &&
-      registrationType.value !== 'trainee' &&
-      registrationType.value !== 'panelist') {
+  if (
+    registrationType.value !== 'student' &&
+    registrationType.value !== 'trainee' &&
+    registrationType.value !== 'panelist'
+  ) {
     showResult('Invalid registration type for free registration', 'error')
     return
   }
@@ -504,7 +512,10 @@ const handleFreeRegistration = async () => {
     }, 2000)
   } catch (error) {
     console.error(error)
-    showResult(`Sorry, your registration could not be processed...<br><br>${error.message}`, 'error')
+    showResult(
+      `Sorry, your registration could not be processed...<br><br>${error.message}`,
+      'error',
+    )
   } finally {
     loading.value = false
   }
@@ -523,21 +534,21 @@ const showResult = (message, type = 'info') => {
 const fetchConferenceConfig = async () => {
   try {
     const response = await fetch(
-      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/getConferenceConfig'
+      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/getConferenceConfig',
     )
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch conference configuration')
     }
-    
+
     const config = await response.json()
     conferenceConfig.value = config
-    
+
     // Determine available registration types based on currentRegistrationWindow
     const currentWindow = config.currentRegistrationWindow.current || 'regular'
     const paidOptions = []
-    
-    console.log("currentWindow", currentWindow)
+
+    console.log('currentWindow', currentWindow)
     // Add all paid options up to and including the current window
     if (currentWindow === 'early-bird') {
       paidOptions.push({ value: 'early-bird', label: 'Early-bird - $75' })
@@ -547,15 +558,15 @@ const fetchConferenceConfig = async () => {
       paidOptions.push({ value: 'late', label: 'Late Registration - $95' })
     }
 
-    console.log("Paid options", paidOptions)
-    
+    console.log('Paid options', paidOptions)
+
     // Always include free options
     const freeOptions = [
       { value: 'student', label: 'Student - Free' },
       { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'panelist', label: 'Panelist - Free' }
+      { value: 'panelist', label: 'Panelist - Free' },
     ]
-    
+
     availableRegistrationTypes.value = [...paidOptions, ...freeOptions]
   } catch (error) {
     console.error('Error fetching conference config:', error)
@@ -566,7 +577,7 @@ const fetchConferenceConfig = async () => {
       { value: 'late', label: 'Late Registration - $95' },
       { value: 'student', label: 'Student - Free' },
       { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'panelist', label: 'Panelist - Free' }
+      { value: 'panelist', label: 'Panelist - Free' },
     ]
   }
 }
@@ -574,10 +585,10 @@ const fetchConferenceConfig = async () => {
 // Ensure page scrolls to top on mount
 onMounted(async () => {
   window.scrollTo({ top: 0, behavior: 'instant' })
-  
+
   // Fetch conference config first
   await fetchConferenceConfig()
-  
+
   // Load PayPal SDK via CDN (using sandbox credentials)
   const script = document.createElement('script')
   script.src = getSandboxPayPalSDKUrl()
@@ -600,7 +611,7 @@ const initializePayPal = () => {
     if (container) {
       container.innerHTML = ''
     }
-    
+
     window.paypal
       .Buttons({
         style: {
@@ -691,7 +702,10 @@ const initializePayPal = () => {
             }, 3000)
           } catch (error) {
             console.error(error)
-            showResult(`Sorry, your registration could not be processed...<br><br>${error.message}`, 'error')
+            showResult(
+              `Sorry, your registration could not be processed...<br><br>${error.message}`,
+              'error',
+            )
           } finally {
             loading.value = false
           }
@@ -716,7 +730,7 @@ const presenters = [
     name: 'Michelle Rickerby, MD',
     title: 'Clinical Professor of Psychiatry and Human Behavior, Brown University',
     bio: "Michelle Rickerby, MD has had her academic home at Brown University since 1996. Following her residency training, she spent 20 years working with a team on the development of the Partial Hospital Program at Hasbro Children's Hospital, a nationally recognized program known for creating a model of family-based integrated care for children and teens with complex combinations of medical and psychiatric illness. She transitioned to community-based practice in Providence, RI, in 2018, where she focuses on outpatient family-based integrated care, program development consultation, and cross-disciplinary family therapy training. Her primary teaching role throughout her tenure at Brown, where she is a Clinical Professor of Psychiatry and Human Behavior, has been as the previous co-director and current Director of family therapy training for the child psychiatry and triple board residents. She is currently a Co-Chair of AACAP's Family Committee.",
-    image: null,
+    image: michelleRickerbyImg,
   },
   {
     name: 'Manijeh Daneshpour, PhD',
