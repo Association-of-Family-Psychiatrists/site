@@ -414,7 +414,8 @@ import rishiKapurImg from '@/assets/conferencewebsiteinformation/Rishi Kapur.JPG
 import daneshpourImg from '@/assets/conferencewebsiteinformation/Dr. Manijeh Daneshpour.jpg'
 import shaligramImg from '@/assets/conferencewebsiteinformation/Shaligram-Dee headshot.jpg'
 import michelleRickerbyImg from '@/assets/conferencewebsiteinformation/Dr Michelle Rickerby.jpg'
-
+import jGuzderImg from '@/assets/conferencewebsiteinformation/Dr Jaswant Guzder.jpg'
+import ramaRaoGogineniImg from '@/assets/conferencewebsiteinformation/Dr. Rama Rao Gogineni.png'
 // SEO setup
 useSEO({
   title: 'Bridging Minds, Systems and Relationships: Biopsychorelational Healing | AFP',
@@ -754,7 +755,7 @@ const presenters = [
     name: 'Jaswant Guzder, MD',
     title: 'Clinical Professor of Psychiatry, University of British Columbia',
     bio: "Jaswant Guzder, MD. is a Clinical Professor of Psychiatry at the University of British Columbia and Co-Director of the UBC Social and Cultural Psychiatry Program, with a career deeply grounded in refugee mental health and culturally informed care. Since 2020, her clinical work in Victoria, BC, has centered on supporting refugee and immigrant communities through the Vancouver Island Centre for Refugee and Immigrant Mental Health (VICCIR), alongside work with Indigenous Child and Youth Mental Health services across southern Vancouver Island. A retired Professor of Psychiatry at McGill University, where she continues to collaborate with the Divisions of Child Psychiatry and Social and Transcultural Psychiatry, she has held major leadership roles, including Head of Child Psychiatry and founding Co-Director of the Cultural Consultation Service at the Jewish General Hospital. Her global research and training initiatives focus on high-risk children and cultural psychiatry, with longstanding partnerships in Jamaica, India, Nepal, and Sri Lanka. Dr. Guzder has authored numerous articles, co-edited Cultural Consultation: Encountering the Other in Mental Health Care, and collaborated with Rome's Museo Laboratorio della Mente on an art-based project in 2017. Her advocacy and clinical leadership have been recognized with the Queen Elizabeth II Diamond Jubilee Medal.",
-    image: null,
+    image: jGuzderImg,
   },
   {
     name: 'Deepika Shaligram, MD',
@@ -766,7 +767,7 @@ const presenters = [
     name: 'Rama Rao Gogineni, MD, MFT',
     title: 'Professor of Psychiatry, Cooper Medical School of Rowan University',
     bio: 'Rama Rao Gogineni, MD, MFT is a graduate of Kakatiya Medical College, Osmania University, and completed psychiatry residency at the University of Pennsylvania and Child and Adolescent Psychiatry fellowship at the Medical College of Pennsylvania. He was trained in family therapy and psychoanalysis. He is currently a Professor of Psychiatry and Senior Educator in Developmental Psychiatry at Cooper Medical School of Rowan University. He is an active, contributing member of U.S. and international psychiatric organizations. He has several publications, presentations, and serves as editor of five books.',
-    image: null,
+    image: ramaRaoGogineniImg,
   },
 ]
 </script>
