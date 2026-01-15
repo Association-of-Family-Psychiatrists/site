@@ -1,14 +1,16 @@
 <template>
   <div class="conference-page">
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" :style="{ backgroundImage: `url(${conferenceImage1})` }">
+      <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1 class="conference-title">
-          Bridging Minds, Systems and Relationships: Biopsychorelational Healing
+          Bridging Minds, Systems, and Relationships: Biopsychorelational Healing
         </h1>
         <p class="conference-subtitle">A Collaboration between FPI, AFP and AACAP</p>
         <div class="conference-meta">
-          <p class="conference-date">Virtual Conference • April 04, 2026</p>
+          <p class="conference-date">April 4, 2026</p>
+          <p class="conference-time">7:00 AM – 2:00 PM PST / 10:00 AM – 5:00 PM EST</p>
         </div>
       </div>
     </section>
@@ -17,10 +19,10 @@
     <section class="logos-section">
       <div class="logos-container">
         <img :src="logoFpi" alt="Family Process Institute Logo" class="partner-logo" />
-        <img :src="logoAacap" alt="AACAP Logo" class="partner-logo" />
         <img :src="logoAu" alt="Alliant University Logo" class="partner-logo" />
-        <img :src="logoCheo" alt="CHEO Logo" class="partner-logo" />
+        <!-- <img :src="logoCheo" alt="CHEO Logo" class="partner-logo" />
         <img :src="logo1c1" alt="1Call1Click Logo" class="partner-logo" />
+        <img :src="logoAacap" alt="AACAP Logo" class="partner-logo" /> -->
       </div>
     </section>
 
@@ -35,9 +37,14 @@
       </p>
     </section>
 
+    <!-- Visual Break Section -->
+    <section class="visual-break-section">
+      <img :src="conferenceImage4" alt="Conference visual" class="visual-break-image" />
+    </section>
+
     <!-- Conference Objectives -->
     <section class="objectives-section">
-      <h2>Conference Objectives</h2>
+      <h2>Conference-Wide Learning Objectives</h2>
       <p>By the end of the conference, participants will be able to:</p>
       <ol class="objectives-list">
         <li>
@@ -58,14 +65,17 @@
     <section class="agenda-section">
       <h2>Conference Agenda</h2>
       <div class="agenda-container">
+        <!-- Welcome -->
+        <div class="panel-card">
+          <h3>10:00 – 10:15 | Welcome and Introduction</h3>
+          <p class="panel-focus">
+            <strong>Conference Chair:</strong> Dr. Manijeh Daneshpour
+          </p>
+        </div>
+
         <!-- Panel I -->
         <div class="panel-card">
-          <h3>Panel I: Systemic & Relational Perspectives in Psychiatry and Therapy</h3>
-          <p class="panel-duration">1 Hour</p>
-          <p class="panel-focus">
-            <strong>Focus:</strong> Exploring how family systems theory and relational frameworks
-            inform psychiatric diagnosis and treatment planning.
-          </p>
+          <h3>10:15 – 11:15 | Panel I: Systemic & Relational Perspectives in Psychiatry and Therapy</h3>
           <div class="panelists">
             <h4>Panelists:</h4>
             <div class="presenter-list">
@@ -79,11 +89,11 @@
             </div>
           </div>
           <div class="panel-objectives">
-            <h4>Objectives:</h4>
+            <h4>Learning Objectives:</h4>
             <ul>
               <li>Describe systemic influences on mental health symptoms.</li>
               <li>
-                Demonstrate relational interventions that can complement pharmacological approaches.
+                Demonstrate relational interventions that complement pharmacological approaches.
               </li>
             </ul>
           </div>
@@ -92,14 +102,8 @@
         <!-- Panel II -->
         <div class="panel-card">
           <h3>
-            Panel II: From Loss to Resilience: Biopsychorelational Approaches with Refugee Families
+            11:15 – 12:15 | Panel II: From Loss to Resilience: Biopsychorelational Approaches with Refugee Families
           </h3>
-          <p class="panel-duration">1 Hour</p>
-          <p class="panel-focus">
-            <strong>Focus:</strong> Examining the impact of forced migration, displacement, and
-            refugee experiences on family systems, with attention to resilience, relational stress,
-            and systemic healing.
-          </p>
           <div class="panelists">
             <h4>Panelists:</h4>
             <div class="presenter-list">
@@ -113,15 +117,15 @@
             </div>
           </div>
           <div class="panel-objectives">
-            <h4>Objectives:</h4>
+            <h4>Learning Objectives:</h4>
             <ul>
               <li>
                 Identify common relational and systemic challenges faced by displaced and refugee
                 families (e.g., role shifts, intergenerational strain, cultural dislocation).
               </li>
               <li>
-                Explore therapeutic strategies that foster resilience, belonging, and healing within
-                refugee family systems.
+                Explore strategies that foster resilience, belonging, and healing within refugee
+                family systems.
               </li>
               <li>
                 Discuss how systemic and relational perspectives can inform policy and community
@@ -133,12 +137,7 @@
 
         <!-- Panel III -->
         <div class="panel-card">
-          <h3>Panel III: Integrated Care Models – From Theory to Practice</h3>
-          <p class="panel-duration">1 Hour</p>
-          <p class="panel-focus">
-            <strong>Focus:</strong> Innovative programs and models where psychiatrists and
-            therapists work side by side.
-          </p>
+          <h3>12:15 – 1:15 | Panel III: Integrated Care Models – From Theory to Practice</h3>
           <div class="panelists">
             <h4>Panelists:</h4>
             <div class="presenter-list">
@@ -152,22 +151,22 @@
             </div>
           </div>
           <div class="panel-objectives">
-            <h4>Objectives:</h4>
+            <h4>Learning Objectives:</h4>
             <ul>
-              <li>Describe integrated care models.</li>
-              <li>Understanding barriers and how to overcome them in various settings</li>
+              <li>Describe integrated care models in which psychiatrists and therapists collaborate.</li>
+              <li>Identify common barriers to integration and strategies to overcome them across clinical settings.</li>
             </ul>
           </div>
         </div>
 
+        <!-- Lunch Break -->
+        <div class="panel-card">
+          <h3>1:15 – 2:00 | Lunch Break (45 minutes)</h3>
+        </div>
+
         <!-- Panel IV -->
         <div class="panel-card">
-          <h3>Panel IV: Ethical, Cultural, and Generational Challenges in Collaborative Care</h3>
-          <p class="panel-duration">1 Hour</p>
-          <p class="panel-focus">
-            <strong>Focus:</strong> Navigating ethical dilemmas, cultural differences, and
-            generational dynamics in family systems.
-          </p>
+          <h3>2:00 – 3:00 | Panel IV: Ethical, Cultural, and Generational Challenges in Collaborative Care</h3>
           <div class="panelists">
             <h4>Panelists:</h4>
             <div class="presenter-list">
@@ -181,7 +180,7 @@
             </div>
           </div>
           <div class="panel-objectives">
-            <h4>Objectives:</h4>
+            <h4>Learning Objectives:</h4>
             <ul>
               <li>Apply culturally responsive and ethically sound approaches in systemic work.</li>
               <li>
@@ -192,45 +191,43 @@
           </div>
         </div>
 
-        <!-- Breakout Sessions -->
+        <!-- All-Presenters Panel -->
         <div class="panel-card">
-          <h3>75 Minute-Breakout Sessions & Conversations</h3>
-          <p class="panel-focus">
-            <strong>Format:</strong> Small groups of 10-12 participants led by a facilitator (mix of
-            psychiatrists and therapists).
-          </p>
-          <p class="panel-focus">
-            <strong>Purpose:</strong> To foster in-depth dialogue and peer-to-peer learning.
-          </p>
+          <h3>3:00 – 4:00 | All-Presenters Panel Discussion</h3>
+          <div class="panelists">
+            <h4>Panelists:</h4>
+            <div class="presenter-list">
+              <span
+                v-for="panelist in allPresentersPanel"
+                :key="panelist.name"
+                class="presenter-badge"
+              >
+                {{ panelist.name }}
+              </span>
+            </div>
+          </div>
           <div class="panel-objectives">
-            <h4>Suggested Breakout Topics:</h4>
-            <ol>
-              <li>Strategies for effective psychiatrist-therapist collaboration.</li>
-              <li>Case consultations integrating systemic and biopsychorelational perspectives.</li>
-              <li>Addressing structural inequities and social determinants of health.</li>
+            <h4>Learning Objectives:</h4>
+            <ul>
+              <li>Integrate insights from psychiatry and therapy to advance biopsychorelational collaboration.</li>
               <li>
-                Building future research and training initiatives in integrated family mental health
-                care.
+                Identify emerging themes and opportunities for future clinical, training, and research
+                initiatives in integrated family mental health care.
               </li>
-            </ol>
+            </ul>
           </div>
         </div>
 
-        <!-- Wrap-Up -->
+        <!-- Q&A -->
         <div class="panel-card">
-          <h3>45 minutes-Wrap-Up & Report Back Session</h3>
-          <p class="panel-focus">
-            Facilitators from each breakout group will share 3–5 key insights or action steps. This
-            part will synthesize ideas across groups, creating a shared vision for future
-            initiatives.
-          </p>
+          <h3>4:00 – 5:00 | Audience Q&A and Concluding Remarks</h3>
           <div class="panel-objectives">
-            <h4>Objectives:</h4>
+            <h4>Learning Objectives:</h4>
             <ul>
-              <li>Synthesize key themes from the breakout sessions.</li>
+              <li>Synthesize key concepts across panels into practical applications.</li>
               <li>
-                Identify concrete next steps for collaborative action in participants' clinical or
-                organizational settings.
+                Engage in reflective dialogue to identify next steps for collaboration within participants'
+                clinical, educational, or organizational contexts.
               </li>
             </ul>
           </div>
@@ -262,21 +259,26 @@
         <div class="pricing">
           <h3>Registration Fees</h3>
           <ul>
-            <li><strong>Early-bird:</strong> $75</li>
-            <li><strong>Regular:</strong> $90</li>
-            <li><strong>Late registration:</strong> $95</li>
-            <li><strong>Professionals:</strong> Full fee</li>
-            <li><strong>Students/trainees:</strong> Free</li>
-            <li><strong>Panelists:</strong> Waived Registration plus gifts</li>
+            <li><strong>Early-Bird:</strong> $75 (before March 1, 2026)</li>
+            <li><strong>Regular:</strong> $90 (until April 1, 2026)</li>
+            <li><strong>Late Registration:</strong> $95 (after April 1 until April 4, 2026)</li>
+          </ul>
+          <h3 style="margin-top: 1.5rem;">Registration Categories</h3>
+          <ul>
+            <li><strong>Professionals:</strong> Full registration fee applies</li>
+            <li><strong>Students/Trainees:</strong> Free registration</li>
+            <li><strong>International Participants:</strong> Free registration</li>
           </ul>
         </div>
         <div class="payment-info">
           <h3>Payment & Policies</h3>
-          <p>Accepted payment methods: credit card, check, institutional purchase orders.</p>
+          <p>Accepted payment methods include credit card, check, and institutional purchase orders.</p>
+          <p>Additional registration and payment details will be provided upon enrollment.</p>
         </div>
         <div class="ce-info">
           <h3>Continuing Education</h3>
-          <p>CME and CEUs: Alliant will pay for this and does not charge for them.</p>
+          <p>Participants will receive 6 units of Continuing Education (CEUs) and Continuing Medical Education (CMEs) for full participation in the conference.</p>
+          <p>There is no additional cost for CEUs or CMEs, as these are fully covered by Alliant University.</p>
         </div>
       </div>
 
@@ -416,6 +418,11 @@ import shaligramImg from '@/assets/conferencewebsiteinformation/Shaligram-Dee he
 import michelleRickerbyImg from '@/assets/conferencewebsiteinformation/Dr Michelle Rickerby.jpg'
 import jGuzderImg from '@/assets/conferencewebsiteinformation/Dr Jaswant Guzder.jpg'
 import ramaRaoGogineniImg from '@/assets/conferencewebsiteinformation/Dr. Rama Rao Gogineni.png'
+import rajeshMehtaImg from '@/assets/conferencewebsiteinformation/Dr. Rajesh Mehta.jpeg'
+
+// Import conference photos
+import conferenceImage1 from '@/assets/afp-conference-photos/image-1.png'
+import conferenceImage4 from '@/assets/afp-conference-photos/image-4.png'
 // SEO setup
 useSEO({
   title: 'Bridging Minds, Systems and Relationships: Biopsychorelational Healing | AFP',
@@ -473,7 +480,8 @@ const handleFreeRegistration = async () => {
   if (
     registrationType.value !== 'student' &&
     registrationType.value !== 'trainee' &&
-    registrationType.value !== 'panelist'
+    registrationType.value !== 'panelist' &&
+    registrationType.value !== 'international'
   ) {
     showResult('Invalid registration type for free registration', 'error')
     return
@@ -565,7 +573,7 @@ const fetchConferenceConfig = async () => {
     const freeOptions = [
       { value: 'student', label: 'Student - Free' },
       { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'panelist', label: 'Panelist - Free' },
+      { value: 'international', label: 'International Participant - Free' },
     ]
 
     availableRegistrationTypes.value = [...paidOptions, ...freeOptions]
@@ -578,7 +586,7 @@ const fetchConferenceConfig = async () => {
       { value: 'late', label: 'Late Registration - $95' },
       { value: 'student', label: 'Student - Free' },
       { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'panelist', label: 'Panelist - Free' },
+      { value: 'international', label: 'International Participant - Free' },
     ]
   }
 }
@@ -719,11 +727,22 @@ const initializePayPal = () => {
 // Panelists data
 const panel1Panelists = [{ name: 'Dr. Noah Spector' }, { name: 'Dr. Rishi Kapur' }]
 
-const panel2Panelists = [{ name: 'Dr. J Guzder' }, { name: 'Kronick' }]
+const panel2Panelists = [{ name: 'Dr. Jaswant Guzder' }, { name: 'Dr. Rajesh Mehta' }]
 
 const panel3Panelists = [{ name: 'Dr. Dee Shaligram' }, { name: 'Dr. Michelle Rickerby' }]
 
-const panel4Panelists = [{ name: 'Dr. Daneshpour' }, { name: 'Dr. Rama Rao Gogineni' }]
+const panel4Panelists = [{ name: 'Dr. Manijeh Daneshpour' }, { name: 'Dr. Rama Rao Gogineni' }]
+
+const allPresentersPanel = [
+  { name: 'Dr. Noah Spector' },
+  { name: 'Dr. Rishi Kapur' },
+  { name: 'Dr. Dee Shaligram' },
+  { name: 'Dr. Michelle Rickerby' },
+  { name: 'Dr. Jaswant Guzder' },
+  { name: 'Dr. Rajesh Mehta' },
+  { name: 'Dr. Manijeh Daneshpour' },
+  { name: 'Dr. Rama Rao Gogineni' },
+]
 
 // Presenters data with bios and images
 const presenters = [
@@ -736,7 +755,7 @@ const presenters = [
   {
     name: 'Manijeh Daneshpour, PhD',
     title: 'Systemwide Couple and Family Therapy Director, Alliant International University',
-    bio: 'Manijeh Daneshpour, PhD, is the Systemwide Couple and Family Therapy Director and Distinguished Marriage and Family Therapy Professor at Alliant International University in California. She is a licensed marriage and family therapist with nearly three decades of academic, research, and clinical experience. Originally from Iran, she identifies as a third-wave feminist. Her research, publications, and presentations focus on gender, multiculturalism, social justice, postmodernism, third-wave feminism, and premarital and marital relationships, with contextual therapy serving as the foundation of her scholarly and clinical work.',
+    bio: `Manijeh Daneshpour, PhD, is the Systemwide Director of Couple and Family Therapy and a Distinguished Professor of Marriage and Family Therapy at Alliant University in California. A licensed marriage and family therapist with nearly three decades of academic, research, and clinical experience, she is deeply shaped by her lived experience as a Middle Eastern woman originally from Iran and as a self-identified third-wave feminist. Her scholarly and clinical work emerges from the intersection of personal history, cultural context, and professional practice. Dr. Daneshpour has worked extensively with Muslim families and is the author of Family Therapy with Muslims, using classic family therapy models and their clinical applications for working with Muslim families. Her most recent book, Gender, Power, Global Social Justice: The Healing Power of Psychotherapy, examines how gender and power shape relational life globally and explores the role of family therapists in supporting ethical and relational change.`,
     image: daneshpourImg,
   },
   {
@@ -769,6 +788,31 @@ const presenters = [
     bio: 'Rama Rao Gogineni, MD, MFT is a graduate of Kakatiya Medical College, Osmania University, and completed psychiatry residency at the University of Pennsylvania and Child and Adolescent Psychiatry fellowship at the Medical College of Pennsylvania. He was trained in family therapy and psychoanalysis. He is currently a Professor of Psychiatry and Senior Educator in Developmental Psychiatry at Cooper Medical School of Rowan University. He is an active, contributing member of U.S. and international psychiatric organizations. He has several publications, presentations, and serves as editor of five books.',
     image: ramaRaoGogineniImg,
   },
+  {
+    name: 'Rajesh Mehta, MD',
+    title: 'Director of Psychotherapy Training for the Child and Adolescent Psychiatry Fellowship Program and Attending Psychiatrist at Children’s Hospital of The King’s Daughters',
+    bio: `Rajesh Mehta, MD is a double board-certified child, adolescent, and general psychiatrist
+currently serving as Director of Psychotherapy Training for the Child and Adolescent Psychiatry
+Fellowship Program and Attending Psychiatrist at Children’s Hospital of The King’s Daughters
+(CHKD), affiliated with Eastern Virginia Medical School–Old Dominion University, Virginia.
+With a strong background in psychodynamic psychotherapy and systems-based family care, Dr.
+Mehta integrates developmental, cultural, and relational frameworks in both clinical practice and
+teaching. Trained in India and the United States, Dr. Mehta has cultivated a globally informed
+perspective on mental health. He completed psychiatry residency training at St. Louis University
+in Missouri, Child and Adolescent Psychiatry fellowship training at the Institute of
+
+Living/Hartford Hospital in Connecticut, and an advanced course in psychodynamic
+psychotherapy at the St. Louis Psychoanalytic Institute. He has supervised psychiatry residents
+and fellows across multiple academic centers.
+Dr. Mehta is an active member of AACAP, APA, AFP, IACAPAP, and GAP and contributes to
+several educational and research initiatives. He currently serves as Vice President of the
+Association of Family Psychiatrists (AFP). His academic work includes the development of
+short-term psychodynamically oriented family therapy and scholarship focused on the role of
+fathers in child development, cultural psychiatry, and systems-based care. He has presented
+posters, case conferences, and workshops on child mental health, integrative psychotherapy,
+migration and mental health, and early childhood development.`,
+    image: rajeshMehtaImg,
+  },
 ]
 </script>
 
@@ -783,15 +827,41 @@ const presenters = [
 
 /* Hero Section */
 .hero-section {
+  position: relative;
   background: linear-gradient(135deg, var(--color-accent) 0%, #c65e53 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   padding: 4rem 2rem;
   text-align: center;
   border-radius: 12px;
   margin-bottom: 3rem;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(198, 94, 83, 0.85) 0%,
+    rgba(198, 94, 83, 0.75) 50%,
+    rgba(198, 94, 83, 0.85) 100%
+  );
+  z-index: 1;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -891,6 +961,13 @@ const presenters = [
 .conference-date {
   font-size: 1.25rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.conference-time {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.95;
 }
 
 /* Mission Section */
@@ -914,6 +991,23 @@ const presenters = [
   line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
+}
+
+/* Visual Break Section */
+.visual-break-section {
+  margin: 3rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 400px;
+}
+
+.visual-break-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  max-height: 400px;
 }
 
 /* Objectives Section */
@@ -969,6 +1063,7 @@ const presenters = [
   flex-direction: column;
   gap: 2rem;
 }
+
 
 .panel-card {
   background: white;
@@ -1374,6 +1469,20 @@ const presenters = [
 
   .conference-subtitle {
     font-size: 1.25rem;
+  }
+
+  .hero-section {
+    min-height: 300px;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .visual-break-section {
+    margin: 2rem 0;
+    max-height: 250px;
+  }
+
+  .visual-break-image {
+    max-height: 250px;
   }
 
   .logos-container {

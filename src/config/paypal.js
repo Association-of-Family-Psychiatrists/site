@@ -20,7 +20,8 @@ export const PAYPAL_CONFIG = {
     'late': 95,
     'student': 0,
     'trainee': 0,
-    'panelist': 0
+    'panelist': 0,
+    'international': 0
   }
 }
 
