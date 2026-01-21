@@ -206,6 +206,10 @@
               </span>
             </div>
           </div>
+          <div class="moderator">
+            <h4>Moderator:</h4>
+            <span class="presenter-badge">Dr. Rajesh Mehta</span>
+          </div>
           <div class="panel-objectives">
             <h4>Learning Objectives:</h4>
             <ul>
@@ -1097,6 +1101,16 @@ migration and mental health, and early childhood development.`,
 }
 
 .panelists h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-dark, #333);
+}
+
+.moderator {
+  margin: 1.5rem 0;
+}
+
+.moderator h4 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   color: var(--color-text-dark, #333);
