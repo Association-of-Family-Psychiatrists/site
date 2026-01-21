@@ -7,7 +7,7 @@
         <h1 class="conference-title">
           Bridging Minds, Systems, and Relationships: Biopsychorelational Healing
         </h1>
-        <p class="conference-subtitle">A Collaboration between FPI, AFP and AACAP</p>
+        <p class="conference-subtitle">A Collaboration between Family Process Institute, Association of Family Psychiatry, and American Association of Child and Adolescent Psychiatry</p>
         <div class="conference-meta">
           <p class="conference-date">April 4, 2026</p>
           <p class="conference-time">7:00 AM – 2:00 PM PST / 10:00 AM – 5:00 PM EST</p>
@@ -421,13 +421,13 @@ import ramaRaoGogineniImg from '@/assets/conferencewebsiteinformation/Dr. Rama R
 import rajeshMehtaImg from '@/assets/conferencewebsiteinformation/Dr. Rajesh Mehta.jpeg'
 
 // Import conference photos
-import conferenceImage1 from '@/assets/afp-conference-photos/image-1.png'
-import conferenceImage4 from '@/assets/afp-conference-photos/image-4.png'
+import conferenceImage1 from '@/assets/conferencewebsiteinformation/diverse-family-1.png'
+import conferenceImage4 from '@/assets/conferencewebsiteinformation/diverse-family-2.png'
 // SEO setup
 useSEO({
   title: 'Bridging Minds, Systems and Relationships: Biopsychorelational Healing | AFP',
   description:
-    'Virtual Conference - April 04, 2026. A collaboration between FPI, AFP and AACAP exploring systemic and relational factors in mental health care.',
+    'Virtual Conference - April 04, 2026. A Collaboration between Family Process Institute, Association of Family Psychiatry, and American Association of Child and Adolescent Psychiatry exploring systemic and relational factors in mental health care.',
   path: '/conference',
 })
 
