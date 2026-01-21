@@ -42,6 +42,13 @@ useStructuredData('CollectionPage', {
         name: 'McMaster Family Therapy',
         description: 'Encyclopedia entry on McMaster Family Therapy approach',
       },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'From Hysteria to the Creation of a Functional Neurological Disorder Clinic',
+        description:
+          'Article by Alison Heru on the development of a functional neurological disorder clinic',
+      },
     ],
   },
 })
@@ -63,6 +70,7 @@ const contentSections = [
       'Heru, AM. Managing family differences March 14, 2017 Clinical Psychiatry News Families in Psychiatry.',
       'Heru AM. Changing the Family Dance September 19, 2017 Clinical Psychiatric News Families in Psychiatry.',
       'Papernow, Patricia L. Clinical Guidelines for Working With Stepfamilies: What Family, Couple, Individual, and Child Therapists Need to Know. Fam Proc 57:25-51 2018',
+      'Heru AM. [From Hysteria to the Creation of a Functional Neurological Disorder Clinic](https://cdn.tanuj.xyz/10_68.4heru-1_ah.pdf).',
     ],
   },
 ]

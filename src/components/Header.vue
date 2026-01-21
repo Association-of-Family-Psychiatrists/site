@@ -12,6 +12,9 @@
         >Resources</RouterLink
       >
       <RouterLink to="/events" exact-active-class="active" class="nav-link">Events</RouterLink>
+      <RouterLink to="/conference" exact-active-class="active" class="nav-link"
+        >Conference</RouterLink
+      >
       <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
       <RouterLink to="/membership" class="member-button">Become a Member</RouterLink>
     </nav>
@@ -30,6 +33,9 @@
         >
         <RouterLink to="/events" exact-active-class="active" @click="drawerOpen = false"
           >Events</RouterLink
+        >
+        <RouterLink to="/conference" exact-active-class="active" @click="drawerOpen = false"
+          >Conference</RouterLink
         >
         <RouterLink
           to="/membership"
