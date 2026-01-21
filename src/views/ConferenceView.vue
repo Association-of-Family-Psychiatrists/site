@@ -208,7 +208,7 @@
           </div>
           <div class="moderator">
             <h4>Moderator:</h4>
-            <span class="presenter-badge">Dr. Rajesh Mehta</span>
+            <span class="presenter-badge">Dr. Manijeh Daneshpour</span>
           </div>
           <div class="panel-objectives">
             <h4>Learning Objectives:</h4>
