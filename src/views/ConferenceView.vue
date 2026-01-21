@@ -405,7 +405,7 @@ import { ref, onMounted, nextTick, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSEO } from '@/composables/useSEO.js'
 import { pageSeoData } from '@/utils/seo.js'
-import { getSandboxPayPalSDKUrl, PAYPAL_CONFIG } from '@/config/paypal.js'
+import { getPayPalSDKUrl, PAYPAL_CONFIG } from '@/config/paypal.js'
 
 // Import logos
 import logoFpi from '@/assets/conferencewebsiteinformation/logo_fpi.jpeg'
@@ -602,9 +602,9 @@ onMounted(async () => {
   // Fetch conference config first
   await fetchConferenceConfig()
 
-  // Load PayPal SDK via CDN (using sandbox credentials)
+  // Load PayPal SDK via CDN (using production credentials)
   const script = document.createElement('script')
-  script.src = getSandboxPayPalSDKUrl()
+  script.src = getPayPalSDKUrl()
   script.onload = async () => {
     paypalLoaded.value = true
     // Wait for Vue to finish rendering
