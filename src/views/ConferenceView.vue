@@ -18,7 +18,7 @@
     <!-- Partner Logos Section -->
     <section class="logos-section">
       <div class="logos-container">
-        <img :src="logoFpi" alt="Family Process Institute Logo" class="partner-logo" />
+        <img :src="logoFpi" alt="Family Process Institute Logo" class="partner-logo partner-logo-fpi" />
         <img :src="logoAu" alt="Alliant University Logo" class="partner-logo" />
         <!-- <img :src="logoCheo" alt="CHEO Logo" class="partner-logo" />
         <img :src="logo1c1" alt="1Call1Click Logo" class="partner-logo" />
@@ -895,6 +895,11 @@ migration and mental health, and early childhood development.`,
   width: auto;
 }
 
+.partner-logo-fpi {
+  max-height: 180px;
+  max-width: 400px;
+}
+
 /* Single row on larger screens - all 5 logos in one row */
 @media (min-width: 1200px) {
   .logos-container {
@@ -905,6 +910,11 @@ migration and mental health, and early childhood development.`,
   .partner-logo {
     max-height: 90px;
     max-width: 200px;
+  }
+
+  .partner-logo-fpi {
+    max-height: 200px;
+    max-width: 450px;
   }
 }
 
@@ -919,6 +929,11 @@ migration and mental health, and early childhood development.`,
   .partner-logo {
     max-height: 75px;
     max-width: 160px;
+  }
+
+  .partner-logo-fpi {
+    max-height: 150px;
+    max-width: 320px;
   }
 
   /* First 2 logos take 50% each */
@@ -942,6 +957,11 @@ migration and mental health, and early childhood development.`,
     max-height: 60px;
     max-width: 140px;
     flex: 0 1 calc(50% - 0.75rem);
+  }
+
+  .partner-logo-fpi {
+    max-height: 120px;
+    max-width: 280px;
   }
 }
 
