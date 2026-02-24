@@ -12,6 +12,9 @@
           <p class="conference-date">April 4, 2026</p>
           <p class="conference-time">7:00 AM – 2:00 PM PST / 10:00 AM – 5:00 PM EST</p>
         </div>
+        <p class="conference-virtual-note">
+          Virtual Conference
+        </p>
       </div>
     </section>
 
@@ -271,7 +274,10 @@
           <ul>
             <li><strong>Professionals:</strong> Full registration fee applies</li>
             <li><strong>Students/Trainees:</strong> Free registration</li>
-            <li><strong>International Participants:</strong> Free registration</li>
+            <li>
+              <strong>International Participants (outside North America):</strong>
+              Free registration (Canadian professionals are not eligible)
+            </li>
           </ul>
         </div>
         <div class="payment-info">
@@ -980,6 +986,14 @@ migration and mental health, and early childhood development.`,
 
 .conference-meta {
   margin-top: 1.5rem;
+}
+
+.conference-virtual-note {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .conference-date {
