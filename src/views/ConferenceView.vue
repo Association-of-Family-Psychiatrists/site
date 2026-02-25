@@ -1374,8 +1374,8 @@ migration and mental health, and early childhood development.`,
 }
 
 .price-display.free {
-  background-color: #e8f5e9;
-  border-left: 4px solid #4caf50;
+  background-color: #f8f9fa;
+  border-left: 4px solid var(--color-accent);
 }
 
 .price-label {
