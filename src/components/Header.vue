@@ -16,6 +16,7 @@
         >Conference</RouterLink
       >
       <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
+      <RouterLink to="/donate" exact-active-class="active" class="nav-link">Donate</RouterLink>
       <RouterLink to="/membership" class="member-button">Become a Member</RouterLink>
     </nav>
 
@@ -36,6 +37,9 @@
         >
         <RouterLink to="/conference" exact-active-class="active" @click="drawerOpen = false"
           >Conference</RouterLink
+        >
+        <RouterLink to="/donate" exact-active-class="active" @click="drawerOpen = false"
+          >Donate</RouterLink
         >
         <RouterLink
           to="/membership"

@@ -21,8 +21,8 @@ export const PAYPAL_CONFIG = {
     'student': 0,
     'trainee': 0,
     'panelist': 0,
-    'international': 0
-  }
+    'international': 0,
+  },
 }
 
 // PayPal SDK URL builder for membership (production)
@@ -46,4 +46,13 @@ export const getSandboxPayPalSDKUrl = () => {
   })
 
   return `https://www.paypal.com/sdk/js?${params.toString()}`
+}
+
+// PayPal Donate SDK configuration
+// See https://developer.paypal.com/sdk/donate/ for details.
+export const DONATE_CONFIG = {
+  // For sandbox, use the hosted_button_id from a sandbox Donate button.
+  // For production, replace this with your live hosted_button_id and set env to 'production'.
+  hostedButtonId: 'YOUR_SANDBOX_HOSTED_BUTTON_ID',
+  env: import.meta.env.MODE === 'production' ? 'production' : 'sandbox',
 }

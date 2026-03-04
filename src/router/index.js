@@ -141,6 +141,11 @@ export const routes = [
     component: EventsView,
   },
   {
+    path: '/donate',
+    name: 'donate',
+    component: () => import('@views/DonateView.vue'),
+  },
+  {
     path: '/conference',
     name: 'conference',
     component: ConferenceView,

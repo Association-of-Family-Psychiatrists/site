@@ -147,6 +147,18 @@ export const pageSeoData = {
     ],
     type: 'website',
   },
+  donate: {
+    title: 'Donate',
+    description:
+      'Support the Association of Family Psychiatrists with a secure online donation to advance family mental health.',
+    keywords: [
+      'donate',
+      'charitable giving',
+      'support family psychiatry',
+      'mental health donation',
+    ],
+    type: 'website',
+  },
   contact: {
     title: 'Contact Us',
     description:
