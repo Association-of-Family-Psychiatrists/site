@@ -51,6 +51,11 @@ export const routes = [
         component: () => import('@views/resources/ArticlesView.vue'),
       },
       {
+        path: 'scholarly-contributions',
+        name: 'resources-scholarly-contributions',
+        component: () => import('@views/resources/ScholarlyContributionsView.vue'),
+      },
+      {
         path: 'web',
         name: 'resources-web',
         component: () => import('@views/resources/WebResourcesView.vue'),

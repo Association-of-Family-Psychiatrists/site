@@ -25,6 +25,14 @@
 
       <InformationSection
         class="animate-fade-slide"
+        heading="Scholarly Contributions by AFP Members"
+        subheading=""
+        description="Books, articles, and resources shared by our members"
+        link="/resources/scholarly-contributions"
+      />
+
+      <InformationSection
+        class="animate-fade-slide"
         heading="General Web Resources"
         subheading=""
         description="In addition to this page, resources including books and articles can be found throughout the website."
@@ -113,6 +121,12 @@ useStructuredData('CollectionPage', {
       {
         '@type': 'ListItem',
         position: 3,
+        name: 'Scholarly Contributions by AFP Members',
+        description: 'Books, articles, and resources shared by our members',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
         name: 'Web Resources',
         description: 'General web resources for family psychiatrists',
       },
