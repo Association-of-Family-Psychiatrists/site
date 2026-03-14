@@ -24,7 +24,7 @@
       <RouterLink to="/about" class="cta-button">Learn More</RouterLink>
     </div>
 
-    <!-- Special Announcements Section -->
+    <!-- Special Announcements Section (commented out)
     <div class="announcements-section" id="announcements">
       <div class="announcements-container">
         <h2 class="announcements-title">Special Announcements</h2>
@@ -92,8 +92,52 @@
         </div>
       </div>
     </div>
+    -->
 
     <!-- <FeaturedEvent :="featuredEventData" id="featured-event" /> -->
+
+    <!-- APA Session Search -->
+    <section class="session-search-section" id="apa-session-search">
+      <h2 class="session-search-title">Attend the AFP Session at the Annual APA Meeting</h2>
+      <p class="session-search-intro">
+        Join AFP at the 2026 APA Annual Meeting. Find our featured session below, or explore the
+        full program by topic, speaker, or format.
+      </p>
+      <div class="session-search-link-wrap">
+        <a
+          :href="sessionSearchUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="session-search-link"
+        >
+          Open APA 2026 Session Search →
+        </a>
+      </div>
+      <div class="session-search-highlight">
+        <span class="session-search-highlight-label">Featured session</span>
+        <p class="session-search-featured-datetime">
+          <strong>{{ apaFeaturedSession.dateTime }}</strong>
+        </p>
+        <p class="session-search-featured-title">{{ apaFeaturedSession.title }}</p>
+        <div class="session-search-speakers">
+          <strong>Speaker(s):</strong>
+          <ul>
+            <li v-for="(s, i) in apaFeaturedSession.speakers" :key="i">
+              {{ s.role }}: {{ s.name }}
+            </li>
+          </ul>
+        </div>
+        <div class="session-search-topics">
+          <strong>Topics:</strong>
+          <span>{{ apaFeaturedSession.topics.join(' · ') }}</span>
+        </div>
+        <p class="session-search-location">
+          <strong>Location:</strong> {{ apaFeaturedSession.location }}
+        </p>
+        <p class="session-search-code"><strong>Session Code:</strong> {{ apaFeaturedSession.sessionCode }}</p>
+        <p class="session-search-cta">{{ apaFeaturedSession.callToAction }}</p>
+      </div>
+    </section>
 
     <div class="conference-and-carousel">
       <h2 class="section-title">Conference Highlights</h2>
@@ -203,6 +247,8 @@ import {
   featuredArticles,
   conferenceEventData,
   featuredAwardWinners,
+  sessionSearchUrl,
+  apaFeaturedSession,
 } from '@data/homeData.js'
 import { officerCards } from '@data/officerData.js'
 
@@ -800,5 +846,131 @@ onUnmounted(() => {
   .carousel-container {
     height: 450px;
   }
+}
+
+/* APA Session Search Section */
+.session-search-section {
+  width: 100%;
+  padding: 3rem 2rem;
+  margin: 0 auto;
+  background-color: var(--color-background);
+}
+
+.session-search-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+.session-search-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-link-wrap {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.session-search-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.session-search-link:hover {
+  background-color: #c65e53;
+}
+
+.session-search-highlight {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #fef5f4 0%, #fce8e6 100%);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 1024px) {
+  .session-search-highlight {
+    max-width: 920px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .session-search-highlight {
+    max-width: 1100px;
+  }
+}
+
+.session-search-highlight-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.session-search-featured-datetime {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-featured-title {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.session-search-speakers {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-speakers ul {
+  margin: 0.25rem 0 0 1.25rem;
+  padding: 0;
+  list-style: disc;
+}
+
+.session-search-speakers li {
+  margin-bottom: 0.25rem;
+}
+
+.session-search-topics {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-location,
+.session-search-code {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-cta {
+  margin: 1rem 0 0;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--color-text-dark, #333);
 }
 </style>

@@ -14,21 +14,21 @@ export const featuredCards = [
   {
     image: new URL('@/assets/img/affiliate/affiliate-1.jpg', import.meta.url).href,
     title: 'AACAP',
-    subtitle: 'Annual Meeting • October 2025',
+    subtitle: 'Annual Meeting • October 26-31 2026',
     details:
       'The American Academy of Child and Adolescent Psychiatry (AACAP) is the leading national professional medical association dedicated to promoting healthy development and the mental health of children, adolescents, and families. Join us for their annual meeting featuring cutting-edge research, clinical workshops, and networking opportunities with child and adolescent psychiatry experts.',
   },
   {
     image: new URL('@/assets/img/affiliate/affilliate-2.jpg', import.meta.url).href,
     title: 'APA',
-    subtitle: 'Annual Meeting • May 2026',
+    subtitle: 'Annual Meeting • May 16-20, 2026',
     details:
       "The American Psychiatric Association (APA) is the world's largest psychiatric organization, representing more than 38,000 physician members specializing in the diagnosis, treatment, prevention, and research of mental illnesses. Their annual meeting brings together psychiatrists from around the world for education, networking, and the latest advances in psychiatric care and research.",
   },
   {
     image: new URL('@/assets/img/affiliate/affiliate-3.jpg', import.meta.url).href,
     title: 'Annual AFP Conference',
-    subtitle: 'Virtual • March 2026',
+    subtitle: 'Virtual • April 4, 2026',
     details:
       'Our flagship event featuring keynote speakers, panels, and networking opportunities. The Association of Family Psychiatrists Annual Conference is the premier gathering for family psychiatry professionals, offering comprehensive education on family-centered mental health care, innovative treatment approaches, and collaborative practice models.',
   },
@@ -149,6 +149,29 @@ export const publicationData = [
     authors: ['AFP Editorial Board'],
   },
 ]
+
+// APA 2026 Session Search – featured session details
+export const sessionSearchUrl = 'https://share.google/gTMFr00zhfvEoIWjr'
+
+export const apaFeaturedSession = {
+  dateTime: 'Tuesday May 19th, 8:30 AM – 10:00 AM PDT',
+  title:
+    'Association of Family Psychiatrists: Lifetime Achievement Award for Contributions to Family Psychiatry (Inaugural Event) – Carlos Sluzki',
+  speakers: [
+    { role: 'Chair', name: 'R. Gogineni, MD' },
+    { role: 'Presenter', name: 'Carlos E. Sluzki, MD' },
+    { role: 'Presenter', name: 'Manijeh Daneshpour, MA, Ph.D.' },
+    { role: 'Discussant', name: 'Ira Glick, MD' },
+  ],
+  topics: [
+    ' Community Psychiatry – Association of Family Psychiatrists (AFP)',
+    'Trauma- and Stressor-Related Disorders',
+    'Advocacy and Policy',
+    'Award Session',
+  ],
+  location: 'Room 301 (LL), Moscone Convention Center',
+  sessionCode: '9124',
+}
 
 export const conferenceCarouselData = [
   {

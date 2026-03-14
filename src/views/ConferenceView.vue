@@ -259,30 +259,6 @@
       </div>
     </section>
 
-    <!-- Session Search -->
-    <section class="session-search-section">
-      <h2>Session Search</h2>
-      <p class="session-search-intro">
-        Welcome to the 2026 APA Annual Meeting Scientific Program! To explore the program by topic, speaker, or format, use the Session Search below.
-      </p>
-      <div class="session-search-link-wrap">
-        <a
-          :href="sessionSearchUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="session-search-link"
-        >
-          Open APA 2026 Session Search →
-        </a>
-      </div>
-      <div class="session-search-highlight">
-        <span class="session-search-highlight-label">Featured session</span>
-        <p class="session-search-highlight-text">
-          <strong>Family psychiatry session</strong> — 8:30 to 10:00, Tuesday, Convention Center
-        </p>
-      </div>
-    </section>
-
     <!-- Registration Section -->
     <section class="registration-section">
       <h2>Registration</h2>
@@ -468,7 +444,6 @@ useSEO({
 
 // Registration form state
 const router = useRouter()
-const sessionSearchUrl = 'https://share.google/gTMFr00zhfvEoIWjr'
 const name = ref('')
 const email = ref('')
 const phone = ref('')
@@ -1283,79 +1258,6 @@ migration and mental health, and early childhood development.`,
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--color-text-dark, #333);
-}
-
-/* Session Search Section */
-.session-search-section {
-  padding: 3rem 2rem;
-  margin-bottom: 3rem;
-  background-color: var(--color-background);
-}
-
-.session-search-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--color-accent);
-  text-align: center;
-}
-
-.session-search-intro {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
-  color: var(--color-text-dark, #333);
-}
-
-.session-search-link-wrap {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.session-search-link {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--color-accent);
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.session-search-link:hover {
-  background-color: #c65e53;
-}
-
-.session-search-highlight {
-  max-width: 560px;
-  margin: 0 auto;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, #fef5f4 0%, #fce8e6 100%);
-  border-left: 4px solid var(--color-accent);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.session-search-highlight-label {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-accent);
-  margin-bottom: 0.5rem;
-}
-
-.session-search-highlight-text {
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.5;
-  color: var(--color-text-dark, #333);
-}
-
-.session-search-highlight-text strong {
-  color: var(--color-accent);
 }
 
 /* Registration Section */
