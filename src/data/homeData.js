@@ -59,12 +59,16 @@ export const featuredArticles = [
     url: 'https://www.psychologytoday.com/us/blog/psychiatrys-think-tank/202501/coping-with-problematic-effects-of-social-media',
   },
   {
-    title: 'Community Support Strategies',
+    title:
+      'Loving Someone with a Mental Illness or History of Trauma: Skills, Hope, and Strength for Your Journey (Johns Hopkins University Press, 2025)',
     thumbnail: new URL('@/assets/img/featured/feature-2.jpg', import.meta.url).href,
+    url: 'https://michelleshermanphd-dot-yamm-track.appspot.com/2qap1LEOOlWPJZPXLvdEsZjzcQdvzqw133oUb3DEL90qBsgmYmgGHHk6L8tjymUt1SBEp5XPetChPJHvO9IZDcp92Ou3lvPClw97DoVznidc03REf04LJOGqgmKQCaUQlzMhLpVF8EcoZboQV8M11UYQUJXk6cg051whZXCci7WpN99ICu6A',
   },
   {
-    title: 'Trauma-Informed Care',
+    title:
+      "I'm Not Alone: A Teen's Guide to Living with a Parent Who Has a Mental Illness or History of Trauma (2nd ed., 2024)",
     thumbnail: new URL('@/assets/img/featured/feature-3.jpg', import.meta.url).href,
+    url: 'https://michelleshermanphd-dot-yamm-track.appspot.com/2qap1LEOOlWPJZPXLvdEsZjzcQdvzqw133oUb3DEL90qBsgmYmgGHHk6L8tjymUt1SBEp5XPetChPJHvO9IZDcp92Ou3lvPClw97DoVznidc03REf04LJOGqgmKQCaUQlzMhLpVF8EcoZboQV8M11UYQUJXk6cg051whZXCci7WpN99ICu6A',
   },
 ]
 
