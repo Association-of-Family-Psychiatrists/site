@@ -259,6 +259,30 @@
       </div>
     </section>
 
+    <!-- Session Search -->
+    <section class="session-search-section">
+      <h2>Session Search</h2>
+      <p class="session-search-intro">
+        Welcome to the 2026 APA Annual Meeting Scientific Program! To explore the program by topic, speaker, or format, use the Session Search below.
+      </p>
+      <div class="session-search-link-wrap">
+        <a
+          :href="sessionSearchUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="session-search-link"
+        >
+          Open APA 2026 Session Search →
+        </a>
+      </div>
+      <div class="session-search-highlight">
+        <span class="session-search-highlight-label">Featured session</span>
+        <p class="session-search-highlight-text">
+          <strong>Family psychiatry session</strong> — 8:30 to 10:00, Tuesday, Convention Center
+        </p>
+      </div>
+    </section>
+
     <!-- Registration Section -->
     <section class="registration-section">
       <h2>Registration</h2>
@@ -429,6 +453,7 @@ import michelleRickerbyImg from '@/assets/conferencewebsiteinformation/Dr Michel
 import jGuzderImg from '@/assets/conferencewebsiteinformation/Dr Jaswant Guzder.jpg'
 import ramaRaoGogineniImg from '@/assets/conferencewebsiteinformation/Dr. Rama Rao Gogineni.png'
 import rajeshMehtaImg from '@/assets/conferencewebsiteinformation/Dr. Rajesh Mehta.jpeg'
+import abbyRossImg from '@/assets/afp-conference-photos/image-12.avif'
 
 // Import conference photos
 import conferenceImage1 from '@/assets/conferencewebsiteinformation/diverse-family-1.png'
@@ -443,6 +468,7 @@ useSEO({
 
 // Registration form state
 const router = useRouter()
+const sessionSearchUrl = 'https://share.google/gTMFr00zhfvEoIWjr'
 const name = ref('')
 const email = ref('')
 const phone = ref('')
@@ -739,7 +765,7 @@ const panel1Panelists = [{ name: 'Dr. Noah Spector' }, { name: 'Dr. Rishi Kapur'
 
 const panel2Panelists = [{ name: 'Dr. Jaswant Guzder' }, { name: 'Dr. Rajesh Mehta' }]
 
-const panel3Panelists = [{ name: 'Dr. Dee Shaligram' }, { name: 'Dr. Michelle Rickerby' }]
+const panel3Panelists = [{ name: 'Dr. Dee Shaligram' }, { name: 'Dr. Michelle Rickerby' }, { name: 'Dr. Abby Ross' }]
 
 const panel4Panelists = [{ name: 'Dr. Manijeh Daneshpour' }, { name: 'Dr. Rama Rao Gogineni' }]
 
@@ -752,6 +778,7 @@ const allPresentersPanel = [
   { name: 'Dr. Rajesh Mehta' },
   { name: 'Dr. Manijeh Daneshpour' },
   { name: 'Dr. Rama Rao Gogineni' },
+  { name: 'Dr. Abby Ross' },
 ]
 
 // Presenters data with bios and images
@@ -822,6 +849,12 @@ fathers in child development, cultural psychiatry, and systems-based care. He ha
 posters, case conferences, and workshops on child mental health, integrative psychotherapy,
 migration and mental health, and early childhood development.`,
     image: rajeshMehtaImg,
+  },
+  {
+    name: 'Abigail (Abby) M. Ross, MSW, LICSW, MPH, PhD',
+    title: 'Associate Professor, University of Pennsylvania School of Social Policy & Practice',
+    bio: `Abigail (Abby) M. Ross, MSW, LICSW, MPH, PhD, is an Associate Professor at the University of Pennsylvania School of Social Policy & Practice; she maintains a secondary appointment in the Department of Psychiatry at the Perelman School of Medicine. She also consults as a Research Social Worker to the Departments of Psychiatry and Social Work at Boston Children's Hospital. Broadly, her program of research seeks to develop and implement evidence-based interventions that both improve youth and family well-being in pediatric health settings and advance equity within youth-serving health systems. Specifically, her research aims to: 1) develop, adapt, refine, and implement family-based preventive interventions that reduce suicide risk in youth for use across the continuum of healthcare settings, 2) identify effective dissemination and implementation processes and mechanisms that increase the uptake of these evidence-based practices, and 3) leverage technology in youth-serving health systems to both detect unmet social needs and evaluate the impact of social care interventions that address them. Her research has been supported by several federal sources and national foundations, including the American Foundation for Suicide Prevention, the Doris Duke Foundation, the Health Resources and Services Administration, the National Institute of Mental Health, the Substance Abuse and Mental Health Services Administration, and the Tommy Fuss Center for Neuropsychiatric Disease Research.`,
+    image: abbyRossImg,
   },
 ]
 </script>
@@ -1250,6 +1283,79 @@ migration and mental health, and early childhood development.`,
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--color-text-dark, #333);
+}
+
+/* Session Search Section */
+.session-search-section {
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  background-color: var(--color-background);
+}
+
+.session-search-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+  text-align: center;
+}
+
+.session-search-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-link-wrap {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.session-search-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.session-search-link:hover {
+  background-color: #c65e53;
+}
+
+.session-search-highlight {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #fef5f4 0%, #fce8e6 100%);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.session-search-highlight-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.session-search-highlight-text {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--color-text-dark, #333);
+}
+
+.session-search-highlight-text strong {
+  color: var(--color-accent);
 }
 
 /* Registration Section */
