@@ -16,6 +16,29 @@
         >Conference</RouterLink
       >
       <RouterLink to="/members" exact-active-class="active" class="nav-link">Members</RouterLink>
+      <form
+        class="paypal-donate-form"
+        action="https://www.paypal.com/donate"
+        method="post"
+        target="_top"
+      >
+        <input type="hidden" name="hosted_button_id" value="RESWJ6YAPFPVW" />
+        <button
+          type="submit"
+          class="donate-button"
+          name="submit"
+          title="PayPal - The safer, easier way to pay online!"
+        >
+          Donate
+        </button>
+        <img
+          alt=""
+          src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+          width="1"
+          height="1"
+          class="paypal-pixel"
+        />
+      </form>
       <RouterLink to="/membership" class="member-button">Become a Member</RouterLink>
     </nav>
 
@@ -37,6 +60,29 @@
         <RouterLink to="/conference" exact-active-class="active" @click="drawerOpen = false"
           >Conference</RouterLink
         >
+        <form
+          class="paypal-donate-form mobile-paypal-donate"
+          action="https://www.paypal.com/donate"
+          method="post"
+          target="_top"
+        >
+          <input type="hidden" name="hosted_button_id" value="RESWJ6YAPFPVW" />
+          <button
+            type="submit"
+            class="donate-button mobile-donate-button"
+            name="submit"
+            title="PayPal - The safer, easier way to pay online!"
+          >
+            Donate
+          </button>
+          <img
+            alt=""
+            src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+            width="1"
+            height="1"
+            class="paypal-pixel"
+          />
+        </form>
         <RouterLink
           to="/membership"
           @click="drawerOpen = false"
@@ -84,7 +130,16 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.member-button {
+.paypal-donate-form {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.member-button,
+.donate-button {
   background-color: var(--color-accent);
   color: white;
   padding: 0.5rem 1rem;
@@ -92,13 +147,54 @@ onBeforeUnmount(() => {
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.25;
 }
 
-.member-button:hover {
+.member-button:hover,
+.donate-button:hover {
   background-color: #c65e53;
 }
 
+.paypal-pixel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.mobile-paypal-donate {
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 /* Mobile button spacing */
+.mobile-donate-button {
+  margin-top: 0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  color: white !important;
+  background-color: var(--color-accent);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
 .mobile-member-button {
   margin-top: 1rem;
   text-align: center;
@@ -113,6 +209,11 @@ onBeforeUnmount(() => {
   transition: background-color 0.3s ease;
   font-size: 1.1rem; /* << KEY: force visible text */
   line-height: 1.4; /* << KEY: force visible line height */
+}
+
+.mobile-member-button:hover,
+.mobile-donate-button:hover {
+  background-color: #c65e53;
 }
 
 .header {
