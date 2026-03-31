@@ -4,7 +4,7 @@
     <p class="page-subtitle animate-fade-slide" style="animation-delay: 0.2s">
       We'd love to hear from you! Reach out with any questions, suggestions, or inquiries.
     </p>
-    <!-- 
+    <!--
     <div class="contact-info animate-fade-slide" style="animation-delay: 0.4s">
       <p>Email: <a href="mailto:dev@tanuj.xyz">dev@tanuj.xyz</a></p>
     </div> -->
@@ -44,8 +44,7 @@ import { useRouter } from 'vue-router'
 import { useSEO, useStructuredData } from '@/composables/useSEO.js'
 import { pageSeoData } from '@/utils/seo.js'
 
-const FORM_ACTION =
-  'https://development-form-relay.tanujsiripurapu.workers.dev/afp/submit'
+const FORM_ACTION = 'https://forms.tanuj.xyz/afp/submit'
 
 const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
 const turnstileToken = ref('')
