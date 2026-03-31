@@ -10,7 +10,7 @@
     "test:unit": "vitest",
     "test:e2e": "playwright test",
     "build-only": "vite-ssg build",
-    "type-check": "vue-tsc --build",
+    "type-check": "vue-tsc --noEmit",
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
     "lint:eslint": "eslint . --fix",
     "lint": "run-s lint:*",
@@ -43,11 +43,13 @@
     "npm-run-all2": "^7.0.2",
     "oxlint": "^0.16.0",
     "prettier": "3.5.3",
+    "typescript": "^6.0.2",
     "vite": "^6.2.4",
     "vite-plugin-sitemap": "^0.8.2",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vite-ssg": "^28.1.0",
     "vitest": "^3.1.1",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue-tsc": "^3.2.6"
   }
 }
