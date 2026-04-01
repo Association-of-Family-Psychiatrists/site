@@ -270,7 +270,19 @@
             <li><strong>Regular:</strong> $90 (until April 1, 2026)</li>
             <li><strong>Late Registration:</strong> $95 (after April 1 until April 4, 2026)</li>
           </ul>
-          <h3 style="margin-top: 1.5rem;">Registration Categories</h3>
+        </div>
+        <div class="payment-info">
+          <h3>Payment & Policies</h3>
+          <p>Accepted payment methods include credit card, check, and institutional purchase orders.</p>
+          <p>Additional registration and payment details will be provided upon enrollment.</p>
+        </div>
+        <div class="accreditation-info">
+          <h3>Accreditation & Designation Statement</h3>
+          <p>In support of improving patient care, this activity has been planned and implemented by American Psychiatric Association (APA) and Association of Family Psychiatrists. APA is jointly accredited by the American Council for Continuing Medical Education (ACCME), the Accreditation Council for Pharmacy Education (ACPE), and the American Nurses Credentialing Center (ANCC), to provide continuing education for the healthcare team.</p>
+          <p>The APA designates this live activity for a maximum of 6 <em>AMA PRA Category 1 Credit&trade;</em>. Physicians should claim only the credit commensurate with the extent of their participation in the activity.</p>
+        </div>
+        <div class="reg-categories">
+          <h3>Registration Categories</h3>
           <ul>
             <li><strong>Professionals:</strong> Full registration fee applies</li>
             <li><strong>Students/Trainees:</strong> Free registration</li>
@@ -279,11 +291,6 @@
               Free registration (Canadian professionals are not eligible)
             </li>
           </ul>
-        </div>
-        <div class="payment-info">
-          <h3>Payment & Policies</h3>
-          <p>Accepted payment methods include credit card, check, and institutional purchase orders.</p>
-          <p>Additional registration and payment details will be provided upon enrollment.</p>
         </div>
         <div class="ce-info">
           <h3>Continuing Education</h3>
@@ -1278,18 +1285,65 @@ migration and mental health, and early childhood development.`,
 
 .registration-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 2rem;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
+}
+
+.pricing {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.payment-info {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.accreditation-info {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+.reg-categories {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.ce-info {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .pricing h3,
 .payment-info h3,
-.ce-info h3 {
+.ce-info h3,
+.accreditation-info h3,
+.reg-categories h3 {
   font-size: 1.3rem;
   margin-bottom: 1rem;
   color: var(--color-text-light);
+}
+
+.accreditation-info p,
+.reg-categories p {
+  line-height: 1.6;
+}
+
+.reg-categories ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reg-categories li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reg-categories li:last-child {
+  border-bottom: none;
 }
 
 .pricing ul {
@@ -1555,6 +1609,16 @@ migration and mental health, and early childhood development.`,
 
   .registration-info {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .pricing,
+  .payment-info,
+  .accreditation-info,
+  .reg-categories,
+  .ce-info {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
 </style>
