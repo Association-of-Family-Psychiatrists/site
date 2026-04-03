@@ -259,6 +259,66 @@
       </div>
     </section>
 
+    <!-- Access Conference Section -->
+    <section class="access-section">
+      <h2>Access Conference</h2>
+      <div class="access-card">
+        <template v-if="!conferenceAccess">
+          <p class="access-description">
+            Already registered? Enter your registration confirmation ID (Order ID from your
+            confirmation email) to access the conference Zoom details.
+          </p>
+          <form @submit.prevent="verifyAccess" class="access-form">
+            <div class="form-group">
+              <label for="confirmationId">Registration Confirmation ID *</label>
+              <input
+                id="confirmationId"
+                v-model="confirmationId"
+                type="text"
+                placeholder="Enter your Order ID"
+                required
+                :disabled="verifyingAccess"
+              />
+            </div>
+            <button type="submit" class="verify-access-button" :disabled="verifyingAccess">
+              <div v-if="verifyingAccess" class="loading-container">
+                <span class="spinner"></span>
+                <span>Verifying...</span>
+              </div>
+              <span v-else>Access Conference</span>
+            </button>
+          </form>
+          <div v-if="accessError" class="result-message error">
+            <p>{{ accessError }}</p>
+          </div>
+        </template>
+
+        <template v-else>
+          <div class="zoom-details">
+            <p class="welcome-greeting">Welcome, {{ conferenceAccess.name }}!</p>
+            <h3>Conference Zoom Details</h3>
+            <div class="zoom-info-grid">
+              <div class="zoom-info-item">
+                <span class="zoom-label">Zoom Link</span>
+                <a :href="conferenceAccess.zoomLink" target="_blank" rel="noopener noreferrer" class="zoom-link">
+                  Join Meeting
+                </a>
+              </div>
+              <div class="zoom-info-item">
+                <span class="zoom-label">Meeting ID</span>
+                <span class="zoom-value">{{ conferenceAccess.zoomMeetingId }}</span>
+              </div>
+              <div class="zoom-info-item">
+                <span class="zoom-label">Passcode</span>
+                <span class="zoom-value">{{ conferenceAccess.zoomPasscode }}</span>
+              </div>
+            </div>
+          </div>
+          <button @click="clearAccess" class="sign-out-button">Sign Out</button>
+        </template>
+      </div>
+    </section>
+
     <!-- Registration Section -->
     <section class="registration-section">
       <h2>Registration</h2>
@@ -462,6 +522,12 @@ const resultType = ref('')
 const conferenceConfig = ref(null)
 const availableRegistrationTypes = ref([])
 
+// Conference access state
+const confirmationId = ref('')
+const verifyingAccess = ref(false)
+const accessError = ref('')
+const conferenceAccess = ref(null)
+
 const selectedPrice = computed(() => {
   if (!registrationType.value) return 0
   return PAYPAL_CONFIG.conferencePrices[registrationType.value] || 0
@@ -557,6 +623,50 @@ const showResult = (message, type = 'info') => {
   }, 10000) // Clear after 10 seconds
 }
 
+// Conference access verification
+const verifyAccess = async () => {
+  if (!confirmationId.value.trim()) {
+    accessError.value = 'Please enter your registration confirmation ID.'
+    return
+  }
+
+  verifyingAccess.value = true
+  accessError.value = ''
+
+  try {
+    const response = await fetch(
+      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/verifyConferenceAccess',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: confirmationId.value.trim() }),
+      },
+    )
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Verification failed')
+    }
+
+    conferenceAccess.value = data
+    localStorage.setItem('afp_conference_access', JSON.stringify({
+      orderId: confirmationId.value.trim(),
+      ...data,
+    }))
+  } catch (error) {
+    accessError.value = error.message
+  } finally {
+    verifyingAccess.value = false
+  }
+}
+
+const clearAccess = () => {
+  conferenceAccess.value = null
+  confirmationId.value = ''
+  localStorage.removeItem('afp_conference_access')
+}
+
 // Fetch conference config from backend
 const fetchConferenceConfig = async () => {
   try {
@@ -612,6 +722,18 @@ const fetchConferenceConfig = async () => {
 // Ensure page scrolls to top on mount
 onMounted(async () => {
   window.scrollTo({ top: 0, behavior: 'instant' })
+
+  // Restore conference access from localStorage
+  const savedAccess = localStorage.getItem('afp_conference_access')
+  if (savedAccess) {
+    try {
+      const data = JSON.parse(savedAccess)
+      conferenceAccess.value = data
+      confirmationId.value = data.orderId || ''
+    } catch {
+      localStorage.removeItem('afp_conference_access')
+    }
+  }
 
   // Fetch conference config first
   await fetchConferenceConfig()
@@ -1265,6 +1387,157 @@ migration and mental health, and early childhood development.`,
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--color-text-dark, #333);
+}
+
+/* Access Conference Section */
+.access-section {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.access-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.access-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.access-description {
+  font-size: 1rem;
+  color: var(--color-text-dark, #333);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.access-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.access-form .form-group label {
+  text-align: left;
+}
+
+.verify-access-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Georgia', serif;
+}
+
+.verify-access-button:hover:not(:disabled) {
+  background-color: #c65e53;
+}
+
+.verify-access-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.verify-access-button .loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.welcome-greeting {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.zoom-details h3 {
+  font-size: 1.2rem;
+  color: var(--color-text-dark, #333);
+  margin-bottom: 1.25rem;
+}
+
+.zoom-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.zoom-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid var(--color-accent);
+}
+
+.zoom-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.zoom-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-dark, #333);
+  font-family: 'Courier New', monospace;
+}
+
+.zoom-link {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.zoom-link:hover {
+  color: #c65e53;
+  text-decoration: underline;
+}
+
+.sign-out-button {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #666;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Georgia', serif;
+}
+
+.sign-out-button:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 /* Registration Section */
