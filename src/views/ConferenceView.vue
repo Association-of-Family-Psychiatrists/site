@@ -18,6 +18,26 @@
       </div>
     </section>
 
+    <!-- Thank You (conference concluded) -->
+    <section class="thank-you-section">
+      <h2>Thank You</h2>
+      <div class="thank-you-content">
+        <p>
+          Thank you to everyone who joined us on April 4, 2026, for
+          <em>Bridging Minds, Systems, and Relationships: Biopsychorelational Healing</em>.
+        </p>
+        <p>
+          We are grateful to our featured presenters, our partners at the Family Process Institute,
+          Alliant International University, and the collaborating organizations, and to each
+          attendee who took part in the conversation.
+        </p>
+        <p>
+          Registration for this event is now closed. This page remains as a record of the program,
+          agenda, and faculty.
+        </p>
+      </div>
+    </section>
+
     <!-- Partner Logos Section -->
     <section class="logos-section">
       <div class="logos-container">
@@ -258,234 +278,16 @@
         </div>
       </div>
     </section>
-
-    <!-- Access Conference Section -->
-    <section class="access-section">
-      <h2>Access Conference</h2>
-      <div class="access-card">
-        <template v-if="!conferenceAccess">
-          <p class="access-description">
-            Already registered? Enter your registration confirmation ID (Order ID from your
-            confirmation email) to access the conference Zoom details.
-          </p>
-          <form @submit.prevent="verifyAccess" class="access-form">
-            <div class="form-group">
-              <label for="confirmationId">Registration Confirmation ID *</label>
-              <input
-                id="confirmationId"
-                v-model="confirmationId"
-                type="text"
-                placeholder="Enter your Order ID"
-                required
-                :disabled="verifyingAccess"
-              />
-            </div>
-            <button type="submit" class="verify-access-button" :disabled="verifyingAccess">
-              <div v-if="verifyingAccess" class="loading-container">
-                <span class="spinner"></span>
-                <span>Verifying...</span>
-              </div>
-              <span v-else>Access Conference</span>
-            </button>
-          </form>
-          <div v-if="accessError" class="result-message error">
-            <p>{{ accessError }}</p>
-          </div>
-        </template>
-
-        <template v-else>
-          <div class="zoom-details">
-            <p class="welcome-greeting">Welcome, {{ conferenceAccess.name }}!</p>
-            <h3>Conference Zoom Details</h3>
-            <div class="zoom-info-grid">
-              <div class="zoom-info-item">
-                <span class="zoom-label">Zoom Link</span>
-                <a :href="conferenceAccess.zoomLink" target="_blank" rel="noopener noreferrer" class="zoom-link">
-                  Join Meeting
-                </a>
-              </div>
-              <div class="zoom-info-item">
-                <span class="zoom-label">Meeting ID</span>
-                <span class="zoom-value">{{ conferenceAccess.zoomMeetingId }}</span>
-              </div>
-              <div class="zoom-info-item">
-                <span class="zoom-label">Passcode</span>
-                <span class="zoom-value">{{ conferenceAccess.zoomPasscode }}</span>
-              </div>
-            </div>
-          </div>
-          <button @click="clearAccess" class="sign-out-button">Sign Out</button>
-        </template>
-      </div>
-    </section>
-
-    <!-- Registration Section -->
-    <section class="registration-section">
-      <h2>Registration</h2>
-      <div class="registration-info">
-        <div class="pricing">
-          <h3>Registration Fees</h3>
-          <ul>
-            <li><strong>Early-Bird:</strong> $75 (before March 1, 2026)</li>
-            <li><strong>Regular:</strong> $90 (until April 1, 2026)</li>
-            <li><strong>Late Registration:</strong> $95 (after April 1 until April 4, 2026)</li>
-          </ul>
-        </div>
-        <div class="payment-info">
-          <h3>Payment & Policies</h3>
-          <p>Accepted payment methods include credit card, check, and institutional purchase orders.</p>
-          <p>Additional registration and payment details will be provided upon enrollment.</p>
-        </div>
-        <div class="accreditation-info">
-          <h3>Accreditation & Designation Statement</h3>
-          <p>In support of improving patient care, this activity has been planned and implemented by American Psychiatric Association (APA) and Association of Family Psychiatrists. APA is jointly accredited by the American Council for Continuing Medical Education (ACCME), the Accreditation Council for Pharmacy Education (ACPE), and the American Nurses Credentialing Center (ANCC), to provide continuing education for the healthcare team.</p>
-          <p>The APA designates this live activity for a maximum of 6 <em>AMA PRA Category 1 Credit&trade;</em>. Physicians should claim only the credit commensurate with the extent of their participation in the activity.</p>
-        </div>
-        <div class="reg-categories">
-          <h3>Registration Categories</h3>
-          <ul>
-            <li><strong>Professionals:</strong> Full registration fee applies</li>
-            <li><strong>Students/Trainees:</strong> Free registration</li>
-            <li>
-              <strong>International Participants (outside North America):</strong>
-              Free registration (Canadian professionals are not eligible)
-            </li>
-          </ul>
-        </div>
-        <div class="ce-info">
-          <h3>Continuing Education</h3>
-          <p>Participants will receive 6 units of Continuing Education (CEUs) and Continuing Medical Education (CMEs) for full participation in the conference.</p>
-          <p>There is no additional cost for CEUs or CMEs, as these are fully covered by Alliant University.</p>
-        </div>
-      </div>
-
-      <!-- Registration Form -->
-      <div class="registration-form-section">
-        <h3>Register Now</h3>
-        <form @submit.prevent="handleSubmit" class="conference-signup-form">
-          <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input
-              id="name"
-              v-model="name"
-              type="text"
-              placeholder="Full Name"
-              required
-              :disabled="loading"
-            />
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input
-              id="email"
-              v-model="email"
-              type="email"
-              placeholder="Email Address"
-              required
-              :disabled="loading"
-            />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number *</label>
-            <input
-              id="phone"
-              v-model="phone"
-              type="tel"
-              placeholder="Phone Number"
-              required
-              :disabled="loading"
-            />
-          </div>
-          <div class="form-group">
-            <label for="registrationType">Registration Type *</label>
-            <select
-              id="registrationType"
-              v-model="registrationType"
-              required
-              :disabled="loading || !conferenceConfig"
-              @change="updatePrice"
-            >
-              <option value="">Select registration type</option>
-              <option
-                v-for="option in availableRegistrationTypes"
-                :key="option.value"
-                :value="option.value"
-              >
-                {{ option.label }}
-              </option>
-            </select>
-          </div>
-
-          <div v-if="selectedPrice > 0" class="price-display">
-            <span class="price-label">Total:</span>
-            <span class="price-amount">${{ selectedPrice }}</span>
-          </div>
-          <div v-else-if="selectedPrice === 0 && registrationType" class="price-display free">
-            <span class="price-label">Registration Fee:</span>
-            <span class="price-amount">Free</span>
-          </div>
-
-          <!-- PayPal Button Container (for paid registrations) -->
-          <div
-            v-if="registrationType && selectedPrice > 0 && !loading"
-            id="conference-paypal-button-container"
-          ></div>
-
-          <!-- Register Button (for free registrations) -->
-          <button
-            v-if="registrationType && selectedPrice === 0 && !loading"
-            type="submit"
-            class="register-button"
-          >
-            Register
-          </button>
-
-          <!-- Loading State for Free Registration -->
-          <div v-if="registrationType && selectedPrice === 0 && loading" class="loading-state">
-            <span class="spinner"></span>
-            <p>Processing your registration…</p>
-          </div>
-
-          <!-- Loading State for Paid Registration (PayPal) -->
-          <div v-if="registrationType && selectedPrice > 0 && loading" class="loading-state">
-            <span class="spinner"></span>
-            <p>Processing your payment…</p>
-          </div>
-
-          <p v-if="!registrationType" class="form-note">
-            Please select a registration type to continue
-          </p>
-
-          <p class="form-note" v-if="paypalLoaded && registrationType && selectedPrice > 0">
-            Complete your information above and click the PayPal button to proceed
-          </p>
-          <p class="form-note" v-if="registrationType && selectedPrice === 0 && !loading">
-            Complete your information above and click Register to complete your free registration
-          </p>
-        </form>
-
-        <!-- Result Message -->
-        <div v-if="resultMessage" class="result-message" :class="resultType">
-          <p v-html="resultMessage"></p>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 import { useSEO } from '@/composables/useSEO.js'
-import { pageSeoData } from '@/utils/seo.js'
-import { getPayPalSDKUrl, PAYPAL_CONFIG } from '@/config/paypal.js'
 
 // Import logos
 import logoFpi from '@/assets/conferencewebsiteinformation/logo_fpi.jpeg'
-import logoAacap from '@/assets/conferencewebsiteinformation/aacap_logo.png'
 import logoAu from '@/assets/conferencewebsiteinformation/au_logo.png'
-import logoCheo from '@/assets/conferencewebsiteinformation/logo_cheo.svg'
-import logo1c1 from '@/assets/conferencewebsiteinformation/logo_1c1.svg'
 
 // Import presenter headshots
 import noahSpectorImg from '@/assets/conferencewebsiteinformation/Noah Spector.jpg'
@@ -505,364 +307,13 @@ import conferenceImage4 from '@/assets/conferencewebsiteinformation/diverse-fami
 useSEO({
   title: 'Bridging Minds, Systems and Relationships: Biopsychorelational Healing | AFP',
   description:
-    'Virtual Conference - April 04, 2026. A Collaboration between Family Process Institute, Association of Family Psychiatry, and American Association of Child and Adolescent Psychiatry exploring systemic and relational factors in mental health care.',
+    'Thank you to everyone who joined our April 4, 2026 virtual conference. A collaboration between Family Process Institute, Association of Family Psychiatry, and partners exploring systemic and relational factors in mental health care.',
   path: '/conference',
 })
 
-// Registration form state
-const router = useRouter()
-const name = ref('')
-const email = ref('')
-const phone = ref('')
-const registrationType = ref('')
-const loading = ref(false)
-const paypalLoaded = ref(false)
-const resultMessage = ref('')
-const resultType = ref('')
-const conferenceConfig = ref(null)
-const availableRegistrationTypes = ref([])
-
-// Conference access state
-const confirmationId = ref('')
-const verifyingAccess = ref(false)
-const accessError = ref('')
-const conferenceAccess = ref(null)
-
-const selectedPrice = computed(() => {
-  if (!registrationType.value) return 0
-  return PAYPAL_CONFIG.conferencePrices[registrationType.value] || 0
-})
-
-const updatePrice = () => {
-  // Price updates automatically via computed property
-  // Re-initialize PayPal button when registration type changes
-  if (paypalLoaded.value && registrationType.value) {
-    nextTick(() => {
-      initializePayPal()
-    })
-  }
-}
-
-const handleSubmit = async (e) => {
-  e.preventDefault()
-
-  // For free registrations, handle directly
-  if (selectedPrice.value === 0) {
-    await handleFreeRegistration()
-  }
-  // For paid registrations, form submission is handled by PayPal button
-}
-
-const handleFreeRegistration = async () => {
-  // Validate form first
-  if (!name.value || !email.value || !phone.value || !registrationType.value) {
-    showResult('Please fill in all required fields', 'error')
-    return
-  }
-
-  // Validate it's a free registration type
-  if (
-    registrationType.value !== 'student' &&
-    registrationType.value !== 'trainee' &&
-    registrationType.value !== 'panelist' &&
-    registrationType.value !== 'international'
-  ) {
-    showResult('Invalid registration type for free registration', 'error')
-    return
-  }
-
-  loading.value = true
-
-  try {
-    const response = await fetch(
-      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/registerFreeConference',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name.value,
-          email: email.value,
-          phone: phone.value,
-          registrationType: registrationType.value,
-        }),
-      },
-    )
-
-    const result = await response.json()
-
-    if (!response.ok) {
-      throw new Error(result.error || 'Failed to register')
-    }
-
-    // Redirect to confirmation page after a delay
-    setTimeout(() => {
-      router.push({
-        path: '/confirmation',
-        query: { orderId: result.orderId, type: 'conference' },
-      })
-    }, 2000)
-  } catch (error) {
-    console.error(error)
-    showResult(
-      `Sorry, your registration could not be processed...<br><br>${error.message}`,
-      'error',
-    )
-  } finally {
-    loading.value = false
-  }
-}
-
-const showResult = (message, type = 'info') => {
-  resultMessage.value = message
-  resultType.value = type
-  setTimeout(() => {
-    resultMessage.value = ''
-    resultType.value = ''
-  }, 10000) // Clear after 10 seconds
-}
-
-// Conference access verification
-const verifyAccess = async () => {
-  if (!confirmationId.value.trim()) {
-    accessError.value = 'Please enter your registration confirmation ID.'
-    return
-  }
-
-  verifyingAccess.value = true
-  accessError.value = ''
-
-  try {
-    const response = await fetch(
-      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/verifyConferenceAccess',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId: confirmationId.value.trim() }),
-      },
-    )
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Verification failed')
-    }
-
-    conferenceAccess.value = data
-    localStorage.setItem('afp_conference_access', JSON.stringify({
-      orderId: confirmationId.value.trim(),
-      ...data,
-    }))
-  } catch (error) {
-    accessError.value = error.message
-  } finally {
-    verifyingAccess.value = false
-  }
-}
-
-const clearAccess = () => {
-  conferenceAccess.value = null
-  confirmationId.value = ''
-  localStorage.removeItem('afp_conference_access')
-}
-
-// Fetch conference config from backend
-const fetchConferenceConfig = async () => {
-  try {
-    const response = await fetch(
-      'https://us-central1-afp-site-c1bd9.cloudfunctions.net/getConferenceConfig',
-    )
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch conference configuration')
-    }
-
-    const config = await response.json()
-    conferenceConfig.value = config
-
-    // Determine available registration types based on currentRegistrationWindow
-    const currentWindow = config.currentRegistrationWindow.current || 'regular'
-    const paidOptions = []
-
-    console.log('currentWindow', currentWindow)
-    // Add all paid options up to and including the current window
-    if (currentWindow === 'early-bird') {
-      paidOptions.push({ value: 'early-bird', label: 'Early-bird - $75' })
-    } else if (currentWindow === 'regular') {
-      paidOptions.push({ value: 'regular', label: 'Regular - $90' })
-    } else if (currentWindow === 'late') {
-      paidOptions.push({ value: 'late', label: 'Late Registration - $95' })
-    }
-
-    console.log('Paid options', paidOptions)
-
-    // Always include free options
-    const freeOptions = [
-      { value: 'student', label: 'Student - Free' },
-      { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'international', label: 'International Participant - Free' },
-    ]
-
-    availableRegistrationTypes.value = [...paidOptions, ...freeOptions]
-  } catch (error) {
-    console.error('Error fetching conference config:', error)
-    showResult('Failed to load registration options. Please refresh the page.', 'error')
-    // Fallback to default options
-    availableRegistrationTypes.value = [
-      { value: 'regular', label: 'Regular - $90' },
-      { value: 'late', label: 'Late Registration - $95' },
-      { value: 'student', label: 'Student - Free' },
-      { value: 'trainee', label: 'Trainee - Free' },
-      { value: 'international', label: 'International Participant - Free' },
-    ]
-  }
-}
-
-// Ensure page scrolls to top on mount
-onMounted(async () => {
+onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'instant' })
-
-  // Restore conference access from localStorage
-  const savedAccess = localStorage.getItem('afp_conference_access')
-  if (savedAccess) {
-    try {
-      const data = JSON.parse(savedAccess)
-      conferenceAccess.value = data
-      confirmationId.value = data.orderId || ''
-    } catch {
-      localStorage.removeItem('afp_conference_access')
-    }
-  }
-
-  // Fetch conference config first
-  await fetchConferenceConfig()
-
-  // Load PayPal SDK via CDN (using production credentials)
-  const script = document.createElement('script')
-  script.src = getPayPalSDKUrl()
-  script.onload = async () => {
-    paypalLoaded.value = true
-    // Wait for Vue to finish rendering
-    await nextTick()
-    // Only initialize if registration type is already selected
-    if (registrationType.value) {
-      initializePayPal()
-    }
-  }
-  document.head.appendChild(script)
 })
-
-const initializePayPal = () => {
-  if (window.paypal) {
-    // Clear any existing button
-    const container = document.getElementById('conference-paypal-button-container')
-    if (container) {
-      container.innerHTML = ''
-    }
-
-    window.paypal
-      .Buttons({
-        style: {
-          shape: 'rect',
-          layout: 'vertical',
-          color: 'gold',
-          label: 'paypal',
-        },
-        message: {
-          amount: selectedPrice.value || PAYPAL_CONFIG.conferencePrices.regular,
-        },
-
-        async createOrder() {
-          // Validate form first
-          if (!name.value || !email.value || !phone.value || !registrationType.value) {
-            showResult('Please fill in all required fields', 'error')
-            return
-          }
-
-          try {
-            const response = await fetch(
-              'https://us-central1-afp-site-c1bd9.cloudfunctions.net/createConferencePayPalOrder',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  name: name.value,
-                  email: email.value,
-                  phone: phone.value,
-                  registrationType: registrationType.value,
-                }),
-              },
-            )
-
-            const orderData = await response.json()
-
-            if (!response.ok) {
-              const errorMessage = orderData.error || 'Failed to create order'
-              throw new Error(errorMessage)
-            }
-
-            if (orderData.id) {
-              return orderData.id
-            }
-
-            const errorDetail = orderData?.details?.[0]
-            const errorMessage = errorDetail
-              ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
-              : JSON.stringify(orderData)
-
-            throw new Error(errorMessage)
-          } catch (error) {
-            console.error(error)
-            showResult(`Could not initiate PayPal Checkout...<br><br>${error.message}`, 'error')
-          }
-        },
-
-        async onApprove(data, actions) {
-          loading.value = true
-          console.log('Passing approved conference order ID to backend', data.orderID)
-          try {
-            const response = await fetch(
-              `https://us-central1-afp-site-c1bd9.cloudfunctions.net/captureConferencePayPalOrder`,
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ orderID: data.orderID }),
-              },
-            )
-
-            const orderData = await response.json()
-            console.log('Conference order data', JSON.stringify(orderData))
-
-            if (!response.ok) {
-              throw new Error(orderData.error || 'Failed to capture order')
-            }
-
-            // Redirect to confirmation page after a delay
-            setTimeout(() => {
-              router.push({
-                path: '/confirmation',
-                query: { orderId: orderData.id, type: 'conference' },
-              })
-            }, 3000)
-          } catch (error) {
-            console.error(error)
-            showResult(
-              `Sorry, your registration could not be processed...<br><br>${error.message}`,
-              'error',
-            )
-          } finally {
-            loading.value = false
-          }
-        },
-      })
-      .render('#conference-paypal-button-container')
-  }
-}
 
 // Panelists data
 const panel1Panelists = [{ name: 'Dr. Noah Spector' }, { name: 'Dr. Rishi Kapur' }]
@@ -1389,459 +840,45 @@ migration and mental health, and early childhood development.`,
   color: var(--color-text-dark, #333);
 }
 
-/* Access Conference Section */
-.access-section {
-  background-color: var(--color-accent);
-  color: white;
+/* Thank You (post-conference) */
+.thank-you-section {
+  background: linear-gradient(
+    135deg,
+    rgba(198, 94, 83, 0.12) 0%,
+    rgba(198, 94, 83, 0.06) 100%
+  );
+  border: 1px solid rgba(198, 94, 83, 0.25);
   padding: 3rem 2rem;
   border-radius: 12px;
   margin-bottom: 3rem;
   text-align: center;
 }
 
-.access-section h2 {
+.thank-you-section h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: white;
-}
-
-.access-card {
-  max-width: 600px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.access-description {
-  font-size: 1rem;
-  color: var(--color-text-dark, #333);
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.access-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.access-form .form-group label {
-  text-align: left;
-}
-
-.verify-access-button {
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-  background-color: var(--color-accent);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Georgia', serif;
-}
-
-.verify-access-button:hover:not(:disabled) {
-  background-color: #c65e53;
-}
-
-.verify-access-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.verify-access-button .loading-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.welcome-greeting {
-  font-size: 1.4rem;
-  font-weight: 700;
   color: var(--color-accent);
-  margin-bottom: 1rem;
 }
 
-.zoom-details h3 {
-  font-size: 1.2rem;
+.thank-you-content {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
   color: var(--color-text-dark, #333);
+}
+
+.thank-you-content p {
   margin-bottom: 1.25rem;
 }
 
-.zoom-info-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: left;
+.thank-you-content p:last-child {
+  margin-bottom: 0;
 }
 
-.zoom-info-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.75rem 1rem;
-  background-color: #f8f9fa;
-  border-radius: 6px;
-  border-left: 4px solid var(--color-accent);
-}
-
-.zoom-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.zoom-value {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-text-dark, #333);
-  font-family: 'Courier New', monospace;
-}
-
-.zoom-link {
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.zoom-link:hover {
-  color: #c65e53;
-  text-decoration: underline;
-}
-
-.sign-out-button {
-  margin-top: 1.5rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #666;
-  background: none;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: 'Georgia', serif;
-}
-
-.sign-out-button:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
-/* Registration Section */
-.registration-section {
-  background-color: var(--vt-c-black-soft);
-  color: var(--color-text-light);
-  padding: 3rem 2rem;
-  border-radius: 12px;
-  margin-bottom: 3rem;
-}
-
-.registration-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: var(--color-text-light);
-  text-align: center;
-}
-
-.registration-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.pricing {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.payment-info {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.accreditation-info {
-  grid-column: 3;
-  grid-row: 1 / 3;
-}
-
-.reg-categories {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.ce-info {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.pricing h3,
-.payment-info h3,
-.ce-info h3,
-.accreditation-info h3,
-.reg-categories h3 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: var(--color-text-light);
-}
-
-.accreditation-info p,
-.reg-categories p {
-  line-height: 1.6;
-}
-
-.reg-categories ul {
-  list-style: none;
-  padding: 0;
-}
-
-.reg-categories li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.reg-categories li:last-child {
-  border-bottom: none;
-}
-
-.pricing ul {
-  list-style: none;
-  padding: 0;
-}
-
-.pricing li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.pricing li:last-child {
-  border-bottom: none;
-}
-
-.payment-info p,
-.ce-info p {
-  line-height: 1.6;
-}
-
-/* Registration Form Section */
-.registration-form-section {
-  margin-top: 3rem;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.registration-form-section h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--color-accent);
-  text-align: center;
-}
-
-.conference-signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label {
-  font-weight: 600;
-  color: var(--color-text-dark, #333);
-  font-size: 0.95rem;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-family: 'Georgia', serif;
-  transition: border-color 0.2s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: var(--color-accent);
-}
-
-.form-group input:disabled,
-.form-group select:disabled {
-  background-color: #f5f5f5;
-  cursor: not-allowed;
-}
-
-.price-display {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 6px;
-}
-
-.price-display.free {
-  background-color: #f8f9fa;
-  border-left: 4px solid var(--color-accent);
-}
-
-.price-label {
-  font-size: 1.1rem;
-  color: var(--color-text-dark, #333);
-}
-
-.price-amount {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--color-accent);
-  font-family: 'Georgia', serif;
-}
-
-#conference-paypal-button-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem auto;
-}
-
-.register-button {
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem auto;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-  background-color: var(--color-accent);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Georgia', serif;
-  display: block;
-}
-
-.register-button:hover:not(:disabled) {
-  background-color: #c65e53;
-}
-
-.register-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.loading-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
-  margin: 1rem auto;
-  max-width: 400px;
-}
-
-.loading-state .spinner {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid var(--color-accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-.loading-state p {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--color-text-dark, #333);
-  font-weight: 500;
-}
-
-.form-note {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 0.5rem;
+.thank-you-content em {
   font-style: italic;
-  text-align: center;
-}
-
-.loading-spinner {
-  margin-top: 2rem;
-  font-size: 1rem;
-  color: var(--color-text-light);
-  text-align: center;
-}
-
-.spinner {
-  display: inline-block;
-  margin-top: 0.5rem;
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  border-top: 3px solid var(--color-text-light);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.result-message {
-  margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-.result-message.success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.result-message.error {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-.result-message.info {
-  background-color: #d1ecf1;
-  color: #0c5460;
-  border: 1px solid #bee5eb;
+  color: var(--color-text-dark, #333);
 }
 
 /* Responsive Design */
@@ -1880,18 +917,16 @@ migration and mental health, and early childhood development.`,
     grid-template-columns: 1fr;
   }
 
-  .registration-info {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+  .thank-you-section {
+    padding: 2rem 1.5rem;
   }
 
-  .pricing,
-  .payment-info,
-  .accreditation-info,
-  .reg-categories,
-  .ce-info {
-    grid-column: 1;
-    grid-row: auto;
+  .thank-you-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .thank-you-content {
+    font-size: 1rem;
   }
 }
 </style>
