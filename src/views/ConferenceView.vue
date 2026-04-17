@@ -38,6 +38,33 @@
       </div>
     </section>
 
+    <!-- Conference recording -->
+    <section class="recording-section" aria-labelledby="recording-heading">
+      <h2 id="recording-heading">Conference recording</h2>
+      <p class="recording-intro">
+        Watch the full virtual conference on YouTube.
+      </p>
+      <div class="recording-embed">
+        <iframe
+          title="Bridging Minds, Systems, and Relationships: Biopsychorelational Healing — conference recording"
+          :src="conferenceRecordingEmbedUrl"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+        />
+      </div>
+      <p class="recording-link">
+        <a
+          :href="conferenceRecordingWatchUrl"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Open on YouTube
+        </a>
+      </p>
+    </section>
+
     <!-- Partner Logos Section -->
     <section class="logos-section">
       <div class="logos-container">
@@ -314,6 +341,10 @@ useSEO({
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'instant' })
 })
+
+const conferenceRecordingVideoId = 'DGFuHK8_XYo'
+const conferenceRecordingEmbedUrl = `https://www.youtube.com/embed/${conferenceRecordingVideoId}`
+const conferenceRecordingWatchUrl = `https://youtu.be/${conferenceRecordingVideoId}`
 
 // Panelists data
 const panel1Panelists = [{ name: 'Dr. Noah Spector' }, { name: 'Dr. Rishi Kapur' }]
@@ -881,6 +912,70 @@ migration and mental health, and early childhood development.`,
   color: var(--color-text-dark, #333);
 }
 
+/* Conference recording */
+.recording-section {
+  background-color: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.recording-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+.recording-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text-dark, #333);
+  margin-bottom: 1.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recording-embed {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+
+.recording-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.recording-link {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+}
+
+.recording-link a {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.recording-link a:hover {
+  opacity: 0.9;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .conference-title {
@@ -926,6 +1021,18 @@ migration and mental health, and early childhood development.`,
   }
 
   .thank-you-content {
+    font-size: 1rem;
+  }
+
+  .recording-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .recording-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .recording-intro {
     font-size: 1rem;
   }
 }
